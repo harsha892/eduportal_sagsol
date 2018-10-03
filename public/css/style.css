@@ -1,0 +1,124 @@
+@import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
+@import url(./app.css);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700);
+* {
+    width: auto;
+    height: auto;
+    font-family: "Open Sans"
+}
+body{
+width: 100%;
+height: 100%;
+}
+aside {
+    width: 19em;
+    min-height: 100vh;
+    background: #fff;
+}
+
+#content_wrap,.content_wrap {
+    
+    width: 100%;
+    min-height: 100vh;
+    border-left: 1px solid rgba(0,0,0,0.05);
+    padding: 20px;
+}
+
+.wrapper {
+    display: flex;
+}
+.user_profile_view{
+    display: flex;
+    align-items: center;
+}
+.user_profile_view p{
+    font-weight: normal;
+    color: grey;
+}
+.user_profile_box{
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.user_nav li a{
+    font-size: 14px
+}
+.user_picture{
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    margin-left: 14px;;
+}
+.user_nav li a{
+    padding: 2px 5px;
+    border: 1px solid rgba(0,0,0,0.05);
+    color: grey;        
+    font-size: 16px;
+    text-decoration: none;
+}
+.main_aside_nav li a{
+    padding: 12px;
+    font-size: 14px;
+    color: #000;
+    display: block;
+    text-decoration: none;
+}
+.main_aside_nav li a:hover,.main_aside_nav li.active a{
+    color:#4FD1A6;
+    background-color:#EEEEEE;
+}
+
+.main_aside_nav .dropdown-menu{
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    position: relative!important;
+    transform: unset!important;
+    margin: 0;
+    padding: 0;
+}
+.main_aside_nav .dropdown-menu a{
+    padding-left: 25px
+}
+.main_aside_nav .dropdown-toggle::after{
+    border: unset
+}
+.dropdown .fa-chevron-right{
+    transition: all .2s;
+}
+.dropdown.show .fa-chevron-right{
+    transform: rotate(90deg);
+}
+.navbar{
+    background-image: url(http://vue-dark.vueadmintemplate.com/images/nav_bg.jpg?2090ee1…);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bars{
+    font-size: 20px;
+}
+.envveicon{
+    font-size: 20px
+}
+.number{
+    border-radius: 50%;
+    padding: 2px 4px;
+    top: -12px;
+    left: -8px;
+    font-size: 10px;
+    position : relative;
+    transition:.3s;
+}
+.envveicon,.bar ,.badge_animate:hover .number{
+top:-15px
+}
+.navbar-dark .navbar-nav .dropdown-toggle{
+color:#fff;
+}
+.recruiter_cards_view .user_info_cards .card-body{
+    max-height: 600px;
+    overflow: hidden;
+    overflow-y: auto;
+}

@@ -14,3 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+/**
+ * --------------------------------------
+ * Admin Routes 
+ * --------------------------------------
+ */
+
+ Route::prefix('/portal')->group(function () {
+
+    Route::get('/', function() {
+        return view('benchteq.index');
+    });
+    Route::get('/{vue_capture?}', function () {
+        return view('benchteq.index');
+        })->where('vue_capture', '[\/\w\.-]*');
+ });
+

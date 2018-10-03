@@ -1,0 +1,85 @@
+{
+  "siteTitle": "bentchq",
+  "menuItems": [
+    {
+      "title": "consultant",
+      "routeName": "consultant",
+      "iconText": "fa-user"
+    },
+    {
+      "title": "company",
+      "routeName": "company",
+      "iconText": "fa-building"
+    },
+    {
+      "title": "vendor",
+      "routeName": "vendor",
+      "iconText": "fa-code-branch"
+    },
+    {
+      "title": "client",
+      "routeName": "client",
+      "iconText": "fa-superpowers"
+    },
+    {
+      "title": "contact",
+      "routeName": "contact",
+      "iconText": "fa-envelope"
+    },
+    {
+      "title": "employee",
+      "routeName": "employee",
+      "iconText": "fa-desktop"
+    },
+    {
+      "title": "projects",
+      "routeName": "projects",
+      "iconText": "fa-project-diagram"
+    },
+    {
+      "title": "trainer",
+      "routeName": "trainer",
+      "iconText": "fa-chalkboard-teacher"
+    },
+    {
+      "title": "techie",
+      "routeName": "techie",
+      "iconText": "fa-laptop-code"
+    },
+    {
+      "title": "support",
+      "routeName": "support",
+      "iconText": "fa-question-circle"
+    }
+    ,
+    {
+      "title": "Forms",
+      "routeName": "forms",
+      "iconText": "fa-question-circle"
+    }
+  ],
+  "userProfileTabs": [
+    {
+      "title": "Activities",
+      "tabsContent": [
+        {
+          "activityTitle": "Forword Resume to praveen wipro. Forworded By recruiter - company Lakshman - prohires",
+          "createdOn": "2018-26-04"
+        },
+        {
+          "activityTitle": "Beau Pomeroy changed order status from Pending to Completed",
+          "createdOn": "2018-26-04"
+        }
+      ]
+    },
+    {
+      "title": "My Schedules",
+      "tabsContent": [
+        {
+          "activityTitle": "2018-26-04 at 6:00 PM.",
+          "createdOn": "2018-26-04"
+        }
+      ]
+    }
+  ]
+}
