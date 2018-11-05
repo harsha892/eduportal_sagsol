@@ -1,10 +1,10 @@
 @import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
 @import url(./app.css);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700);
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,600i,700');
 * {
     width: auto;
     height: auto;
-    font-family: "Open Sans"
+    font-family: "Montserrat"
 }
 body{
 width: 100%;
@@ -91,10 +91,15 @@ aside {
     transform: rotate(90deg);
 }
 .navbar{
-    background-image: url(http://vue-dark.vueadmintemplate.com/images/nav_bg.jpg?2090ee1…);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: #fff;
+    border-bottom: 1px solid rgb(236, 233, 242);
+    height: 48px;
+}
+.navbar a{
+    color: rgba(24,0,69,0.4);
+}
+.navbar-nav .nav-item .nav-link{
+    padding: 0px 12px;
 }
 .bars{
     font-size: 20px;
@@ -121,4 +126,15 @@ color:#fff;
     max-height: 600px;
     overflow: hidden;
     overflow-y: auto;
+}
+.bg_primary_set {
+    background: #56baed;
+    color: #fff;
+}
+.bg-white{
+    background: #fff;
+}
+.table .thead-light th{
+    font-weight: 500;
+    font-size: 12px;
 }

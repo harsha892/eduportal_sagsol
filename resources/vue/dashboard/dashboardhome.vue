@@ -4,8 +4,8 @@
         <div v-if="userType === 'consultant'">
             <ConsultantView></ConsultantView>
         </div>
-         <div v-if="userType === 'recruiter'">
-            <RecruiterView></RecruiterView>
+         <div v-if="userType === 'admin'">
+            <adminView></adminView>
         </div>
         <!-- <div v-else>
             <h1>other user</h1>
@@ -15,7 +15,7 @@
 
 <script>
 import ConsultantView from "./consultant/Consultant";
-import RecruiterView from "./recruiter/Recruiter";
+import adminView from "./admin/admin";
 export default {
   name: "dhome",
   data() {
@@ -29,7 +29,7 @@ export default {
   },
   components: {
     ConsultantView,
-    RecruiterView
+    adminView
   }
 };
 </script>

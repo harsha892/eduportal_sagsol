@@ -4,7 +4,7 @@
      <top-header-view></top-header-view>
  </header>
      <div class="wrapper">
-         <aside-bar v-if="userType !== 'consultant'" class="bg-white"></aside-bar>
+         <!-- <aside-bar v-if="userType !== 'consultant'" class="bg-white"></aside-bar> -->
                  <div v-bind:class="{container:userType === 'consultant'}" class="w-100">
                     <router-view></router-view>
                  </div>

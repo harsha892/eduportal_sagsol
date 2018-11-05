@@ -1,6 +1,6 @@
 <template>
     <div class="app" id="mainApp">
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="#">Benz Tech</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,14 +8,28 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item badge_animate">
-                        <a class="nav-link" href="#"><i class="far fa-envelope envveicon text-white"></i>
+                        <router-link :to="{name:'dashboardHome' , params:{pageType:'home'}}" class="nav-link">Home</router-link>
+                    </li>
+                    <li class="nav-item badge_animate">
+                        <router-link :to="{name:'dashboardHome' , params:{pageType:'recruiter_list'}}" class="nav-link">Recruiter</router-link>
+                    </li>
+                    <li class="nav-item badge_animate">
+                        <router-link :to="{name:'dashboardHome' , params:{pageType:'consultant_list'}}" class="nav-link">Consultants</router-link>
+                    </li>
+                    <li class="nav-item badge_animate">
+                        <router-link :to="{name:'dashboardHome' , params:{pageType:'vendor_list'}}" class="nav-link">Vendor</router-link>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    
+                    <li class="nav-item badge_animate">
+                        <a class="nav-link" href="#"><i class="far fa-envelope envveicon"></i>
                             <span class="number badge badge-success  ">2</span></a>
                     </li>
                     <li class="nav-item badge_animate">
-                        <a class="nav-link" href="#"><i class="fas fa-bars bar text-white envveicon"></i>
+                        <a class="nav-link" href="#"><i class="fas fa-bars bar envveicon"></i>
                             <span class="number badge badge-success  ">2</span></a>
                     </li>
                     <li class="nav-item dropdown">
@@ -32,7 +46,8 @@
 
                 </ul>
             </div>
-        </nav>    </div>
+        </nav>    
+    </div>
 </template>
 
 <script>
