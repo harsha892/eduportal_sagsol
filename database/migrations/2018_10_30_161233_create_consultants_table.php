@@ -13,13 +13,13 @@ class CreateConsultantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('consultants', function (Blueprint $table) {
-            $table->increments('consultant_id');
-            $table->integer('consultant_id')->unsigned();
-            $table->foreign('consultant_id')->references('id')->on('users');
+        // Schema::create('consultants', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('user_id')->unsigned();
+        //     $table->foreign('user_id')->references('id')->on('users');
             
-            $table->timestamps(); 
-        });
+        //     $table->timestamps(); 
+        // });
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateConsultantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consultants');
+        // Schema::dropIfExists('consultants');
     }
 }

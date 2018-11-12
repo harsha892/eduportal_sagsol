@@ -13,15 +13,15 @@ class CreateRecruiterTable extends Migration
      */
     public function up()
     {
-        Schema::create('recruiter', function (Blueprint $table) {
-            $table->increments('recruiter_company_id');  
-            $table->integer('recruiter_company_id')->unsigned();
-            $table->foreign('recruiter_company_id')->references('id')->on('users');
-            $table->string('full_name');
-            $table->string('email');
-            $table->string('password');
-            $table->timestamps();
-        });
+        // Schema::create('recruiter', function (Blueprint $table) {
+        //     $table->increments('id');  
+        //     $table->integer('user_id')->unsigned();
+        //     $table->foreign('user_id')->references('id')->on('users');
+        //     $table->string('full_name');
+        //     $table->string('email');
+        //     $table->string('password');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -31,6 +31,6 @@ class CreateRecruiterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recruiter');
+        // Schema::dropIfExists('recruiter');
     }
 }
