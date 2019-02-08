@@ -1,0 +1,183 @@
+{
+    "AdminMenuItems": [
+        {
+            "title": "Home",
+            "routeName": "adminDashboard",
+            "pageName": "home",
+            "iconText": "fa-window-maximize"
+        },
+        {
+            "title": "Users",
+            "routeName": "usersList",
+            "pageName": "userslist",
+            "iconText": "fa-user-circle"
+        },
+        {
+            "title": "Skill testing / Exams",
+            "routeName": "education",
+            "pageName": "vendor",
+            "iconText": "fa-campground",
+            "childern": [
+                {
+                    "title": "Subjects",
+                    "routeName": "e-test-subjects",
+                    "pageName": "vendor",
+                    "iconText": "fa-random"
+                },
+                {
+                    "title": "Question Bank",
+                    "routeName": "e-test-questionBank",
+                    "pageName": "vendor",
+                    "iconText": "fa-accusoft"
+                },
+                {
+                    "title": " Tests",
+                    "routeName": "e-tests",
+                    "pageName": "vendor",
+                    "iconText": "fa-question"
+                }
+            ]
+        },
+        {
+            "title": "Learning Mangment Sysytem",
+            "routeName": "homePage",
+            "pageName": "client",
+            "iconText": "fa-tv",
+            "childern": [
+                {
+                    "title": "Topics",
+                    "routeName": "e-learn-syllabus",
+                    "pageName": "vendor",
+                    "iconText": "fa-random"
+                },
+                {
+                    "title": "Subjects",
+                    "routeName": "e-learn-subjects",
+                    "pageName": "vendor",
+                    "iconText": "fa-random"
+                },
+                {
+                    "title": "Answer Bank",
+                    "routeName": "e-answers",
+                    "pageName": "vendor",
+                    "iconText": "fa-accusoft"
+                }
+            ]
+        },
+        {
+            "title": "Financial Reports",
+            "routeName": "financialReports",
+            "params": "contact",
+            "iconText": "fa-credit-card",
+            "childern": [
+                {
+                    "title": "Receipt",
+                    "routeName": "users",
+                    "params": "am",
+                    "iconText": "fa-chess-king"
+                },
+                {
+                    "title": "payments",
+                    "routeName": "users",
+                    "params": "ai",
+                    "iconText": "fa-code-branch"
+                },
+                {
+                    "title": "overdue receipts",
+                    "routeName": "users",
+                    "params": "students",
+                    "iconText": "fa-user-graduate"
+                },
+                {
+                    "title": "overdue payments",
+                    "routeName": "users",
+                    "params": "leave-requests",
+                    "iconText": "fa-sign-out-alt"
+                }
+            ]
+        },
+        {
+            "title": "Notifications",
+            "routeName": "notifications",
+            "pageName": "employee",
+            "iconText": "fa-bell"
+        },
+        {
+            "title": "Master Settings",
+            "routeName": "",
+            "pageName": "support",
+            "iconText": "fa-cog",
+            "childern": [
+                {
+                    "title": "Settings",
+                    "routeName": "m-settings",
+                    "iconText": "fa-cogs"
+                },
+                {
+                    "title": "Permissions",
+                    "routeName": "m-permissions",
+                    "iconText": "fa-users"
+                },
+                {
+                    "title": "Roles",
+                    "routeName": "m-roles",
+                    "iconText": "fa-users"
+                },
+                {
+                    "title": "Groups",
+                    "routeName": "m-groups",
+                    "iconText": "fa-users"
+                },
+                {
+                    "title": "Question Papers",
+                    "routeName": "m-question-paper",
+                    "iconText": "fa-users"
+                }
+            ]
+        }
+    ],
+    "StudentMenuItems": [
+        {
+            "title": "Dashboard",
+            "pageName": "Dashboard",
+            "iconText": "fa-window-maximize"
+        },
+        {
+            "title": "Exams",
+            "pageName": "vendor",
+            "iconText": "fa-campground",
+            "childern": [
+                {
+                    "title": "Categories",
+                    "pageName": "vendor",
+                    "iconText": "fa-random"
+                },
+                {
+                    "title": "Question Bank",
+                    "pageName": "vendor",
+                    "iconText": "fa-question"
+                },
+                {
+                    "title": " Quiz",
+                    "pageName": "vendor",
+                    "iconText": "fa-question"
+                }
+            ]
+        },
+        {
+            "title": "LMS",
+            "pageName": "client",
+            "iconText": "fa-tv"
+        },
+        {
+            "title": "Pay Now",
+            "pageName": "contact",
+            "iconText": "fa-credit-card"
+        },
+        {
+            "title": "Notifications",
+            "pageName": "employee",
+            "iconText": "fa-bell"
+        }
+    ]
+}

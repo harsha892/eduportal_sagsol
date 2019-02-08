@@ -1,85 +1,199 @@
 {
-  "siteTitle": "bentchq",
-  "menuItems": [
+  "siteTitle": "education portal",
+  "userMenu": {
+    "aa": [
+      {
+        "title": "Home",
+        "routeName": "adminDashboard",
+        "iconText": "fa-window-maximize"
+      },
+      {
+        "title": "Users",
+        "params": "userslist",
+        "iconText": "fa-users",
+        "childern": [
+          {
+            "title": "AM",
+            "routeName": "users",
+            "params": "am",
+            "iconText": "fa-chess-king"
+          },
+          {
+            "title": "AI",
+            "routeName": "users",
+            "params": "ai",
+            "iconText": "fa-code-branch"
+          },
+          {
+            "title": "Students",
+            "routeName": "users",
+            "params": "students",
+            "iconText": "fa-user-graduate"
+          },
+          {
+            "title": "leave requests",
+            "routeName": "leave-requests",
+            "params": "leave-requests",
+            "iconText": "fa-sign-out-alt"
+          }
+        ]
+      },
+      {
+        "title": "Skill testing / Exams",
+        "routeName": "education",
+        "iconText": "fa-campground",
+        "childern": [
+          {
+            "title": " Tests",
+            "routeName": "e-tests",
+            "iconText": "fa-question"
+          },
+          {
+            "title": "Question Bank",
+            "routeName": "e-test-questionBank",
+            "pageName": "vendor",
+            "iconText": "fa-accusoft"
+          }
+        ]
+      },
+      {
+        "title": "library management",
+        "routeName": "homePage",
+        "params": "client",
+        "iconText": "fa-tv",
+        "childern": [
+          {
+            "title": "Topics",
+            "routeName": "e-learn-topics",
+            "iconText": "fa-random"
+          },
+          {
+            "title": "Subjects",
+            "routeName": "e-learn-subjects",
+            "iconText": "fa-random"
+          }
+        ]
+      },
+      {
+        "title": "Notifications",
+        "routeName": "notifications",
+        "params": "employee",
+        "iconText": "fa-bell"
+      },
+      {
+        "title": "Master Settings",
+        "routeName": "",
+        "params": "support",
+        "iconText": "fa-cog",
+        "childern": [
+          {
+            "title": "Settings",
+            "routeName": "m-settings",
+            "iconText": "fa-cogs"
+          },
+          {
+            "title": "Roles",
+            "routeName": "m-roles",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Groups",
+            "routeName": "m-groups",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Question Papers",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Mapping",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          }
+        ]
+      }
+    ],
+    "am": [
+      {
+        "title": "AM Home",
+        "routeName": "adminDashboard",
+        "params": "home",
+        "iconText": "fa-window-maximize"
+      }
+    ],
+    "ai": [
+      {
+        "title": "AI home",
+        "routeName": "adminDashboard",
+        "params": "home",
+        "iconText": "fa-window-maximize"
+      }
+    ],
+    "student": [
+      {
+        "title": "Student",
+        "routeName": "adminDashboard",
+        "params": "home",
+        "iconText": "fa-window-maximize"
+      }
+    ]
+  },
+  "AdminAnalyticsInfo": [
     {
-      "title": "consultant",
-      "routeName": "consultant",
-      "iconText": "fa-user"
+      "title": "Users",
+      "resultData": 249,
+      "link": "sampl.com",
+      "bg_class": "swatch-blue",
+      "icon": "fa-users"
     },
     {
-      "title": "company",
-      "routeName": "company",
-      "iconText": "fa-building"
+      "title": "Subjects",
+      "resultData": 12,
+      "link": "sampl.com",
+      "bg_class": "swatch-green",
+      "icon": "fa-desktop"
     },
     {
-      "title": "vendor",
-      "routeName": "vendor",
-      "iconText": "fa-code-branch"
+      "title": "Topics",
+      "resultData": 45,
+      "link": "sampl.com",
+      "bg_class": "swatch-indigo",
+      "icon": "fa-book"
     },
     {
-      "title": "client",
-      "routeName": "client",
-      "iconText": "fa-superpowers"
+      "title": "Questions",
+      "resultData": 54,
+      "link": "sampl.com",
+      "bg_class": "swatch-pink",
+      "icon": "fa-list"
     },
     {
-      "title": "contact",
-      "routeName": "contact",
+      "title": "Logined Users",
+      "resultData": 214,
+      "link": "sampl.com",
+      "bg_class": "swatch-purple",
+      "icon": "fa-question-circle"
+    }
+  ],
+  "oldData": [
+    {
+      "title": "SMS",
+      "routeName": "homePage",
+      "params": "projects",
       "iconText": "fa-envelope"
     },
     {
-      "title": "employee",
-      "routeName": "employee",
-      "iconText": "fa-desktop"
+      "title": "Comments",
+      "routeName": "homePage",
+      "params": "trainer",
+      "iconText": "fa-comments"
     },
     {
-      "title": "projects",
-      "routeName": "projects",
-      "iconText": "fa-project-diagram"
-    },
-    {
-      "title": "trainer",
-      "routeName": "trainer",
-      "iconText": "fa-chalkboard-teacher"
-    },
-    {
-      "title": "techie",
-      "routeName": "techie",
-      "iconText": "fa-laptop-code"
-    },
-    {
-      "title": "support",
-      "routeName": "support",
-      "iconText": "fa-question-circle"
-    }
-    ,
-    {
-      "title": "Forms",
-      "routeName": "forms",
-      "iconText": "fa-question-circle"
-    }
-  ],
-  "userProfileTabs": [
-    {
-      "title": "Activities",
-      "tabsContent": [
-        {
-          "activityTitle": "Forword Resume to praveen wipro. Forworded By recruiter - company Lakshman - prohires",
-          "createdOn": "2018-26-04"
-        },
-        {
-          "activityTitle": "Beau Pomeroy changed order status from Pending to Completed",
-          "createdOn": "2018-26-04"
-        }
-      ]
-    },
-    {
-      "title": "My Schedules",
-      "tabsContent": [
-        {
-          "activityTitle": "2018-26-04 at 6:00 PM.",
-          "createdOn": "2018-26-04"
-        }
-      ]
+      "title": "Feedback",
+      "routeName": "homePage",
+      "params": "techie",
+      "iconText": "fa-comment"
     }
   ]
 }

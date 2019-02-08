@@ -1,10 +1,10 @@
 @import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
 @import url(./app.css);
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,600i,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 * {
     width: auto;
     height: auto;
-    font-family: "Montserrat"
+    font-family: "Roboto"
 }
 body{
 width: 100%;
@@ -14,6 +14,7 @@ aside {
     width: 19em;
     min-height: 100vh;
     background: #fff;
+    height: 100%;
 }
 
 #content_wrap,.content_wrap {
@@ -26,6 +27,8 @@ aside {
 
 .wrapper {
     display: flex;
+    background: #eff1f5;
+    min-height: 100vh;
 }
 .user_profile_view{
     display: flex;
@@ -79,7 +82,8 @@ aside {
     padding: 0;
 }
 .main_aside_nav .dropdown-menu a{
-    padding-left: 25px
+    padding-left: 35px;
+    font-size: 12px;
 }
 .main_aside_nav .dropdown-toggle::after{
     border: unset
@@ -93,10 +97,33 @@ aside {
 .navbar{
     background-color: #fff;
     border-bottom: 1px solid rgb(236, 233, 242);
-    height: 48px;
+    padding: 0.7rem 1rem;
 }
 .navbar a{
     color: rgba(24,0,69,0.4);
+}
+.bottom_nav.navbar .nav-item a{
+color: #fff
+}
+.bottom_nav.navbar .nav-item .dropdown-menu a{
+    color:rgb(24, 0, 69)
+}
+@media (min-width: 992px){
+.bottom_nav .navbar-nav .dropdown-menu {
+    left: 10px;
+    top: 31PX;
+    width:12rem;
+}
+.bottom_nav .navbar-nav .dropdown-menu::before{
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    transform: rotate(43deg);
+    background: #fff;
+    top: -5px;
+    left: 10%;
+}
 }
 .navbar-nav .nav-item .nav-link{
     padding: 0px 12px;

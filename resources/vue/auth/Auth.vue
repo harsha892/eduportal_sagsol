@@ -1,27 +1,103 @@
 <template>
+  <div>
     <div class="authView" id="authView">
-          <div class="form">
+      <div class="form">
         <div class="container">
-            <div class="row mt-5 justify-content-center">
-                <div class="col-12 col-md-5    ">
-                    <form class="auth_form">
-                        <div class="auth_box mt-5">
-                            <div class="images">
-                                <img src="https://cdn.dribbble.com/users/321983/screenshots/2262084/ui-engine-icon.gif" id="icon" alt="User Icon" />
-                            </div>
-                            <div class="my-2">
-                                <input type="text" placeholder="login" class="my-2 bg-light"><br>
-                                <input type="password" placeholder="password " class="my-2 bg-light"><br>
-                                <input type="submit" value="Log In" class="submit " v-on:click="goDashboard()">
-                            </div>
+          <div class="row mt-5 justify-content-center">
+            <div class="col-12 col-md-5">
+              <form class="auth_form">
+                <div class="auth_box mt-5">
+                  <div class="images pt-3 pb-0">
+                    <img src="../../images/sagsol.png" id="icon" alt="User Icon">
+                    <h5 class="my-3 text-uppercase text-blue">school management system</h5>
+                  </div>
+                  <hr>
+                  <div class="mb-5">
+                    <form>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          placeholder="Enter email"
+                        >
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="exampleInputPassword1"
+                          placeholder="Password"
+                        >
+                      </div>
+                      <div class="form-group">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="userType"
+                            id="aaRadio"
+                            value="aa"
+                            v-model="userType"
+                          >
+                          <label class="form-check-label" for="aaRadio">AA</label>
                         </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="userType"
+                            id="amRadio"
+                            value="am"
+                            v-model="userType"
+                          >
+                          <label class="form-check-label" for="amRadio">AM</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="userType"
+                            id="aiRadio"
+                            value="ai"
+                            v-model="userType"
+                          >
+                          <label class="form-check-label" for="aiRadio">AI</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="userType"
+                            id="studentRadio"
+                            value="student"
+                            v-model="userType"
+                          >
+                          <label class="form-check-label" for="studentRadio">Student</label>
+                        </div>
+                      </div>
+                      <span class="btn swatch-green" v-on:click="goDashboard()">Submit</span>
                     </form>
+                    <!-- .form
+                    <input type="text" placeholder="login" class="my-2 bg-light">
+                    <br>
+                    <input type="password" placeholder="password " class="my-2 bg-light">
+                    <br>
+                    <input type="submit" value="Log In" class="submit" v-on:click="goDashboard()">
+                    <br>
+                    <a href=""></a>-->
+                  </div>
                 </div>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-        
-    </div>
+  </div>
 </template>
 
 <script>
@@ -31,7 +107,8 @@ export default {
   data: function() {
     return {
       siteTitle: staticData.siteTitle,
-      pageType: ""
+      pageType: "",
+      userType: ""
     };
   },
   watch: {
@@ -49,8 +126,8 @@ export default {
   methods: {
     goDashboard() {
       this.$router.push({
-        name: "dashboardHome",
-        params: { userType: "admin", pageType: "home" }
+        name: "adminDashboard",
+        params: { userType: this.userType }
       });
     }
   }
@@ -60,23 +137,23 @@ export default {
 .auth_form {
   width: 100%;
   min-height: 100%;
-  padding: 20px;
   min-height: 100%;
+  padding: 30px;
   width: 100%;
 }
-.auth_form input {
-  padding: 12px 50px;
+/* .auth_form input {
+  padding: 12px 25px;
   border-radius: 5px;
+  width: 80%;
   border: none;
-}
+} */
 
 .auth_box {
   border-radius: 10px;
-  padding: 22px;
+  padding: 40px;
   width: 100%;
   position: relative;
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-  text-align: center;
   background: #fff;
 }
 .submit {
@@ -86,7 +163,8 @@ export default {
   background-color: #56baed;
   box-shadow: 3px 5px 10px 0px rgba(0, 0, 0, 0.3);
   color: #fff;
-  margin: 10px 0;
+  margin: 20px 0 10px 0;
+  text-align: center;
 }
 .forgot {
   background-color: #f6f6f6;

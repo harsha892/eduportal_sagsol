@@ -1,14 +1,55 @@
-
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+$enable-gradients: true;
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
+// With variable
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+.text-blue{
+  color: $blue;
+}
+.swatch-blue{
+  background-color: $blue;
+  color: $white;
+}
+.swatch-indigo{
+  background-color: $indigo!important;
+  color: $white;
+}
+.swatch-purple{
+  background-color: $purple;
+  color: $white;
+}
+.swatch-pink{
+  background-color: $pink;
+  color: $white;
+}
+.swatch-red{
+  background-color: $red;
+  color: $white;
+}
+.swatch-orange{
+  background-color: $orange;
+  color: $white;
+}
+.swatch-yellow{
+  background-color: $yellow;
+  color: $white;
+}
+.swatch-green{
+  background-color: $green;
+  color: $white;
+}
+.swatch-teal{
+  background-color: $teal;
+  color: $white;
+}
+.swatch-cyan{
+  background-color: $cyan;
+  color: $white;
 }
