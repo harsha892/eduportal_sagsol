@@ -1826,6 +1826,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_StaticData_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../js/StaticData.json */ "./resources/js/StaticData.json");
 var _js_StaticData_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../js/StaticData.json */ "./resources/js/StaticData.json", 1);
+/* harmony import */ var _js_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../js/environment */ "./resources/js/environment.js");
+/* harmony import */ var _js_appservices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../js/appservices */ "./resources/js/appservices.js");
 //
 //
 //
@@ -1929,13 +1931,16 @@ var _js_StaticData_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "authView",
   data: function data() {
     return {
       siteTitle: _js_StaticData_json__WEBPACK_IMPORTED_MODULE_0__.siteTitle,
       pageType: "",
-      userType: ""
+      userType: "",
+      rolesData: ""
     };
   },
   watch: {
@@ -1947,8 +1952,13 @@ var _js_StaticData_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
     this.pageType = this.$route.params.authType;
   },
   mounted: function mounted() {
-    console.log("Component mounted.", this.$route.params);
+    var _this = this;
+
     this.pageType = this.$route.params.authType;
+    _js_appservices__WEBPACK_IMPORTED_MODULE_2__["default"].doGet("role/all").then(function (res) {
+      _this.rolesData = res;
+      console.log(_this.rolesData, "rolesData");
+    });
   },
   methods: {
     goDashboard: function goDashboard() {
@@ -1957,6 +1967,15 @@ var _js_StaticData_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
         params: {
           userType: this.userType
         }
+      });
+    },
+    doLogin: function doLogin() {
+      var payload = {
+        email: "harsha.chayanam@gmail.com",
+        password: "Sagsol12"
+      };
+      _js_appservices__WEBPACK_IMPORTED_MODULE_2__["default"].doPost("user/login", payload).then(function (res) {
+        console.log(res);
       });
     }
   }
@@ -76957,7 +76976,7 @@ var render = function() {
                           staticClass: "btn swatch-green",
                           on: {
                             click: function($event) {
-                              return _vm.goDashboard()
+                              return _vm.doLogin()
                             }
                           }
                         },
@@ -104758,6 +104777,102 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
+/***/ "./resources/js/appservices.js":
+/*!*************************************!*\
+  !*** ./resources/js/appservices.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environment */ "./resources/js/environment.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var serviceRequests = [{
+  title: "userlogin",
+  url: "login"
+}, {
+  title: "createnewuser",
+  url: "users/new"
+}, {
+  title: "userlogin",
+  url: "users/new"
+}];
+
+var AppService =
+/*#__PURE__*/
+function () {
+  function AppService() {
+    _classCallCheck(this, AppService);
+  }
+
+  _createClass(AppService, [{
+    key: "doGet",
+    value: function doGet(endpoint) {
+      var url = "".concat(_environment__WEBPACK_IMPORTED_MODULE_1__["default"].apiBase).concat(endpoint);
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).catch(function (e) {
+        console.log('error in sevice request', e);
+      });
+    }
+  }, {
+    key: "doPost",
+    value: function doPost(endpoint, payload) {
+      var url = "".concat(_environment__WEBPACK_IMPORTED_MODULE_1__["default"].apiBase).concat(endpoint);
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, payload).catch(function (e) {
+        console.log('error in sevice request', e);
+      });
+    } // doPost(endpoint, payload) {
+    //     console.log('payload from losscode search service', payload);
+    //     const url = `${this.apiRoot}/${endpoint}`;
+    //     return this.http.post(url, payload).pipe(
+    //         map((response) => response),
+    //         shareReplay(),
+    //         catchError(e => {
+    //             console.log(e);
+    //             return of(null);
+    //         }), filter(e => !!e));
+    // }
+    // doPut(endpoint, payload) {
+    //     console.log('payload from losscode search service', payload);
+    //     const url = `${this.apiRoot}/${endpoint}`;
+    //     return this.http.post(url, payload).pipe(
+    //         map((response) => response),
+    //         shareReplay(),
+    //         catchError(e => {
+    //             console.log(e);
+    //             return of(null);
+    //         }), filter(e => !!e));
+    // }
+    // doPut(endpoint, payload) {
+    //     console.log('payload from losscode search service', payload);
+    //     const url = `${this.apiRoot}/${endpoint}`;
+    //     return this.http.post(url, payload).pipe(
+    //         map((response) => response),
+    //         shareReplay(),
+    //         catchError(e => {
+    //             console.log(e);
+    //             return of(null);
+    //         }), filter(e => !!e));
+    // }
+
+  }]);
+
+  return AppService;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (new AppService());
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -104883,6 +104998,26 @@ var pieChartData = {
   planetChartData: planetChartData,
   pieChartData: pieChartData
 });
+
+/***/ }),
+
+/***/ "./resources/js/environment.js":
+/*!*************************************!*\
+  !*** ./resources/js/environment.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var environment = {
+  production: false,
+  apiBase: 'http://education_portal.test/api/',
+  tinyAPIKey: '55ug9ban0d31h0bmto81y5z82vq1fk8d443028h27f5xamor',
+  googleAPIKey: 'AIzaSyCh8ZIJYL1KWUHRCuhJoZPi0ahc5wostc0',
+  env: 'dev'
+};
+/* harmony default export */ __webpack_exports__["default"] = (environment);
 
 /***/ }),
 

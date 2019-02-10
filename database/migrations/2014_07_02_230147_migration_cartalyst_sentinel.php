@@ -101,7 +101,7 @@ class MigrationCartalystSentinel extends Migration
             $table->unsignedInteger('contact_id')->nullable();
 
             $table->string('email')->unique();
-            $table->timestamp('last_logined')->nullable();
+            $table->timestamp('last_login')->nullable();
             $table->boolean('login_status')->nullable();
             $table->string('password');
             $table->unsignedInteger('academic_year_start')->nullable();

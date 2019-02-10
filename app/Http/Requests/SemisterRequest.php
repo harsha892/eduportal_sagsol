@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Dingo\Api\Http\FormRequest;
 
-class TopicRequest extends FormRequest
+class SemisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,12 @@ class TopicRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|unique:topics",
+            "name" => "required|unique:semisters",
             "is_active" => "required|boolean",
             "created_by" => "required|exists:users,id",
             "updated_by" => "required|exists:users,id",
-            "short_description" => "required",
-            "long_description" => "required",
-            "type_of_content" => "required",
+            "start_date" => "required",
+            "end_date" => "required"
         ];
     }
 }

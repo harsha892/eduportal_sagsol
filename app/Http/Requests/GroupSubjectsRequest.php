@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Dingo\Api\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class SubjectReuqest extends FormRequest
+class GroupSubjectsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class SubjectReuqest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +24,7 @@ class SubjectReuqest extends FormRequest
     public function rules()
     {
         return [
-            "name" =>  "required|unique:subjects|min:2",
-            "is_active" =>  "required|boolean",
-            "created_by" =>  "required|exists:users,id",
-            "updated_by" =>  "required|exists:users,id",
-            "short_description" =>  "required",
+            //
         ];
     }
 }

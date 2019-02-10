@@ -23,9 +23,7 @@ class CreateGroups extends Migration
             $table->unsignedInteger('updated_by');
 
             $table->text('short_description');
-
-            $table->json('related_subject_ids');
-            
+                        
             $table->timestamps();
         });
     }

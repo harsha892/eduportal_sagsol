@@ -7,9 +7,11 @@
 </template>
 
 <script>
+
 export default {
   name: "mainApp",
-  mounted() {},
+  mounted() {
+  },
   components: {}
 };
 </script>

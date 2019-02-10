@@ -24,9 +24,7 @@ class CreateTopicsTable extends Migration
 
             $table->text('short_description');
             $table->text('long_description');
-
-            $table->json('related_group_ids');
-            $table->json('related_subject_ids');
+            
             $table->string('type_of_content');
             $table->json('semister_ids');
 

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubjectReuqest;
 use App\Http\Requests\UpdateSubjectRequest;
+use App\Http\Requests\GroupSubjectsRequest;
 use App\models\User;
 use App\models\Subject;
+use App\models\GroupSubject;
 
 class SubjectController extends Controller
 {
@@ -18,10 +20,10 @@ class SubjectController extends Controller
         $subject->created_by = $request->get("created_by");
         $subject->updated_by = $request->get("updated_by");
 
-        $subject->short_description = $request->get("short_description");
-        $subject->related_group_ids = $request->get("related_group_ids");
-
         $subject->save();
+        $groupSubject =new GroupSubject();
+        $groupSubject->group_id = $subject->id;
+        $groupSubject->subject_id = $subject->id;
         return $subject;
     }
     public function updateSubject(UpdateSubjectRequest $request){
@@ -32,9 +34,6 @@ class SubjectController extends Controller
 
         $subject->created_by = $request->get("created_by");
         $subject->updated_by = $request->get("updated_by");
-
-        $subject->short_description = $request->get("short_description");
-        $subject->related_group_ids = $request->get("related_group_ids");
 
         $subject->save();
         return $subject;

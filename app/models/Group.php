@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     protected $casts = [
-        'related_subject_ids' => 'array',
+        'subject_ids' => 'array',
     ];
+    public function subjects() {
+        return $this->hasMany(Subject::class, ''); //contacts -> contact_id 
+    }
 }

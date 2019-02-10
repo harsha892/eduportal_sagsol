@@ -25,9 +25,6 @@ class CreateSubjectsTable extends Migration
 
             $table->text('short_description');
 
-            $table->json('related_group_ids');
-
-
             $table->timestamps();
         });
     }

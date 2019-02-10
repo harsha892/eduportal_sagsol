@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\models\Group;
 use App\Http\Requests\GroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\models\Group;
+use App\models\GroupSubject;
+use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    public function CreateNewGroup(GroupRequest $request){
+    public function CreateNewGroup(GroupRequest $request)
+    {
         $group = new Group();
 
         $group->name = $request->get("name");
@@ -19,12 +21,22 @@ class GroupController extends Controller
         $group->updated_by = $request->get("updated_by");
 
         $group->short_description = $request->get("short_description");
-        $group->related_subject_ids = $request->get("related_subject_ids");
+        //$group->save();
+        if ( !empty( $request->get("subject_ids") ) ) {
+            $collection = collect($request->get("subject_ids"));
+            $groupSubjectsMaping = $collection->map(function ($item)  use ($group) {
+                $groupSubject = new GroupSubject();
+                $groupSubject->group_id = $group->id;
+                $groupSubject->subject_id = $item;
+                // $groupSubject-->save();
+                return $groupSubject;
+            });
+        }
+        return Group::with(['subjects'])->find( $subject->id );
 
-        $group->save();
-        return $group;
     }
-    public function updateGroup(UpdateGroupRequest $request){
+    public function updateGroup(UpdateGroupRequest $request)
+    {
         $group = Group::find($request->get("id"));
 
         $group->name = $request->get("name");
@@ -34,16 +46,17 @@ class GroupController extends Controller
         $group->updated_by = $request->get("updated_by");
 
         $group->short_description = $request->get("short_description");
-        $group->related_subject_ids = $request->get("related_subject_ids");
 
         $group->save();
         return $group;
     }
-    public function getAllGroups(){
+    public function getAllGroups()
+    {
         $group = Group::all();
         return $group;
     }
-    public function deleteGroup(Request $request){
+    public function deleteGroup(Request $request)
+    {
         $group = Group::find($request->get("id"));
         $group->delete();
         return "Group Deleted Successful";

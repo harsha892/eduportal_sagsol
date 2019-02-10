@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Dingo\Api\Http\FormRequest;
 
-class TopicRequest extends FormRequest
+class UpdateTopicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class TopicRequest extends FormRequest
     public function rules()
     {
         return [
+            "id" => "required|exists:topics,id",
             "name" => "required|unique:topics",
             "is_active" => "required|boolean",
             "created_by" => "required|exists:users,id",

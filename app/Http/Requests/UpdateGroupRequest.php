@@ -30,7 +30,6 @@ class updateGroupRequest extends FormRequest
             "created_by" =>  "required|exists:users,id",
             "updated_by" =>  "required|exists:users,id",
             "short_description" =>  "required",
-            "related_subject_ids"=> "array"
         ];
     }
 }

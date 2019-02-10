@@ -14,7 +14,8 @@
         "laravel/framework": "5.7.25",
         "laravel/tinker": "^1.0",
         "metricloop/laravel-transformer-maker": "^1.0",
-        "symfony/http-foundation": "^4.2"
+        "symfony/http-foundation": "^4.2",
+        "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

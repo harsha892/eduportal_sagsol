@@ -21,7 +21,7 @@
             <li><button onClick="verifyUser()">Click here to activate</button></li>
         </ul>
         <script>
-        var apiPath = "http://education_portal.test/api/verifyUser";
+        var apiPath = "http://education_portal.test/api/auth/verifyUser";
         document.getElementById("username").innerHTML = window.location.pathname.split("/")[3];
         document.getElementById("useremail").innerHTML =  window.location.pathname.split("/")[4];
         var user_id = window.location.pathname.split("/")[5];

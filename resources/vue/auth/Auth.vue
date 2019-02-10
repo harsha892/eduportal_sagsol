@@ -79,7 +79,7 @@
                           <label class="form-check-label" for="studentRadio">Student</label>
                         </div>
                       </div>
-                      <span class="btn swatch-green" v-on:click="goDashboard()">Submit</span>
+                      <span class="btn swatch-green" v-on:click="doLogin()">Submit</span>
                     </form>
                     <!-- .form
                     <input type="text" placeholder="login" class="my-2 bg-light">
@@ -102,13 +102,16 @@
 
 <script>
 import staticData from "../../js/StaticData.json";
+import environment from "../../js/environment";
+import AppService from "../../js/appservices";
 export default {
   name: "authView",
   data: function() {
     return {
       siteTitle: staticData.siteTitle,
       pageType: "",
-      userType: ""
+      userType: "",
+      rolesData: ""
     };
   },
   watch: {
@@ -120,14 +123,26 @@ export default {
     this.pageType = this.$route.params.authType;
   },
   mounted() {
-    console.log("Component mounted.", this.$route.params);
     this.pageType = this.$route.params.authType;
+    AppService.doGet("role/all").then(res => {
+      this.rolesData = res;
+      console.log(this.rolesData, "rolesData");
+    });
   },
   methods: {
     goDashboard() {
       this.$router.push({
         name: "adminDashboard",
         params: { userType: this.userType }
+      });
+    },
+    doLogin() {
+      const payload = {
+        email: "harsha.chayanam@gmail.com",
+        password: "Sagsol12"
+      };
+      AppService.doPost("user/login", payload).then(res => {
+        console.log(res);
       });
     }
   }
