@@ -95,21 +95,51 @@ class MigrationCartalystSentinel extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->unsignedInteger('contact_id')->nullable();
-
             $table->string('email')->unique();
+            $table->string('password');
+
+            $table->string('token')->nullable();
+
             $table->timestamp('last_login')->nullable();
             $table->boolean('login_status')->nullable();
-            $table->string('password');
-            $table->unsignedInteger('academic_year_start')->nullable();
-            $table->unsignedInteger('academic_year_end')->nullable();
+
+            $table->boolean('status')->default(1);
 
             $table->timestamps();
             $table->engine = 'InnoDB';
         });
+
+        Schema::create('user_details', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('user_id')->unsigned();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->boolean('phone_verified')->default(0);
+            $table->string('verification_code')->nullable();
+
+            $table->string('address')->nullable();
+            $table->string('city', 100)->nullable();
+            $table->string('state', 3)->nullable();
+            $table->string('zip', 10)->nullable();
+            $table->string('country')->default('IN')->nullable();
+
+            $table->date('dob')->nullable();
+
+            $table->unsignedInteger('academic_year_start')->nullable();
+            $table->unsignedInteger('academic_year_end')->nullable();
+
+            $table->timestamps();
+            $table->index(['user_id']);
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->engine = 'InnoDB';
+        });
+
     }
 
     /**
