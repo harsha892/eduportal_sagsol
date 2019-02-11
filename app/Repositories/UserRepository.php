@@ -92,11 +92,6 @@ class UserRepository
     public function updateUserDetail(User $user, array $data)
     {
         if ($user->userDetail) {
-            if ($user->userDetail->phone_verified) {
-                unset($data['user_detail']['phone']);
-            } else if (isset($data['user_detail']['phone']) && ($data['user_detail']['phone'] != $user->userDetail->phone)) {
-                $user->userDetail->phone_verified = 0;
-            }
             $this->assignUserDetails($user->userDetail, $data);
             $user->userDetail->save();
 
@@ -118,17 +113,22 @@ class UserRepository
         $search = isset($data['search']) ? $data['search'] : '';
         $sortBy = isset($data['sort_by']) ? $data['sort_by'] : 'email';
         $sortType = isset($data['sort_type']) ? $data['sort_type'] : 'ASC';
+        $role = isset($data['role']) ? $data['role'] : '';
 
         $users = $this->auth->getUserRepository()->createModel()
             ->join('user_details', 'users.id', '=', 'user_details.user_id')
             ->join('role_users', 'users.id', '=', 'role_users.user_id')
             ->join('roles', 'roles.id', '=', 'role_users.role_id')
             ->select('users.*', 'user_details.first_name', 'user_details.last_name', 'user_details.phone', 'role_users.role_id', 'roles.name AS role')
-            ->whereNotIn('role_users.role_id', [2, 3, 4])
-            ->where(function ($s_query) use ($search) {
+            ->whereNotIn('role_users.role_id', [1])
+            ->where(function ($s_query) use ($search, $role) {
                 if (!empty($search)) {
                     $s_query->where('users.email', 'LIKE', "%$search%");
                     $s_query->orWhere(DB::raw("CONCAT(user_details.`first_name`, ' ',user_details.`last_name`)"), 'LIKE', "%$search%");
+                }
+
+                if (!empty($role)) {
+                    $s_query->where('role_users.role_id', $role);
                 }
             })
             ->orderBy($sortBy, $sortType)
@@ -137,10 +137,11 @@ class UserRepository
                 'search' => $search,
                 'sort_by' => $sortBy,
                 'sort_type' => $sortType,
+                'role' => $role,
             ]);
 
         foreach ($users as $key => $user) {
-            $user->details = $user->userDetail;
+            $user->userDetail;
         }
 
         return $users;
@@ -155,7 +156,11 @@ class UserRepository
      */
     public function get($id)
     {
-        return $this->auth->findById($id);
+        $user = $this->auth->findById($id);
+        if ($user) {
+            $user->userDetail;
+        }
+        return $user;
     }
 
     /**
@@ -227,10 +232,8 @@ class UserRepository
         $user->save();
 
         // Assign role to the user
-        if (isset($data['user_roles']) && isset($data['user_roles']['id']) && !empty($data['user_roles']['id'])) {
+        if (isset($data['role_id'])) {
             $this->roleRepository->assignRole($user, $data);
-        } else {
-            $this->roleRepository->assignRenterRole($user);
         }
 
         // Create the user details
@@ -273,23 +276,30 @@ class UserRepository
     {
         $user = $this->get($id);
 
-        $roleId = $user->roles()->first()->id;
+        if (isset($request->email)) {
+            $user->email = $request->email;
+            $user->save();
+        }
 
-        $previous_role = $this->auth->findRoleById($roleId);
-        $previous_role->users()->detach($user);
+        if (isset($request->user_detail)) {
+            $data = [
+                'user_detail' => $request->user_detail,
+            ];
+            // Update the user details
+            $this->updateUserDetail($user, $data);
+        }
 
-        $user->email = $request->email;
-        $user->save();
+        // Assign role to the user
+        if (isset($data['role_id'])) {
+            $roleId = $user->roles()->first()->id;
+            $previous_role = $this->auth->findRoleById($roleId);
+            $previous_role->users()->detach($user);
 
-        $data = [
-            'user_detail' => $request->userDetail,
-        ];
+            $this->roleRepository->assignRole($user, $data);
+            $role = $this->role->find($request->user_roles['id']);
+            $role->users()->attach($user);
 
-        // Update the user details
-        $this->updateUserDetail($user, $data);
-
-        $role = $this->role->find($request->user_roles['id']);
-        $role->users()->attach($user);
+        }
 
         return $user;
     }
@@ -321,41 +331,46 @@ class UserRepository
             $userDetail->first_name = $data['user_detail']['first_name'];
         }
 
-        if (isset($data['user_detail']['middle_initial'])) {
-            $userDetail->middle_initial = $data['user_detail']['middle_initial'];
-        }
-
         if (isset($data['user_detail']['last_name'])) {
             $userDetail->last_name = $data['user_detail']['last_name'];
-        }
-
-        if (isset($data['user_detail']['suffix'])) {
-            $userDetail->suffix = $data['user_detail']['suffix'];
         }
 
         if (isset($data['user_detail']['phone'])) {
             $userDetail->phone = $data['user_detail']['phone'];
         }
 
+        if (isset($data['user_detail']['emergency_phone'])) {
+            $userDetail->emergency_phone = $data['user_detail']['emergency_phone'];
+        }
+
+        if (isset($data['user_detail']['address'])) {
+            $userDetail->address = $data['user_detail']['address'];
+        }
+
+        if (isset($data['user_detail']['city'])) {
+            $userDetail->city = $data['user_detail']['city'];
+        }
+
+        if (isset($data['user_detail']['state'])) {
+            $userDetail->state = $data['user_detail']['state'];
+        }
+
+        if (isset($data['user_detail']['zip'])) {
+            $userDetail->zip = $data['user_detail']['zip'];
+        }
+
+        if (isset($data['user_detail']['country'])) {
+            $userDetail->country = $data['user_detail']['country'];
+        }
+
         if (isset($data['user_detail']['verification_code'])) {
             $userDetail->verification_code = $data['user_detail']['verification_code'];
-        }
-
-        if (isset($data['user_detail']['ssn'])) {
-            $userDetail->ssn = $data['user_detail']['ssn'];
-        }
-
-        if (isset($data['user_detail']['full_ssn'])) {
-            $userDetail->full_ssn = $data['user_detail']['full_ssn'];
         }
 
         if (isset($data['user_detail']['dob'])) {
             $userDetail->dob = $data['user_detail']['dob'];
         }
 
-        if (isset($data['user_detail']['target_credit_score'])) {
-            $userDetail->target_credit_score = $data['user_detail']['target_credit_score'];
-        }
     }
 
     /**

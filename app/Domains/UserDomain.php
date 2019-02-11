@@ -4,7 +4,6 @@ namespace App\Domains;
 use App\Events\PasswordResetCompleted;
 use App\Events\ReminderCodeGenerated;
 use App\Events\UserActivated;
-use App\Repositories\RenterRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Cartalyst\Sentinel\Activations\IlluminateActivationRepository as Activation;
@@ -12,8 +11,12 @@ use Cartalyst\Sentinel\Sentinel as Auth;
 use Illuminate\Events\Dispatcher as Event;
 use Log;
 use Reminder;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\JWTAuth;
 
-class User
+class UserDomain
 {
     const USER_ERROR = '*** USER_ERROR in User Domain *** : ';
     /**
@@ -22,6 +25,7 @@ class User
      * @var Auth
      */
     private $auth;
+    private $jwtAuth;
 
     /**
      * Event instance
@@ -60,22 +64,21 @@ class User
      * @param Activation $activation
      * @param UserRepository $userRepository
      * @param RoleRepository $roleRepository
-     * @param RenterRepository $renterRepository
      */
     public function __construct(
         Auth $auth,
+        JWTAuth $jwtAuth,
         Event $event,
         Activation $activation,
         UserRepository $userRepository,
-        RoleRepository $roleRepository,
-        RenterRepository $renterRepository
+        RoleRepository $roleRepository
     ) {
         $this->event = $event;
         $this->auth = $auth;
+        $this->jwtAuth = $jwtAuth;
         $this->activation = $activation;
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
-        $this->renterRepository = $renterRepository;
     }
 
     /**
@@ -105,6 +108,62 @@ class User
     public function get($id)
     {
         return $this->userRepository->get($id);
+    }
+
+    /**
+     * Register user details
+     *
+     * @param array $data
+     *
+     * @return User
+     *
+     * @throws \Exception
+     */
+    public function register($data)
+    {
+        try {
+            $user = $this->create($data);
+            // Generate activation code
+            $code = $this->activation->create($user);
+
+        } catch (\Exception $e) {
+            Log::error(UserDomain::USER_ERROR . 'For registerUser method : ' . $e->getMessage());
+            throw new \Exception('Error occurred while user registration. ' . $e->getMessage());
+        }
+
+        return ['user' => $user, 'code' => $code->code];
+    }
+
+    /**
+     * Login user
+     *
+     * @param array $credentials
+     *
+     * @return string
+     */
+    public function performLogin($credentials)
+    {
+
+        try {
+            $token = $this->jwtAuth->attempt($credentials);
+
+            if (!$token) {
+                throw new AccessDeniedHttpException();
+            }
+            $user = $this->jwtAuth->user();
+            $user->userDetail;
+            $roleSlug = $user->roles->first()->slug;
+
+        } catch (JWTException $e) {
+            Log::error(UserDomain::USER_ERROR . 'For perform method : ' . $e->getMessage());
+            throw new HttpException(500);
+        }
+
+        return [
+            'token' => $token,
+            'user' => $user,
+            'role' => $roleSlug,
+        ];
     }
 
     /**
@@ -152,7 +211,7 @@ class User
 
         $this->activation->complete($user, $code);
 
-        $this->event->fire(new UserActivated($user));
+        // $this->event->fire(new UserActivated($user));
 
         return $user;
     }
@@ -248,7 +307,7 @@ class User
     {
         try {
 
-            $verificationCode = $this->renterRepository->sendVerificationCode($user);
+            $verificationCode = $this->userRepository->sendVerificationCode($user);
 
             // $this->event->fire(new SendVerificationCodeMessageEvent($user, $verificationCode));
 
@@ -259,7 +318,7 @@ class User
             ], 201);
 
         } catch (\Exception $e) {
-            Log::error(User::USER_ERROR . 'For sendResetPasswordCode method : ' . $e->getMessage());
+            Log::error(UserDomain::USER_ERROR . 'For sendResetPasswordCode method : ' . $e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),

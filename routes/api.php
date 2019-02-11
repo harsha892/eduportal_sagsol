@@ -18,13 +18,29 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/user', 'UserController@showUser');
-Route::post('/user', 'UserController@doLogin');
+// Route::post('/user', 'UserController@doLogin');
 Route::post('/createUser', 'userController@createUser');
 // Route::post('/role/new','RoleController@CreateNewRole');
 
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
+
+    /**
+     * Include User APIs
+     */
+    require ('partials/user.php');
+
+    $api->group(['middleware' => 'jwt.auth'], function ($api) {
+        $api->resource('role', 'RolesController');
+
+        $api->group(['prefix' => 'user'], function ($api) {
+            $api->get('/profile', 'UserController@profile');
+        });
+        $api->resource('user', 'UserController');
+
+    });
+
 //auth
     $api->group(["prefix" => "auth"], function ($api) {
         $api->post('/login', 'UserController@doLogin');
@@ -67,12 +83,12 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
             $api->put('/update', 'TopicController@updateTopic');
             $api->post('/delete', 'TopicController@DeleteTopic');
         });
-        // semister api
-        $api->group(["prefix" => "semister"], function ($api) {
-            $api->get('/all', 'SemisterController@getAllSemisters');
-            $api->post('/new', 'SemisterController@createNewSemister');
-            $api->put('/update', 'SemisterController@updateSemister');
-            $api->post('/delete', 'SemisterController@DeleteSemister');
+        // semester api
+        $api->group(["prefix" => "semester"], function ($api) {
+            $api->get('/all', 'SemesterController@getAllSemesters');
+            $api->post('/new', 'SemesterController@createNewSemester');
+            $api->put('/update', 'SemesterController@updateSemester');
+            $api->post('/delete', 'SemesterController@DeleteSemester');
         });
     });
 });

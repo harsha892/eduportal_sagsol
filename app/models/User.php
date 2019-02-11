@@ -1,39 +1,46 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Sentinel\Users\EloquentUser as SentinelUser;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-
-class User extends Authenticatable implements JWTSubject
+class User extends SentinelUser implements JWTSubject
 {
 
     use Notifiable;
 
     // Rest omitted for brevity
+    protected $hidden = ['password', 'roles'];
 
-    
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y, h:iA',
+        'updated_at' => 'datetime:d/m/Y, h:iA',
+        'status' => 'boolean',
+    ];
 
-    protected $hidden = ['contact_id', 'password', 'roles'];
-    protected $appends = ['role_id'];
-
-    public function roles()
+    /**
+     * Get the user details
+     *
+     */
+    public function userDetail()
     {
-        return $this->hasOne(RoleUser::class);
+        return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
-    public function getRoleIdAttribute()
-    {
-        return $this->roles->role_id;
-    }
-    
 
-    public function contact()
+    /**
+     * Check for user permission via role
+     *
+     * @param $role
+     *
+     * @return count
+     */
+    public function hasRole($role)
     {
-        return $this->hasOne(Contact::class); //contacts -> contact_id
+        return $this->where('role', $role)
+            ->where('id', $this->id)
+            ->count();
     }
 
     /**
@@ -54,6 +61,15 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function canCreateUser()
+    {
+        if (!$this->roles || !$this->roles->first()) {
+            return false;
+        }
+
+        return in_array($this->roles->first()->id, [1, 2, 3]);
     }
 
 }

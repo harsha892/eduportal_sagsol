@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 
-use App\models\Topic;
+use App\Models\Topic;
 
 class TopicController extends Controller
 {
@@ -25,7 +25,7 @@ class TopicController extends Controller
         $topic->long_description = $request->get("long_description");
         $topic->related_group_ids = $request->get("related_group_ids");
         $topic->related_subject_ids = $request->get("related_subject_ids");
-        $topic->semister_ids = $request->get("semister_ids");
+        $topic->semester_ids = $request->get("semester_ids");
         $topic->type_of_content = $request->get("type_of_content");
 
         $topic->save();

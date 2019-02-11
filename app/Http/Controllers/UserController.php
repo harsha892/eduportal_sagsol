@@ -3,21 +3,136 @@
 namespace App\Http\Controllers;
 
 use Activation;
+use App\Domains\UserDomain;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserPostRequest;
+use App\Http\Requests\Users\RegisterUserRequest;
 use App\Http\Requests\VerifyUserRequest;
 use App\Mail\ActiveUser;
-use App\models\Contact;
-use App\models\RoleUser;
-use App\models\User;
-use App\models\VerifyUser;
+use App\Models\Contact;
+use App\Models\RoleUser;
+use App\Models\User;
+use App\Models\VerifyUser;
+use App\Repositories\UserRepository;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserController extends Controller
 {
-    //
+
+    private $userDomain;
+
+    public function __construct(
+        UserDomain $userDomain
+    ) {
+        $this->userDomain = $userDomain;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(
+        UserRepository $userRepository,
+        Request $request
+    ) {
+        $users = $userRepository->getAll($request->all());
+        return response()->json($users);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(
+        UserDomain $userDomain,
+        RegisterUserRequest $request
+    ) {
+
+        $currentUser = $userDomain->getCurrentUser();
+        if (!$currentUser->canCreateUser()) {
+            throw new AccessDeniedHttpException();
+        }
+        $data = $userDomain->register($request->all());
+        return response()->json([
+            'user' => $data['user'],
+            'code' => $data['code'],
+        ]);
+    }
+
+    /**
+     * Get current logged user profile
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function profile(
+        UserDomain $userDomain
+    ) {
+        $user = $userDomain->getCurrentUser();
+        return response()->json($user);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id
+    ) {
+        return response()->json($this->userDomain->update($id, $request));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 
     public function showUser()
     {
@@ -67,10 +182,7 @@ class UserController extends Controller
 
         return User::with(['contact'])->find($user->id);
     }
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['doLogin']]);
-    }
+
     public function doLogin(UserLoginRequest $request)
     {
         $credentials = [

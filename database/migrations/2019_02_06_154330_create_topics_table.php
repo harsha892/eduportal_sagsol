@@ -26,7 +26,7 @@ class CreateTopicsTable extends Migration
             $table->text('long_description');
             
             $table->string('type_of_content');
-            $table->json('semister_ids');
+            $table->json('semester_ids');
 
 
             $table->timestamps();

@@ -88,6 +88,11 @@ class CreateTest extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('question_options');
+        Schema::dropIfExists('questions');
+        Schema::dropIfExists('test_questions');
         Schema::dropIfExists('tests');
+        Schema::dropIfExists('test_model_sections');
+        Schema::dropIfExists('test_models');
     }
 }

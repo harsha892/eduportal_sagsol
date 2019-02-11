@@ -4,55 +4,55 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\SemisterRequest;
-use App\Http\Requests\UpdateSemisterRequest;
+use App\Http\Requests\SemesterRequest;
+use App\Http\Requests\UpdateSemesterRequest;
 
-use App\models\Semister;
+use App\Models\Semester;
 
-class SemisterController extends Controller
+class SemesterController extends Controller
 {
-    public function createNewSemister(SemisterRequest $request)
+    public function createNewSemester(SemesterRequest $request)
     {
-        $semister = new Semister();
-        $semister->name = $request->get("name");
-        $semister->is_active = $request->get("is_active");
+        $semester = new Semester();
+        $semester->name = $request->get("name");
+        $semester->is_active = $request->get("is_active");
 
-        $semister->created_by = $request->get("created_by");
-        $semister->updated_by = $request->get("updated_by");
+        $semester->created_by = $request->get("created_by");
+        $semester->updated_by = $request->get("updated_by");
 
-        $semister->start_date = $request->get("start_date");
-        $semister->end_date = $request->get("end_date");
+        $semester->start_date = $request->get("start_date");
+        $semester->end_date = $request->get("end_date");
 
-        $semister->save();
+        $semester->save();
 
-        return $semister;
+        return $semester;
     }
-    public function updateSemister(UpdateSemisterRequest $request)
+    public function updateSemester(UpdateSemesterRequest $request)
     {
-        $semister = semister::find($request->get("id"));
+        $semester = semester::find($request->get("id"));
 
-        $semister->name = $request->get("name");
-        $semister->is_active = $request->get("is_active");
+        $semester->name = $request->get("name");
+        $semester->is_active = $request->get("is_active");
 
-        $semister->created_by = $request->get("created_by");
-        $semister->updated_by = $request->get("updated_by");
+        $semester->created_by = $request->get("created_by");
+        $semester->updated_by = $request->get("updated_by");
 
-        $semister->start_date = $request->get("start_date");
-        $semister->end_date = $request->get("end_date");
+        $semester->start_date = $request->get("start_date");
+        $semester->end_date = $request->get("end_date");
         
-        $semister->save();
-        return $semister;
+        $semester->save();
+        return $semester;
 
     }
-    public function DeleteSemister(Request $request)
+    public function DeleteSemester(Request $request)
     {
-        $semister = semister::find($request->get("id"));
-        $semister->delete();
-        return "semister Deleted Successful";
+        $semester = semester::find($request->get("id"));
+        $semester->delete();
+        return "semester Deleted Successful";
     }
-    public function getAllSemisters()
+    public function getAllSemesters()
     {
-        $semister = semister::all();
-        return $semister;
+        $semester = semester::all();
+        return $semester;
     }
 }

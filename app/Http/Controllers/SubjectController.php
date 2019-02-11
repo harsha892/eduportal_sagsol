@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SubjectReuqest;
 use App\Http\Requests\UpdateSubjectRequest;
 use App\Http\Requests\GroupSubjectsRequest;
-use App\models\User;
-use App\models\Subject;
-use App\models\GroupSubject;
+use App\Models\User;
+use App\Models\Subject;
+use App\Models\GroupSubject;
 
 class SubjectController extends Controller
 {

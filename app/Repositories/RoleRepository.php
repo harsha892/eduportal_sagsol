@@ -115,7 +115,7 @@ class RoleRepository
      */
     public function assignRole($user, $data)
     {
-        $role = $this->auth->findRoleById($data['user_roles']['id']);
+        $role = $this->auth->findRoleById($data['role_id']);
         $role->users()->attach($user);
     }
 

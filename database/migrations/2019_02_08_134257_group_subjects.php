@@ -28,6 +28,7 @@ class GroupSubjects extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('group_subjects');
+
     }
 }

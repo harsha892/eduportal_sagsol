@@ -28,6 +28,7 @@ class SubjectTopics extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('subject_topics');
+
     }
 }

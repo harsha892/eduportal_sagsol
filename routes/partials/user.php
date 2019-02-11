@@ -5,5 +5,7 @@
  */
 
 $api->group(['prefix' => 'user', 'namespace' => 'Auth'], function ($api) {
-    $api->post('signup', 'RegisterController@register');
+    $api->post('register', 'RegisterController@register');
+    $api->post('activate', 'RegisterController@activate');
+    $api->post('login', 'LoginController@login');
 });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SemisterTopics extends Migration
+class SemesterTopics extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class SemisterTopics extends Migration
      */
     public function up()
     {
-        Schema::create('semister_topics', function (Blueprint $table) {
+        Schema::create('semester_topics', function (Blueprint $table) {
 
             $table->unsignedInteger('topic_id');
-            $table->unsignedInteger('semister_id');
+            $table->unsignedInteger('semester_id');
         });
 
     }
@@ -28,6 +28,6 @@ class SemisterTopics extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('semester_topics');
     }
 }

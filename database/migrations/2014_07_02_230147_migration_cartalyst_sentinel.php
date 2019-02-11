@@ -119,11 +119,13 @@ class MigrationCartalystSentinel extends Migration
             $table->boolean('phone_verified')->default(0);
             $table->string('verification_code')->nullable();
 
-            $table->string('address')->nullable();
-            $table->string('city', 100)->nullable();
-            $table->string('state', 3)->nullable();
-            $table->string('zip', 10)->nullable();
+            $table->text('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
             $table->string('country')->default('IN')->nullable();
+
+            $table->string('emergency_phone', 20)->nullable();
 
             $table->date('dob')->nullable();
 
@@ -149,12 +151,13 @@ class MigrationCartalystSentinel extends Migration
      */
     public function down()
     {
-        Schema::drop('activations');
-        Schema::drop('persistences');
-        Schema::drop('reminders');
-        Schema::drop('roles');
-        Schema::drop('role_users');
-        Schema::drop('throttle');
-        Schema::drop('users');
+        Schema::dropIfExists('user_details');
+        Schema::dropIfExists('activations');
+        Schema::dropIfExists('persistences');
+        Schema::dropIfExists('reminders');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('role_users');
+        Schema::dropIfExists('throttle');
+        Schema::dropIfExists('users');
     }
 }

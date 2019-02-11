@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
-use App\models\Group;
-use App\models\GroupSubject;
+use App\Models\Group;
+use App\Models\GroupSubject;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller

@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateSemistesTable extends Migration
+class CreateSemestersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSemistesTable extends Migration
      */
     public function up()
     {
-        Schema::create('semisters', function (Blueprint $table) {
+        Schema::create('semesters', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('name');
             $table->boolean('is_active');
-            
+
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
 
@@ -36,6 +36,6 @@ class CreateSemistesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('semisters');
+        Schema::dropIfExists('semesters');
     }
 }

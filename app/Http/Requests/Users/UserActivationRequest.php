@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Users;
 
 use Dingo\Api\Http\FormRequest;
 
-class SemesterRequest extends FormRequest
+class UserActivationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,7 @@ class SemesterRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|unique:semesters",
-            "is_active" => "required|boolean",
-            "created_by" => "required|exists:users,id",
-            "updated_by" => "required|exists:users,id",
-            "start_date" => "required",
-            "end_date" => "required"
+            "code" => "required|exists:activations,code",
         ];
     }
 }

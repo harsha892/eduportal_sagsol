@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Dingo\Api\Http\FormRequest;
 
-class UpdateSemisterRequest extends FormRequest
+class UpdateSemesterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class UpdateSemisterRequest extends FormRequest
     public function rules()
     {
         return [
-            "id" => "required|exists:semisters",
-            "name" => "required|unique:semisters",
+            "id" => "required|exists:semesters",
+            "name" => "required|unique:semesters",
             "is_active" => "required|boolean",
             "created_by" => "required|exists:users,id",
             "updated_by" => "required|exists:users,id",
