@@ -106,6 +106,8 @@ class MigrationCartalystSentinel extends Migration
             $table->boolean('status')->default(1);
 
             $table->timestamps();
+            $table->softDeletes();
+
             $table->engine = 'InnoDB';
         });
 
@@ -115,6 +117,7 @@ class MigrationCartalystSentinel extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->string('gender')->nullable();
             $table->string('phone', 20)->nullable();
             $table->boolean('phone_verified')->default(0);
             $table->string('verification_code')->nullable();
@@ -133,6 +136,8 @@ class MigrationCartalystSentinel extends Migration
             $table->unsignedInteger('academic_year_end')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
+
             $table->index(['user_id']);
 
             $table->foreign('user_id')
@@ -140,6 +145,26 @@ class MigrationCartalystSentinel extends Migration
                 ->onDelete('cascade');
 
             $table->engine = 'InnoDB';
+        });
+
+        Schema::create('difficulty', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
+
+        Schema::create('privacy', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
+
+        Schema::create('question_type', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
+
+        Schema::create('content_types', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
         });
 
     }

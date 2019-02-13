@@ -97,7 +97,17 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $currentUser = $this->userDomain->getCurrentUser();
+        if (!$currentUser->canCreateUser()) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $user = $this->userDomain->get($id);
+        if (!$user) {
+            abort(404);
+        }
+        return response()->json($user);
+
     }
 
     /**
@@ -108,7 +118,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

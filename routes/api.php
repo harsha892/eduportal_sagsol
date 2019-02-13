@@ -18,9 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/user', 'UserController@showUser');
-// Route::post('/user', 'UserController@doLogin');
 Route::post('/createUser', 'userController@createUser');
-// Route::post('/role/new','RoleController@CreateNewRole');
 
 $api = app('Dingo\Api\Routing\Router');
 
@@ -38,6 +36,8 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
             $api->get('/profile', 'UserController@profile');
         });
         $api->resource('user', 'UserController');
+        $api->resource('group', 'GroupController');
+        $api->resource('subject', 'SubjectController');
 
     });
 

@@ -3,10 +3,18 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 
-class UserDetail extends Model
+class UserDetail extends BaseModel
 {
+    use \Venturecraft\Revisionable\RevisionableTrait;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+    protected $dates = ['deleted_at'];
+
+    public static function boot()
+    {
+        parent::boot();
+    }
+
     protected $casts = [
         'created_at' => 'datetime:d/m/Y, h:iA',
         'updated_at' => 'datetime:d/m/Y, h:iA',

@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -15,7 +18,8 @@
         "laravel/tinker": "^1.0",
         "metricloop/laravel-transformer-maker": "^1.0",
         "symfony/http-foundation": "^4.2",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "dev-develop",
+        "venturecraft/revisionable": "1.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -41,8 +45,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {

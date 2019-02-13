@@ -10,7 +10,14 @@ class User extends SentinelUser implements JWTSubject
 {
 
     use Notifiable;
+    use \Venturecraft\Revisionable\RevisionableTrait;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+    protected $dates = ['deleted_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+    }
     // Rest omitted for brevity
     protected $hidden = ['password', 'roles'];
 
@@ -70,6 +77,15 @@ class User extends SentinelUser implements JWTSubject
         }
 
         return in_array($this->roles->first()->id, [1, 2, 3]);
+    }
+
+    public function canCreateGroup()
+    {
+        if (!$this->roles || !$this->roles->first()) {
+            return false;
+        }
+
+        return in_array($this->roles->first()->id, [1]);
     }
 
 }

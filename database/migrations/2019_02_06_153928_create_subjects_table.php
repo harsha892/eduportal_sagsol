@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSubjectsTable extends Migration
 {
@@ -16,16 +16,29 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
 
-
+            $table->string('slug')->unique();
             $table->string('name');
-            $table->boolean('is_active');
-            
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by');
+            $table->text('description');
 
-            $table->text('short_description');
-
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
+
+        });
+
+        Schema::create('group_subjects', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('group_id')->unsigned();
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+
+            $table->integer('subject_id')->unsigned();
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->integer('year')->nullable();
+            $table->integer('semester')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
@@ -36,6 +49,7 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('group_subjects');
         Schema::dropIfExists('subjects');
     }
 }

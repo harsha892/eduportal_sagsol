@@ -339,6 +339,10 @@ class UserRepository
             $userDetail->phone = $data['user_detail']['phone'];
         }
 
+        if (isset($data['user_detail']['gender'])) {
+            $userDetail->gender = $data['user_detail']['gender'];
+        }
+
         if (isset($data['user_detail']['emergency_phone'])) {
             $userDetail->emergency_phone = $data['user_detail']['emergency_phone'];
         }

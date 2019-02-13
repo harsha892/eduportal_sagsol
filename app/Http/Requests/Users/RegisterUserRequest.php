@@ -29,6 +29,7 @@ class RegisterUserRequest extends FormRequest
             "role_id" => "required",
 
             "user_detail.first_name" => "required",
+            "user_detail.gender" => "required|in:male,female,transgender",
             "user_detail.phone" => "required|min:10|max:10|unique:user_details,phone",
             "user_detail.emergency_phone" => "required|min:10|max:10",
 
