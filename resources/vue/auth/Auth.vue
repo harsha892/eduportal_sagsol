@@ -13,7 +13,7 @@
                   </div>
                   <hr>
                   <div class="mb-5">
-                    <form>
+                    <form @submit="doLogin">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input
@@ -22,7 +22,11 @@
                           id="exampleInputEmail1"
                           aria-describedby="emailHelp"
                           placeholder="Enter email"
+                          v-model="email"
+                          name="email"
+                          v-validate="'required|email'"
                         >
+                        <small class="text-danger my-2">{{ errors.first('email') }}</small>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
@@ -31,64 +35,19 @@
                           class="form-control"
                           id="exampleInputPassword1"
                           placeholder="Password"
+                          name="password"
+                          v-model="password"
+                          v-validate="'required|min:6'"
                         >
+                        <small class="text-danger my-2">{{ errors.first('password') }}</small>
                       </div>
-                      <div class="form-group">
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="userType"
-                            id="aaRadio"
-                            value="aa"
-                            v-model="userType"
-                          >
-                          <label class="form-check-label" for="aaRadio">AA</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="userType"
-                            id="amRadio"
-                            value="am"
-                            v-model="userType"
-                          >
-                          <label class="form-check-label" for="amRadio">AM</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="userType"
-                            id="aiRadio"
-                            value="ai"
-                            v-model="userType"
-                          >
-                          <label class="form-check-label" for="aiRadio">AI</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="userType"
-                            id="studentRadio"
-                            value="student"
-                            v-model="userType"
-                          >
-                          <label class="form-check-label" for="studentRadio">Student</label>
-                        </div>
-                      </div>
-                      <span class="btn swatch-green" v-on:click="doLogin()">Submit</span>
+                      <input
+                        type="submit"
+                        :disabled="errors.any()"
+                        class="btn swatch-green"
+                        value="Submit"
+                      >
                     </form>
-                    <!-- .form
-                    <input type="text" placeholder="login" class="my-2 bg-light">
-                    <br>
-                    <input type="password" placeholder="password " class="my-2 bg-light">
-                    <br>
-                    <input type="submit" value="Log In" class="submit" v-on:click="goDashboard()">
-                    <br>
-                    <a href=""></a>-->
                   </div>
                 </div>
               </form>
@@ -109,40 +68,29 @@ export default {
   data: function() {
     return {
       siteTitle: staticData.siteTitle,
-      pageType: "",
       userType: "",
-      rolesData: ""
+      email: "",
+      password: ""
     };
   },
-  watch: {
-    "$route.params": function() {
-      this.pageType = this.$route.params.authType;
-    }
-  },
-  created: function() {
-    this.pageType = this.$route.params.authType;
-  },
-  mounted() {
-    this.pageType = this.$route.params.authType;
-    AppService.doGet("role/all").then(res => {
-      this.rolesData = res;
-      console.log(this.rolesData, "rolesData");
-    });
-  },
   methods: {
-    goDashboard() {
-      this.$router.push({
-        name: "adminDashboard",
-        params: { userType: this.userType }
-      });
-    },
-    doLogin() {
+    doLogin(e) {
+      e.preventDefault();
       const payload = {
-        email: "harsha.chayanam@gmail.com",
-        password: "Sagsol12"
+        email: this.email,
+        password: this.password
       };
-      AppService.doPost("user/login", payload).then(res => {
-        console.log(res);
+      console.log(payload);
+      AppService.doPostWithOutToken("user/login", payload).then(response => {
+        console.log(response);
+        if (response) {
+          this.$session.start();
+          this.$session.set("token", response.data.token);
+          this.$router.push({
+            name: "adminDashboard",
+            params: { userType: response.data.role }
+          });
+        }
       });
     }
   }

@@ -4,8 +4,8 @@
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <ul>
-            <li>Objective: It contains only mutliple choice questions</li>
-            <li>MCQ: It contains both mutilple and writtne type questions</li>
+            <li>Group: Unable to edit group information</li>
+            <li>Delete: Ii you want edit in group you have to delete group and create new group</li>
           </ul>
           <div>
             <a
@@ -21,122 +21,36 @@
     <div class="card">
       <div class="card-body">
         <div class="tab-content" id="pills-tabContent">
-          <div
-            class="tab-pane fade show active"
-            id="pills-home"
-            role="tabpanel"
-            aria-labelledby="pills-home-tab"
-          >
-            <table class="table table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Group Title</th>
-                  <th scope="col" style="width:300px">Descrepition</th>
-                  <th scope="col">Created / Updated By</th>
-                  <th scope="col">Created / Updated on</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>CSC</td>
-
-                  <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam maxime asperiores obcaecati atque molestias, tempora expedita voluptate! Illo asperiores accusantium, aperiam enim, sunt modi cum similique corporis incidunt maxime dolores.</td>
-                  <td>
-                    <a href>Ramesh D</a>
-                  </td>
-                  <td>21 oct 2018</td>
-                  <td>
-                    <a href data-toggle="modal" data-target="#exampleModalLong">
-                      <i class="fa fa-edit"></i> Edit
-                    </a> |
-                    <a href class="text-muted">
-                      <small>
-                        <i class="fa fa-trash"></i> Delete
-                      </small>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>ECE</td>
-
-                  <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam maxime asperiores obcaecati atque molestias, tempora expedita voluptate! Illo asperiores accusantium, aperiam enim, sunt modi cum similique corporis incidunt maxime dolores.</td>
-                  <td>
-                    <a href>Ramesh D</a>
-                  </td>
-                  <td>21 oct 2018</td>
-                  <td>
-                    <a href data-toggle="modal" data-target="#exampleModalLong">
-                      <i class="fa fa-edit"></i> Edit
-                    </a> |
-                    <a href class="text-muted">
-                      <small>
-                        <i class="fa fa-trash"></i> Delete
-                      </small>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div
-            class="tab-pane fade"
-            id="pills-profile"
-            role="tabpanel"
-            aria-labelledby="pills-profile-tab"
-          >
-            <table class="table table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Image</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Rajesh</td>
-                  <td>rajesh123@gmail.com</td>
-                  <td>
-                    <img
-                      src="http://phpstack-127383-482309.cloudwaysapps.com/public/uploads/users/thumbnail/default.png"
-                      alt
-                    >
-                  </td>
-                  <td>Accountent</td>
-                  <td>
-                    <a href>
-                      <i class="fa fa-edit"></i> Edit
-                    </a> |
-                    <a href class="text-muted">
-                      <i class="fa fa-trash"></i> Delete
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Nalini</td>
-                  <td>nalini@gmail.com</td>
-                  <td>
-                    <img
-                      src="http://phpstack-127383-482309.cloudwaysapps.com/public/uploads/users/thumbnail/default.png"
-                      alt
-                    >
-                  </td>
-                  <td>Sr. Incharge</td>
-                  <td>
-                    <a href>
-                      <i class="fa fa-edit"></i> Edit
-                    </a> |
-                    <a href class="text-muted">
-                      <i class="fa fa-trash"></i> Delete
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <table class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Description</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Is Active</th>
+                <th scope="col">Semesters</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item,index) in groups" :key="index">
+                <td>{{item.name}}</td>
+                <td>{{item.slug}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.duration}}</td>
+                <td>{{item.semesters}}</td>
+                <td>{{item.slug}}</td>
+                <td>{{item.created_at | dateFormat}}</td>
+                <td>
+                  <a href class="text-muted">
+                    <i class="fa fa-trash"></i> Delete
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -157,27 +71,70 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="formGroupExampleInput">Group Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="formGroupExampleInput"
-                  placeholder="Group Name"
-                >
+          <form @submit="createNewGroup">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      v-model="createGroup.name"
+                      placeholder="Name"
+                    >
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="slug">Slug</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="slug"
+                      v-model="createGroup.slug"
+                      placeholder="Slug"
+                    >
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="durations">Durations</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="durations"
+                      v-model="createGroup.durations"
+                      placeholder="Durations"
+                    >
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="Slug">Semesters</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="semesters"
+                      v-model="createGroup.semesters"
+                      placeholder="semesters"
+                    >
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="formGroupExampleInput">Group Description</label>
+                    <textarea rows="3" class="form-control" v-model="createGroup.description"></textarea>
+                  </div>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="formGroupExampleInput">Group Description</label>
-                <textarea rows="3" class="form-control"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit</button>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn swatch-green" value="Submit">
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -192,13 +149,34 @@ export default {
     return {
       tabs: "",
       tabIndex: 0,
-      userType: ""
+      userType: "",
+      createGroup: ""
     };
+  },
+  watch: {
+    groups: function() {}
   },
   mounted() {
     this.tabs = staticData.userProfileTabs;
     this.userType = this.$route.params.userType;
-    console.log("Component mounted.", this.tabs);
+  },
+  computed: {
+    groups() {
+      return this.$store.getters.GET_GROUPS;
+    }
+  },
+  created() {
+    this.$store.dispatch("GROUP_GLOBE_ACTION");
+    this.createGroup = { ...this.$store.getters.GET_GROUP_OBJ };
+  },
+  methods: {
+    createNewGroup(e) {
+      e.preventDefault();
+      this.$store.dispatch("GROUP_GLOBE_ACTION", this.createGroup);
+      setTimeout(function() {
+        return this.$store.dispatch("GROUP_GLOBE_ACTION");
+      }, 2000);
+    }
   }
 };
 </script>

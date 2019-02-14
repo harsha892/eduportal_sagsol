@@ -7,11 +7,12 @@
 </template>
 
 <script>
-
 export default {
   name: "mainApp",
+  mounted() {},
+  components: {},
   mounted() {
-  },
-  components: {}
+    // this.$store.dispatch("GET_ROLES_ACTION");
+  }
 };
 </script>
