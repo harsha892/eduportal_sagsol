@@ -12,7 +12,7 @@
         <ul>
             <li>Name: {{$userName}}</li>
             <li>Email: {{$email}}</li>
-            <li><a href="http://education_portal.test/portal/verifyUser/{{$userName}}/{{$email}}/{{$userId}}/{{$code}}">Click here to verify your email</a></li>
+            <li><a href="/portal/verifyUser/{{$userName}}/{{$email}}/{{$userId}}/{{$code}}">Click here to verify your email</a></li>
         </ul>
     </body>
 </html>

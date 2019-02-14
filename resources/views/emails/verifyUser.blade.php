@@ -21,7 +21,7 @@
             <li><button onClick="verifyUser()">Click here to activate</button></li>
         </ul>
         <script>
-        var apiPath = "http://education_portal.test/api/auth/verifyUser";
+        var apiPath = "/api/auth/verifyUser";
         document.getElementById("username").innerHTML = window.location.pathname.split("/")[3];
         document.getElementById("useremail").innerHTML =  window.location.pathname.split("/")[4];
         var user_id = window.location.pathname.split("/")[5];
@@ -32,7 +32,7 @@
             $.post(apiPath,{ user_id: user_id, activationCode: activationCode })
             .done(function(response) {
                 if(response.completed===true){
-                window.location.replace("http://education_portal.test/portal");
+                window.location.replace("/portal");
                 //console.log(response,"response");
                 }else{
                     alert(response);

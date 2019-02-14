@@ -116903,7 +116903,7 @@ var pieChartData = {
 __webpack_require__.r(__webpack_exports__);
 var environment = {
   production: false,
-  apiBase: 'http://education_portal.test/api/',
+  apiBase: '/api/',
   tinyAPIKey: '55ug9ban0d31h0bmto81y5z82vq1fk8d443028h27f5xamor',
   googleAPIKey: 'AIzaSyCh8ZIJYL1KWUHRCuhJoZPi0ahc5wostc0',
   env: 'dev'
