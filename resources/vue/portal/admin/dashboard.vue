@@ -24,6 +24,7 @@ import topHeaderView from "../../shared/MainHeader";
 import asideBar from "../../shared/AsideBar";
 import AdminHome from "./home";
 import UsersList from "./user/userslist";
+import mapState from "vuex";
 export default {
   name: "adminApp",
   data() {
@@ -31,6 +32,12 @@ export default {
       userType: "",
       pageType: ""
     };
+  },
+  computed: {
+    doneTodosCount() {
+      console.log("Store", this.$store);
+      return 4; //this.$store.role;
+    }
   },
   watch: {
     "$route.params": function() {
@@ -53,8 +60,7 @@ export default {
     asideBar,
     AdminHome,
     UsersList
-  },
-  methods: {}
+  }
 };
 </script>
 <style>

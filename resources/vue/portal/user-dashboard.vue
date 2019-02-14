@@ -1,13 +1,13 @@
 
 <template>
   <div class="app" id="homeView">
-    <div v-if="userType === 'aa'">
+    <div v-if="userType === 'admin'">
       <admin-app></admin-app>
     </div>
     <div v-if="userType === 'student'">
       <student-app></student-app>
     </div>
-    <div v-if="userType === 'am'">
+    <div v-if="userType === 'member'">
       <staff-app></staff-app>
     </div>
   </div>
@@ -26,6 +26,7 @@ export default {
   },
   mounted() {
     this.userType = this.$route.params.userType;
+    console.log(this.userType);
   },
   components: {
     AdminApp,

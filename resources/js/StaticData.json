@@ -1,7 +1,7 @@
 {
   "siteTitle": "education portal",
   "userMenu": {
-    "aa": [
+    "admin": [
       {
         "title": "Home",
         "routeName": "adminDashboard",
@@ -13,15 +13,15 @@
         "iconText": "fa-users",
         "childern": [
           {
-            "title": "AM",
+            "title": "Manager",
             "routeName": "users",
-            "params": "am",
+            "params": "member",
             "iconText": "fa-chess-king"
           },
           {
-            "title": "AI",
+            "title": "Incharge",
             "routeName": "users",
-            "params": "ai",
+            "params": "incharge",
             "iconText": "fa-code-branch"
           },
           {
@@ -29,12 +29,6 @@
             "routeName": "users",
             "params": "students",
             "iconText": "fa-user-graduate"
-          },
-          {
-            "title": "leave requests",
-            "routeName": "leave-requests",
-            "params": "leave-requests",
-            "iconText": "fa-sign-out-alt"
           }
         ]
       },
@@ -81,15 +75,16 @@
         "iconText": "fa-bell"
       },
       {
-        "title": "Master Settings",
+        "title": "Management",
         "routeName": "",
         "params": "support",
         "iconText": "fa-cog",
         "childern": [
           {
-            "title": "Settings",
-            "routeName": "m-settings",
-            "iconText": "fa-cogs"
+            "title": "leave requests",
+            "routeName": "leave-requests",
+            "params": "leave-requests",
+            "iconText": "fa-sign-out-alt"
           },
           {
             "title": "Roles",
@@ -114,7 +109,7 @@
         ]
       }
     ],
-    "am": [
+    "member": [
       {
         "title": "AM Home",
         "routeName": "adminDashboard",
@@ -122,7 +117,7 @@
         "iconText": "fa-window-maximize"
       }
     ],
-    "ai": [
+    "incharge": [
       {
         "title": "AI home",
         "routeName": "adminDashboard",
@@ -195,5 +190,22 @@
       "params": "techie",
       "iconText": "fa-comment"
     }
-  ]
+  ],
+  "newUserFormObj": {
+    "email": "",
+    "password": "",
+    "role_id": "",
+    "user_detail": {
+      "first_name": "",
+      "last_name": "",
+      "phone": "",
+      "emergency_phone": "",
+      "address": "",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "country": "",
+      "dob": ""
+    }
+  }
 }

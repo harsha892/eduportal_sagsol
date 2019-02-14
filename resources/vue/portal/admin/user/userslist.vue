@@ -5,424 +5,93 @@
         <table class="table table-hover">
           <thead class="thead-light">
             <tr>
-              <th scope="col">Name</th>
+              <th scope="col">Name
+                <br>Academic years
+              </th>
               <th scope="col">Contact Details</th>
-              <th scope="col">Group</th>
-              <th scope="col" style="width:300px">Address</th>
-              <th scope="col">Created by</th>
-              <th scope="col">Created on</th>
-              <th scope="col">Action</th>
+              <th scope="col" style="width:110px">Role</th>
+              <th scope="col">Academic years</th>
+              <th scope="col">Address</th>
+              <!-- <th scope="col">Action</th> -->
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr
+              v-for="(item,index) in userByRoles"
+              :key="index"
+              :class="item.status === true ? '': 'table-danger'"
+            >
               <td>
-                <img
-                  src="http://phpstack-127383-482309.cloudwaysapps.com/public/uploads/users/thumbnail/default.png"
-                  alt
-                > Rajesh
+                {{item.user_detail.last_name}} {{item.user_detail.first_name}}
+                <br>
+                {{item.user_detail.academic_year_start}} - {{item.user_detail.academic_year_end}}
               </td>
               <td>
                 <ul class="list-unstyled">
-                  <li>Email: rajesh123@gmail.com</li>
-                  <li>Primary Phone: 9494941122</li>
-                  <li>Emergency phone: 9494941122</li>
+                  <li>Email: {{item.user_detail.email}}</li>
+                  <li>Primary Phone: {{item.user_detail.phone}}</li>
+                  <li>Emergency phone: {{item.user_detail.emergency_phone}}</li>
                 </ul>
               </td>
-              <td>CSC
-                <br>
-                <small>
-                  <a class="text-info" href data-toggle="modal" data-target="#exampleModal3">Change group</a>
-                </small>
+              <td>
+                {{item.role}}
+                <div>
+                  <small>
+                    <span class="cursor_pointer" v-on:click="getUpdateRoleForm(item.id)">Update Role</span>
+                  </small>
+                  <form
+                    v-show="updateRoleFor === item.id"
+                    class="m-0"
+                    style="width:100px;display: table-caption;"
+                  >
+                    <select
+                      class="custom-select custom-select-sm"
+                      v-on:change="updateUserRole(item.id,$event)"
+                    >
+                      <option selected>-- change role --</option>
+                      <option
+                        :value="item.id"
+                        v-for="(item,index) in roles"
+                        :key="index"
+                      >{{item.name}}</option>
+                    </select>
+                  </form>
+                  <small>
+                    <span
+                      class="text-danger cursor_pointer"
+                      v-show="updateRoleFor === item.id"
+                      v-on:click="getUpdateRoleForm(null)"
+                    >Close</span>
+                  </small>
+                </div>
               </td>
               <td>
-                <address>Plotno: 105, pallavi sudha homes a, ankereddy palem, guntur</address>
+                <span>
+                  {{item.user_detail.address}},
+                  {{item.user_detail.city}},
+                  <br>
+                  {{item.user_detail.state}},
+                  {{item.user_detail.zip}},
+                  {{item.user_detail.country}}
+                </span>
               </td>
-              <td>Rajesh</td>
-              <td>11 feb 2018</td>
-              <td>
-                <a data-toggle="modal" data-target="#exampleModal2" class="text-danger">
-                 Update Password
-                </a> |
-                <a data-toggle="modal" data-target="#exampleModal1">
+              <td>{{item.created_at}}</td>
+              <!-- <td>
+                <a
+                  data-toggle="modal"
+                  data-target="#exampleModal2"
+                  class="text-danger"
+                >Update Password</a> |
+                <span href v-on:click="singleUserSelected(item)">
                   <i class="fa fa-edit"></i> Edit
-                </a> |
+                </span>|
                 <a href class="text-muted">
                   <i class="fa fa-trash"></i> Delete
                 </a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  src="http://phpstack-127383-482309.cloudwaysapps.com/public/uploads/users/thumbnail/default.png"
-                  alt
-                > Nalini
-              </td>
-              <td>
-                <ul class="list-unstyled">
-                  <li>Email: rajesh123@gmail.com</li>
-                  <li>Primary Phone: 9494941122</li>
-                  <li>Emergency phone: 9494941122</li>
-                </ul>
-              </td>
-              <td>CSC
-                <br>
-                <small>
-                  <a class="text-info" href data-toggle="modal" data-target="#exampleModal3">Change group</a>
-                </small>
-              </td>
-              <td>
-                <address>Plotno: 105, pallavi sudha homes a, ankereddy palem, guntur</address>
-              </td>
-              <td>Rajesh</td>
-              <td>11 feb 2018</td>
-              <td>
-                <a data-toggle="modal" data-target="#exampleModal2" class="text-danger">
-                  Update Password
-                </a> |
-                <a data-toggle="modal" data-target="#exampleModal1">
-                  <i class="fa fa-edit"></i> Edit
-                </a> |
-                <a href class="text-muted">
-                  <i class="fa fa-trash"></i> Delete
-                </a>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create New User</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="inputAddress">User Type</label>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="gridRadios"
-                        id="gridRadios1"
-                        value="option1"
-                        checked
-                      >
-                      <label class="form-check-label" for="gridRadios1">Student</label>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="gridRadios"
-                        id="gridRadios2"
-                        value="option2"
-                      >
-                      <label class="form-check-label" for="gridRadios2">Staff</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputEmail4">First Name</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="inputEmail4"
-                    placeholder="First name"
-                  >
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">Last Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="inputPassword4"
-                    placeholder="Last name / surname"
-                  >
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputEmail4">Email</label>
-                  <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="inputPassword4"
-                    placeholder="Password"
-                  >
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputAddress">Role</label>
-                <select class="custom-select" id="inlineFormCustomSelectPref">
-                  <option selected>Choose...</option>
-                  <option value="1">Leader</option>
-                  <option value="2">Attend</option>
-                  <option value="3">XYZ</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputAddress2">Address</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputAddress2"
-                  placeholder="Apartment, studio, or floor"
-                >
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputCity">City</label>
-                  <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="inputState">State</label>
-                  <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="inputZip">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create User</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal1"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputEmail4">First Name</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="inputEmail4"
-                    placeholder="First name"
-                  >
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">Last Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="inputPassword4"
-                    placeholder="Last name / surname"
-                  >
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="inputEmail4">Email</label>
-                  <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputAddress">Role</label>
-                <select class="custom-select" id="inlineFormCustomSelectPref">
-                  <option selected>Choose...</option>
-                  <option value="1">Leader</option>
-                  <option value="2">Attend</option>
-                  <option value="3">XYZ</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputAddress2">Address</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputAddress2"
-                  placeholder="Apartment, studio, or floor"
-                >
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputCity">City</label>
-                  <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="inputState">State</label>
-                  <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="inputZip">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update User</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal2"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update password of Nalini</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputEmail4">New Password</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="inputEmail4"
-                    placeholder="New Password"
-                  >
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">Re-type New Password</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="inputPassword4"
-                    placeholder="Re-type New Password"
-                  >
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="inputEmail4">Enter your password</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="inputEmail4"
-                    placeholder="Enter your password"
-                  >
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update Password</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal3"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update group</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div>
-                <div class="form-group">
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      id="inlineCheckbox1"
-                      value="option1"
-                      name="groupName"
-                    >
-                    <label class="form-check-label" for="inlineCheckbox1">CSC</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      id="inlineCheckbox2"
-                      name="groupName"
-                      value="option2"
-                    >
-                    <label class="form-check-label" for="inlineCheckbox2">ECE</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      id="inlineCheckbox3"
-                      name="groupName"
-                      value="option3"
-                    >
-                    <label class="form-check-label" for="inlineCheckbox3">Mechanical</label>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update Group</button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -430,19 +99,80 @@
 
 <script>
 import staticData from "../../../../js/StaticData.json";
+import AppService from "../../../../js/appservices";
+import serverBus from "../../../../js/app";
 export default {
   name: "userView",
+  props: ["user"],
   data() {
     return {
-      tabs: "",
-      tabIndex: 0,
-      userType: ""
+      roleId: "",
+      rolesLength: 0,
+      updateRole: false,
+      updateRoleFor: ""
     };
   },
+  watch: {
+    "$route.params": function() {
+      this.$store.dispatch("GET_ROLES_ACTION");
+      this.featchUserByRoleId();
+    },
+    roles: function() {},
+    rolesLength: function() {
+      this.featchUserByRoleId();
+    }
+  },
   mounted() {
-    this.tabs = staticData.userProfileTabs;
-    this.userType = this.$route.params.userType;
-    console.log("Component mounted.", this.tabs);
+    if (this.rolesLength === 0) {
+      this.$store.getters.GET_ROLES;
+    }
+    this.featchUserByRoleId();
+  },
+  computed: {
+    users() {
+      return this.$store.getters.GET_USERS;
+    },
+    userByRoles() {
+      return this.$store.getters.GET_USERS_BY_ROLES;
+    },
+    roles() {
+      this.rolesLength = this.$store.getters.GET_ROLES.length;
+      return this.$store.getters.GET_ROLES;
+    }
+  },
+  created() {
+    this.$store.dispatch("GET_ROLES_ACTION");
+    this.$store.dispatch("GET_USER_ACTION");
+  },
+  methods: {
+    featchUserByRoleId() {
+      this.useRoleId =
+        this.roles.length !== 0
+          ? this.roles.filter(e => {
+              return e.slug === this.$route.params.usersListType ? e : false;
+            })[0]
+          : false;
+      this.useRoleId !== false
+        ? this.$store.dispatch("GET_USER_BY_ROLE_ACTION", this.useRoleId)
+        : false;
+    },
+    singleUserSelected: function(item) {
+      // Using the server bus
+      this.$store.dispatch("GET_USER_BY_ID_ACTION", item);
+      // serverBus.$emit("singleUser", item => {:to="{name:'form', params: {formType:'new-user'}}"
+      this.$router.push({
+        name: "editUser",
+        params: { id: item.id }
+      });
+      // });
+    },
+    getUpdateRoleForm(id) {
+      this.updateRoleFor = id;
+    },
+    updateUserRole(item, event) {
+      console.log("item", item, "event", event.target.value);
+      this.updateRoleFor = "";
+    }
   }
 };
 </script>

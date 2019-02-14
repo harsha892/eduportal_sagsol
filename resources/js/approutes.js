@@ -33,6 +33,9 @@ import ModelQuestionPaperFrom from "../vue/portal/admin/master-settings/model-qu
 import PermissionsForm from "../vue/portal/admin/master-settings/permissions-form"
 // import StaffHome from "../vue/portal/staff/dashboard"
 // import StudentHome from "../vue/portal/student/dashboard"
+import formsView from "../vue/shared/forms/FormsComponent"
+import NewUserForm from "../vue/shared/forms/NewUser"
+
 const portalRoutes = [
     {
         name: "auth",
@@ -188,6 +191,23 @@ const portalRoutes = [
                     },
                 ]
             },
+            {
+                name: "form",
+                path: "form/",
+                component: formsView,
+                children: [
+                    {
+                        name: "newUser",
+                        path: "new-user/",
+                        component: NewUserForm,
+                    },
+                    {
+                        name: "editUser",
+                        path: "edit-user/:id",
+                        component: NewUserForm,
+                    }
+                ]
+            }
         ]
     }
 ];
