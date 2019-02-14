@@ -223,7 +223,7 @@ aside {
 .bottom_nav.navbar .nav-item a.active,
 .bottom_nav.navbar .nav-item a:hover {
     opacity: 1;
-    background-color: #ff5050;
+    background-color: #D66636;
 }
 
 .bottom_nav.navbar .nav-item .dropdown-menu a {
@@ -248,7 +248,7 @@ aside {
 }
 
 .navbar .nav-item .user_dropdown.dropdown-menu a:hover {
-    background: #ff5050;
+    background: #D66636;
     color: #fff;
 }
 
@@ -281,7 +281,7 @@ aside {
         width: 15px;
         height: 15px;
         transform: rotate(43deg);
-        background: #ff5050;
+        background: #D66636;
         top: -5px;
         left: 10%;
     } */
@@ -352,7 +352,7 @@ aside {
     height: 15px;
     width: 15px;
     z-index: 10;
-    border: 3px solid #ff5050;
+    border: 3px solid #D66636;
     border-radius: 70px;
     -moz-animation: heartbit 1s ease-out;
     -moz-animation-iteration-count: infinite;
@@ -369,7 +369,7 @@ aside {
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     border-radius: 15px;
-    background-color: #ff5050;
+    background-color: #D66636;
     position: absolute;
     right: 6px;
     top: -10px;
@@ -384,7 +384,7 @@ aside {
     border-left: 3px solid
 }
 .border-right-danger {
-    border-color: #ff5050;
+    border-color: #D66636;
 }
 
 .border-right-success {
