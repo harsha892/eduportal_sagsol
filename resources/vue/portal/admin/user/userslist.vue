@@ -2,7 +2,8 @@
   <div>
     <div class="card">
       <div class="card-body">
-        <table class="table table-hover">
+        <p class="text-capitalize text-danger" v-if="userByRoles.length ===0">No User found please create new user in create new section</p>
+        <table class="table table-hover" v-if="userByRoles.length !==0">
           <thead class="thead-light">
             <tr>
               <th scope="col">Name
@@ -12,7 +13,7 @@
               <th scope="col" style="width:110px">Role</th>
               <th scope="col">Academic years</th>
               <th scope="col">Address</th>
-              <!-- <th scope="col">Action</th> -->
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -28,7 +29,7 @@
               </td>
               <td>
                 <ul class="list-unstyled">
-                  <li>Email: {{item.user_detail.email}}</li>
+                  <li>Email: {{item.email}}</li>
                   <li>Primary Phone: {{item.user_detail.phone}}</li>
                   <li>Emergency phone: {{item.user_detail.emergency_phone}}</li>
                 </ul>
@@ -76,7 +77,7 @@
                 </span>
               </td>
               <td>{{item.created_at}}</td>
-              <!-- <td>
+              <td>
                 <a
                   data-toggle="modal"
                   data-target="#exampleModal2"
@@ -88,7 +89,7 @@
                 <a href class="text-muted">
                   <i class="fa fa-trash"></i> Delete
                 </a>
-              </td> -->
+              </td>
             </tr>
           </tbody>
         </table>
@@ -146,6 +147,7 @@ export default {
   },
   methods: {
     featchUserByRoleId() {
+      console.log(this.rolesLength);
       this.useRoleId =
         this.roles.length !== 0
           ? this.roles.filter(e => {
@@ -157,9 +159,6 @@ export default {
         : false;
     },
     singleUserSelected: function(item) {
-      // Using the server bus
-      this.$store.dispatch("GET_USER_BY_ID_ACTION", item);
-      // serverBus.$emit("singleUser", item => {:to="{name:'form', params: {formType:'new-user'}}"
       this.$router.push({
         name: "editUser",
         params: { id: item.id }

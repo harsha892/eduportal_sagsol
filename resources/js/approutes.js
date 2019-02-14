@@ -34,7 +34,8 @@ import PermissionsForm from "../vue/portal/admin/master-settings/permissions-for
 // import StaffHome from "../vue/portal/staff/dashboard"
 // import StudentHome from "../vue/portal/student/dashboard"
 import formsView from "../vue/shared/forms/FormsComponent"
-import NewUserForm from "../vue/shared/forms/NewUser"
+import NewUserForm from "../vue/shared/forms/user/NewUser"
+import editUserForm from "../vue/shared/forms/user/editUser"
 
 const portalRoutes = [
     {
@@ -204,7 +205,7 @@ const portalRoutes = [
                     {
                         name: "editUser",
                         path: "edit-user/:id",
-                        component: NewUserForm,
+                        component: editUserForm,
                     }
                 ]
             }

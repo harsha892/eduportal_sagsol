@@ -27,7 +27,7 @@
           {
             "title": "Students",
             "routeName": "users",
-            "params": "students",
+            "params": "student",
             "iconText": "fa-user-graduate"
           }
         ]

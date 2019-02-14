@@ -50,11 +50,23 @@ class AppService {
         return axios.post(url, payload, { headers }).then(function (response) {
             return response;
         }).catch(function (error) {
-            swal({
-                text: "Something went worng please try again",
-                icon: "warning",
-                dangerMode: true,
-            })
+            console.log(error.response);
+            if (error.response.status === 401) {
+                swal({
+                    text: "Something went worng please login again",
+                    icon: "warning",
+                    dangerMode: true,
+                }).then(function () {
+                    sessionStorage.clear();
+                    window.location.replace("http://" + window.location.hostname + '/portal');
+                });
+            } else {
+                swal({
+                    text: "Something went worng please try again",
+                    icon: "warning",
+                    dangerMode: true,
+                })
+            }
         });
 
     }
