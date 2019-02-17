@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Group;
+use App\Models\GroupSubject;
 use Cartalyst\Sentinel\Sentinel;
 
 class GroupRepository
@@ -77,4 +78,41 @@ class GroupRepository
         return $group;
 
     }
+
+    /**
+     * Get the group
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function get($id)
+    {
+        return $this->group->find($id);
+    }
+
+    public function getAllSubjects($groupId)
+    {
+        return collect($this->get($groupId)->subjects)->map(function ($subject) {
+            $subject->subject;
+            return $subject;
+        });
+    }
+
+    public function addSubjects($groupId, array $data = [])
+    {
+        foreach ($data['subjects'] as $subject) {
+            $groupSubject = new GroupSubject();
+            $groupSubject->group_id = $groupId;
+            $groupSubject->subject_id = $subject['id'];
+            $groupSubject->year = $subject['year'];
+            $groupSubject->semester = $subject['semester'];
+            $groupSubject->save();
+        }
+
+        return $this->getAllSubjects($groupId);
+
+    }
+
+    // addSubjects
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupRequest;
+use App\Http\Requests\Groups\AddSubjectsRequest;
+use App\Http\Requests\Groups\GetAllSubjectsRequest;
 use App\Http\Requests\Groups\NewGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
@@ -96,6 +98,27 @@ class GroupController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getSubjects(GetAllSubjectsRequest $request, $group_id)
+    {
+        return response()->json($this->groupRepository->getAllSubjects($group_id));
+    }
+
+    public function addSubject(AddSubjectsRequest $request, $group_id)
+    {
+        return response()->json($this->groupRepository->addSubjects($group_id, $request->all()));
+
+    }
+
+    public function deleteSubject($group_id, $subject_id)
+    {
+
+    }
+
+    public function updateSubject($group_id, $subject_id)
+    {
+
     }
 
     public function CreateNewGroup(GroupRequest $request)

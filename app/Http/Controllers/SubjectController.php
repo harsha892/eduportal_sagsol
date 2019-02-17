@@ -48,7 +48,7 @@ class SubjectController extends Controller
      */
     public function store(NewSubjectRequest $request)
     {
-        return response()->json($this->groupRepository->create($request->all()));
+        return response()->json($this->subjectRepository->create($request->all()));
 
     }
 
