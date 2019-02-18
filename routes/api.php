@@ -40,7 +40,7 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
         $api->group(['prefix' => 'group'], function ($api) {
             $api->get('/{group_id}/subjects', 'GroupController@getSubjects');
             $api->post('/{group_id}/subjects', 'GroupController@addSubject');
-            $api->delete('/{group_id}/subjects/{subject_id}', 'GroupController@deleteSubject');
+            $api->post('/{group_id}/subjects/delete', 'GroupController@deleteSubject');
             $api->put('/{group_id}/subjects/{subject_id}', 'GroupController@updateSubject');
         });
 

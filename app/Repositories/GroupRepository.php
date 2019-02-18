@@ -42,6 +42,22 @@ class GroupRepository
         return $group;
     }
 
+    public function update($id, $data = [])
+    {
+        $group = $this->get($id);
+        $data = collect($data)->only(['is_active']);
+        $group = $this->assign($group, $data);
+        $group->save();
+        return $group;
+    }
+
+    public function delete($id)
+    {
+        GroupSubject::where('group_id', $id)->delete();
+        $this->group->withTrashed()->find($id)->forceDelete();
+        return true;
+    }
+
     /**
      * Assign user details
      *
@@ -91,6 +107,11 @@ class GroupRepository
         return $this->group->find($id);
     }
 
+    public function getWithSubject($id)
+    {
+        return $this->group->with('subjects.subject')->find($id);
+    }
+
     public function getAllSubjects($groupId)
     {
         return collect($this->get($groupId)->subjects)->map(function ($subject) {
@@ -111,6 +132,13 @@ class GroupRepository
         }
 
         return $this->getAllSubjects($groupId);
+
+    }
+
+    public function deleteSubjects($groupId, array $data = [])
+    {
+        GroupSubject::destroy($data);
+        return true;
 
     }
 

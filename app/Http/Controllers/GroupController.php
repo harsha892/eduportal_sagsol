@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupRequest;
 use App\Http\Requests\Groups\AddSubjectsRequest;
+use App\Http\Requests\Groups\DeleteSubjectsRequest;
 use App\Http\Requests\Groups\GetAllSubjectsRequest;
+use App\Http\Requests\Groups\GroupCheckRequest;
 use App\Http\Requests\Groups\NewGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
@@ -61,9 +63,10 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(GroupCheckRequest $request, $id)
     {
-        //
+        return response()->json($this->groupRepository->getWithSubject($id));
+
     }
 
     /**
@@ -84,9 +87,9 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GroupCheckRequest $request, $id)
     {
-        //
+        return response()->json($this->groupRepository->update($id, $request->all()));
     }
 
     /**
@@ -95,24 +98,32 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(GroupCheckRequest $request, $id)
     {
-        //
+        return response()->json($this->groupRepository->delete($id));
+
     }
 
     public function getSubjects(GetAllSubjectsRequest $request, $group_id)
     {
-        return response()->json($this->groupRepository->getAllSubjects($group_id));
+        return response()->json(
+            $this->groupRepository->getAllSubjects($group_id)
+        );
     }
 
     public function addSubject(AddSubjectsRequest $request, $group_id)
     {
-        return response()->json($this->groupRepository->addSubjects($group_id, $request->all()));
+        return response()->json(
+            $this->groupRepository->addSubjects($group_id, $request->all())
+        );
 
     }
 
-    public function deleteSubject($group_id, $subject_id)
+    public function deleteSubject(DeleteSubjectsRequest $request, $group_id)
     {
+        return response()->json(
+            $this->groupRepository->deleteSubjects($group_id, $request->all())
+        );
 
     }
 
