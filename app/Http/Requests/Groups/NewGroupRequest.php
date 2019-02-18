@@ -37,7 +37,7 @@ class NewGroupRequest extends FormRequest
         return [
             "slug" => "required|unique:groups",
             "name" => "required",
-            "durations" => "required|numeric|min:1",
+            "duration" => "required|numeric|min:1",
             "semesters" => "required|numeric|min:1",
         ];
     }
