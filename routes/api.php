@@ -42,6 +42,9 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
             $api->post('/{group_id}/subjects', 'GroupController@addSubject');
             $api->post('/{group_id}/subjects/delete', 'GroupController@deleteSubject');
             $api->put('/{group_id}/subjects/{subject_id}', 'GroupController@updateSubject');
+            $api->get('/{group_id}/subjects/{subject_id}', 'GroupController@getGroupSubjectDetails');
+
+            $api->post('/subjects/{subject_id}/topics', 'GroupController@addTopicsToSubject');
         });
 
         $api->resource('group', 'GroupController');

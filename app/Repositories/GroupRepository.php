@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\Group;
 use App\Models\GroupSubject;
+use App\Models\Topic;
 use Cartalyst\Sentinel\Sentinel;
 
 class GroupRepository
@@ -120,6 +121,14 @@ class GroupRepository
         });
     }
 
+    public function getGroupSubjectDetails($groupId, $subjectId)
+    {
+        return GroupSubject::with('subject')->where([
+            'group_id' => $groupId,
+            'id' => $subjectId,
+        ])->first();
+    }
+
     public function addSubjects($groupId, array $data = [])
     {
         foreach ($data['subjects'] as $subject) {
@@ -139,7 +148,15 @@ class GroupRepository
     {
         GroupSubject::destroy($data);
         return true;
+    }
 
+    public function addTopicsToSubject($subject_id, array $data = [])
+    {
+        $topics = [];
+        foreach ($data['topics'] as $topic) {
+            $newTopic = new Topic();
+
+        }
     }
 
     // addSubjects
