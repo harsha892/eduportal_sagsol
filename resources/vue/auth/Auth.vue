@@ -9,10 +9,11 @@
                 <div class="auth_box mt-5">
                   <div class="images pt-3 pb-0">
                     <img src="../../images/sagsol.png" id="icon" alt="User Icon">
-                    <h5 class="my-3 text-uppercase text-blue">school management system</h5>
+                    <h5 class="my-3 text-uppercase text-danger">school management system</h5>
                   </div>
                   <hr>
                   <div class="mb-5">
+                    <p class="m-0 text-danger" v-if="error!==''">{{error}}</p>
                     <form @submit="doLogin">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
@@ -70,7 +71,8 @@ export default {
       siteTitle: staticData.siteTitle,
       userType: "",
       email: "",
-      password: ""
+      password: "",
+      error: ""
     };
   },
   methods: {
@@ -81,17 +83,35 @@ export default {
         password: this.password
       };
       console.log(payload);
-      AppService.doPostWithOutToken("user/login", payload).then(response => {
-        console.log(response);
-        if (response) {
+      AppService.doPostWithOutToken("user/login", payload)
+        .then(response => {
           this.$session.start();
-          this.$session.set("token", response.data.token);
+          const data = response.data || {};
+          this.$session.set("token", data.token);
           this.$router.push({
             name: "adminDashboard",
-            params: { userType: response.data.role }
+            params: { userType: data.role }
           });
-        }
-      });
+        })
+        .catch(error => {
+          const {
+            status_code,
+            message = "Invalid user name / password try again"
+          } = error || {};
+          switch (status_code) {
+            case 401:
+              this.error = message;
+              break;
+            case 500:
+              this.error = message;
+              break;
+            case 403:
+              this.error = "Invalid user name / password try again";
+              break;
+            default:
+              this.error = "Something went wrong please try again";
+          }
+        });
     }
   }
 };

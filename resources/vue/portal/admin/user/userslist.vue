@@ -2,7 +2,10 @@
   <div>
     <div class="card">
       <div class="card-body">
-        <p class="text-capitalize text-danger" v-if="userByRoles.length ===0">No User found please create new user in create new section</p>
+        <p
+          class="text-capitalize text-danger"
+          v-if="userByRoles.length ===0"
+        >No User found please create new user in create new section</p>
         <table class="table table-hover" v-if="userByRoles.length !==0">
           <thead class="thead-light">
             <tr>
@@ -10,9 +13,10 @@
                 <br>Academic years
               </th>
               <th scope="col">Contact Details</th>
-              <th scope="col" style="width:110px">Role</th>
-              <th scope="col">Academic years</th>
+              <th scope="col" class="d-none" style="width:110px">Role</th>
+              <th scope="col" class="d-none">Academic years</th>
               <th scope="col">Address</th>
+              <th scope="col">Created on</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -34,7 +38,7 @@
                   <li>Emergency phone: {{item.user_detail.emergency_phone}}</li>
                 </ul>
               </td>
-              <td>
+              <td class="d-none">
                 {{item.role}}
                 <div>
                   <small>
@@ -81,12 +85,12 @@
                 <a
                   data-toggle="modal"
                   data-target="#exampleModal2"
-                  class="text-danger"
-                >Update Password</a> |
+                  class="text-danger d-none"
+                >Update Password |</a> 
                 <span href v-on:click="singleUserSelected(item)">
                   <i class="fa fa-edit"></i> Edit
-                </span>|
-                <a href class="text-muted">
+                </span>
+                <a href class="text-muted d-none">
                   <i class="fa fa-trash"></i> Delete
                 </a>
               </td>

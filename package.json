@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.2"
     },
     "dependencies": {
+        "@johmun/vue-tags-input": "^2.0.1",
+        "@voerro/vue-tagsinput": "^1.11.1",
         "animate.css": "^3.7.0",
         "chart.js": "^2.7.3",
         "es6-promise": "^4.2.5",
@@ -32,6 +34,7 @@
         "vee-validate": "^2.1.7",
         "vue-chartjs": "^3.4.0",
         "vue-router": "^3.0.2",
+        "vue-select": "^2.5.1",
         "vue-session": "^1.0.0",
         "vue-swal": "^1.0.0",
         "vue-sweetalert2": "^1.6.4",

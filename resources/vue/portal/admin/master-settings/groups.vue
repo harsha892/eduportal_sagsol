@@ -27,7 +27,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Slug</th>
                 <th scope="col">Description</th>
-                <th scope="col">Duration</th>
+                <th scope="col">Years</th>
                 <th scope="col">Is Active</th>
                 <th scope="col">Semesters</th>
                 <th scope="col">Created At</th>
@@ -40,8 +40,11 @@
                 <td>{{item.slug}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.duration}}</td>
+                <td>
+                  <span class="badge badge-success" v-if="item.is_active===true">Active</span>
+                  <span class="badge badge-secondary" v-else>In Active</span>
+                </td>
                 <td>{{item.semesters}}</td>
-                <td>{{item.slug}}</td>
                 <td>{{item.created_at | dateFormat}}</td>
                 <td>
                   <a href class="text-muted">
@@ -100,12 +103,12 @@
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="durations">Durations</label>
+                    <label for="durations">Years</label>
                     <input
                       type="number"
                       class="form-control"
                       id="durations"
-                      v-model="createGroup.durations"
+                      v-model="createGroup.duration"
                       placeholder="Durations"
                     >
                   </div>

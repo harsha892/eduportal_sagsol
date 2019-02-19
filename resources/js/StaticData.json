@@ -81,12 +81,6 @@
         "iconText": "fa-cog",
         "childern": [
           {
-            "title": "leave requests",
-            "routeName": "leave-requests",
-            "params": "leave-requests",
-            "iconText": "fa-sign-out-alt"
-          },
-          {
             "title": "Roles",
             "routeName": "m-roles",
             "iconText": "fa-users"
@@ -94,6 +88,11 @@
           {
             "title": "Groups",
             "routeName": "m-groups",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Subjects",
+            "routeName": "m-subjects",
             "iconText": "fa-users"
           },
           {

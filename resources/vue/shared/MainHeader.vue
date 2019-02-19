@@ -209,8 +209,7 @@
               </a>
               <div class="dropdown-menu animated flipInX" aria-labelledby="navbarDropdown">
                 <router-link :to="{name:'newUser'}" class="nav-link text-capitalize">User</router-link>
-                <a class="nav-link" href="#">Group</a>
-                <a class="nav-link" href="#">Subject</a>
+                <a class="nav-link" href="#">Paper Model</a>
                 <a class="nav-link" href="#">Topic</a>
                 <a class="nav-link" href="#">Test</a>
               </div>

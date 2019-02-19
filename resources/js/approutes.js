@@ -23,6 +23,7 @@ import createNewTopic from "../vue/portal/education/learn/create-new-topic"
 import LearnAnswerBookiIew from "../vue/portal/education/learn/answer-book"
 import MasterSettings from "../vue/portal/admin/master-settings/master-settings"
 import MaterSetGroups from "../vue/portal/admin/master-settings/groups"
+import MaterSetSubjects from "../vue/portal/admin/master-settings/subjects"
 import MaterSetRoles from "../vue/portal/admin/master-settings/roles"
 import MaterSetMapping from "../vue/portal/admin/master-settings/mapping"
 import MaterSetSettings from "../vue/portal/admin/master-settings/settings"
@@ -36,6 +37,7 @@ import PermissionsForm from "../vue/portal/admin/master-settings/permissions-for
 import formsView from "../vue/shared/forms/FormsComponent"
 import NewUserForm from "../vue/shared/forms/user/NewUser"
 import editUserForm from "../vue/shared/forms/user/editUser"
+import subjectGroupMapping from "../vue/shared/forms/subject-group-form"
 
 const portalRoutes = [
     {
@@ -163,6 +165,10 @@ const portalRoutes = [
                                 path: "groups/",
                                 component: MaterSetGroups
                             }, {
+                                name: "m-subjects",
+                                path: "subjects/",
+                                component: MaterSetSubjects
+                            }, {
                                 name: "m-settings",
                                 path: "settings/",
                                 component: MaterSetSettings
@@ -206,6 +212,11 @@ const portalRoutes = [
                         name: "editUser",
                         path: "edit-user/:id",
                         component: editUserForm,
+                    },
+                    {
+                        name: "subjectGroupMapping",
+                        path: "subject-group-mapping",
+                        component: subjectGroupMapping,
                     }
                 ]
             }

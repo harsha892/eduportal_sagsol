@@ -1,5 +1,8 @@
 import ApiService from "../../js/appservices";
 import { getField, updateField } from 'vuex-map-fields';
+import moment from "moment";
+import router from '../../js/approutes'
+
 
 export default {
     state: {
@@ -7,7 +10,7 @@ export default {
         usersByRole: [],
         singleUserInfo: [],
         newUserFormObj: {
-            email: "sample@g.com",
+            email: "",
             password: "",
             role_id: "",
             user_detail: {
@@ -23,12 +26,14 @@ export default {
                 country: "",
                 dob: ""
             }
-        }
+        },
+        errors: {}
     }, getters: {
         GET_USERS: state => state.users,
         GET_USERS_BY_ROLES: state => state.usersByRole,
         SINGLE_USER_INFO: state => state.singleUserInfo,
         NEW_USER_OBJ: state => state.newUserFormObj,
+        GET_ERRORS: state => state.errors,
         getField
     }, mutations: {
         updateField,
@@ -42,17 +47,14 @@ export default {
             state.singleUserInfo = singleUserInfo;
         },
         NEW_USER_INFO: (state, newUser) => {
+            console.log(newUser);
             state.newUserFormObj = newUser
         },
-        RESET_NEW_USER_FORM(state) {
-            Object.keys(state.newUserFormObj).forEach(function (key) {
-                state.newUserFormObj[key] = ''
-            });
+        SET_ERRORS: (state, errors) => {
+            console.log("SET_ERRORS", { state, errors })
+            state.errors = errors
         }
     }, actions: {
-        CREATE_NEW_USER_OBJ: (context) => {
-            context.commit('NEW_USER_INFO', context);
-        },
         GET_USER_ACTION: (context) => {
             ApiService.doGet('user').then(({ data }) => {
                 const users = data.data;
@@ -81,23 +83,40 @@ export default {
                 })
             }
         },
-        POST_USER_DATA: (context, payload) => {
+        POST_USER_DATA: (context, data) => {
+            let payload = JSON.parse(JSON.stringify(data));
+            payload.data.user_detail.dob = moment(payload.data.user_detail.dob).format(
+                "DD/MM/YYYY"
+            );
             console.log(payload);
-            if (payload.routeName !== 'editUser') {
-                ApiService.doPost('user', payload.payload).then(({ data }) => {
-                    // const singleUserInfo = data;
-                    // console.log("payload", payload, singleUserInfo);
-                    context.commit('RESET_NEW_USER_FORM');
-                }).catch(e => {
-                    console.log(e)
+            if (payload.type === "new") {
+                payload.data.role_id = payload.data.role_id.id;
+                ApiService.doPost('user', payload.data).then(response => {
+                    const form = JSON.parse(JSON.stringify(context.state.newUserFormObj));
+                    Object.keys(form).forEach(key => {
+                        if (typeof form[key] == 'object') {
+                            Object.keys(form[key]).forEach(k => {
+                                form[key][k] = "";
+                            })
+                        } else {
+                            form[key] = "";
+                        }
+                    })
+                    context.commit('NEW_USER_INFO', form);
+                    router.push({
+                        name: "users",
+                        params: { usersListType: data.data.role_id.slug }
+                    });
+                    return response;
+                }).catch(error => {
+                    context.commit('SET_ERRORS', error)
                 })
             } else {
-                ApiService.doPut('user/' + payload.payload.id, payload.payload).then(({ data }) => {
-                    // const singleUserInfo = data;
-                    // console.log("payload", payload, singleUserInfo);
-                    // context.commit('SET_USER_INFO_BY_ID', singleUserInfo);
-                }).catch(e => {
-                    console.log(e)
+                ApiService.doPut('user/' + payload.data.id, payload.data).then(response => {
+                    router.go(-1);
+                    return response;
+                }).catch(error => {
+                    context.commit('SET_ERRORS', error)
                 })
             }
 

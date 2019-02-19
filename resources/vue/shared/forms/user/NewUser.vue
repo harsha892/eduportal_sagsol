@@ -13,8 +13,11 @@
               <label for="user_role">User role</label>
               <select class="custom-select" name="user_role" id="user_role" v-model="role_id">
                 <option value>-- Open this select menu --</option>
-                <option :value="item.id" v-for="(item,index) in roles" :key="index">{{item.name}}</option>
+                <option :value="item" v-for="(item,index) in roles" :key="index">{{item.name}}</option>
               </select>
+              <span class="text-danger my-2" v-if="apiError.errors">
+                <span v-if="apiError.errors['role_id']">Role is required</span>
+              </span>
             </div>
           </div>
           <div class="col-12">
@@ -29,9 +32,10 @@
                     placeholder="Firstname"
                     v-model="first_name"
                     name="first_name"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('first name') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.first_name']">First name is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -44,17 +48,17 @@
                     placeholder="lastname"
                     v-model="last_name"
                     name="last_name"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('last name') }}</small>
                 </div>
               </div>
               <div class="col-3">
                 <div class="form-group">
                   <label for="last_name">Date of birth</label>
-                  <datepicker v-model="dob" input-class="form-control" format="dd/MM/yyyy"></datepicker>
+                  <datepicker v-model="dob" input-class="form-control" :format="customFormatter"></datepicker>
 
-                  <small class="text-danger my-2">{{ errors.first('dob') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.dob']">DOB is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -84,6 +88,9 @@
                       <label class="form-check-label" for="female">Fe male</label>
                     </div>
                   </div>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.gender']">Gender is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -96,9 +103,12 @@
                     placeholder="Phone"
                     v-model="phone"
                     name="phone"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('phone') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span
+                      v-if="apiError.errors['user_detail.phone']"
+                    >{{apiError.errors['user_detail.phone'][0]}}</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -111,9 +121,12 @@
                     placeholder="Emergency Phone"
                     v-model="emergency_phone"
                     name="emergency phone"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('emergency phone') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span
+                      v-if="apiError.errors['user_detail.emergency_phone']"
+                    >Emergency number is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -126,9 +139,10 @@
                     placeholder="Email"
                     v-model="email"
                     name="email"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('email') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['email']">{{apiError.errors['email'][0]}}</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -141,9 +155,10 @@
                     placeholder="password"
                     v-model="password"
                     name="password"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('password') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['password']">Password is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -156,9 +171,10 @@
                     placeholder="Address"
                     v-model="address"
                     name="address"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('address') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.address']">Address is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -171,9 +187,10 @@
                     placeholder="city"
                     v-model="city"
                     name="city"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('city') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.city']">City is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -186,9 +203,10 @@
                     placeholder="state"
                     v-model="state"
                     name="state"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('state') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.state']">State is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -201,9 +219,10 @@
                     placeholder="country"
                     v-model="country"
                     name="country"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('country') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.country']">Country is required</span>
+                  </span>
                 </div>
               </div>
               <div class="col-3">
@@ -216,9 +235,10 @@
                     placeholder="zip"
                     v-model="zip"
                     name="zip"
-                    v-validate="'required'"
                   >
-                  <small class="text-danger my-2">{{ errors.first('zip') }}</small>
+                  <span class="text-danger my-2" v-if="apiError.errors">
+                    <span v-if="apiError.errors['user_detail.zip']">Zipcode is required</span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -260,6 +280,9 @@ export default {
   },
   mounted() {},
   computed: {
+    apiError() {
+      return this.$store.getters.GET_ERRORS;
+    },
     roles() {
       this.rolesLength = this.$store.getters.GET_ROLES.length;
       return this.$store.getters.GET_ROLES.filter(e => {
@@ -290,17 +313,17 @@ export default {
     this.$store.dispatch("GET_ROLES_ACTION");
   },
   methods: {
+    customFormatter(date) {
+      return moment(date).format("DD/MM/YYYY");
+    },
     createNewUser(e) {
       e.preventDefault();
-      let newUserObj = this.$store.state.user.newUserFormObj;
-      newUserObj.user_detail.dob = moment(newUserObj.user_detail.dob).format(
-        "DD/MM/YYYY"
-      );
-      const data = {
-        routeName: this.routeName,
-        payload: newUserObj
-      };
-      this.$store.dispatch("POST_USER_DATA", data);
+      const newUserObj = this.$store.state.user.newUserFormObj;
+      this.$store.dispatch("POST_USER_DATA", {
+        method: "post",
+        type: "new",
+        data: newUserObj
+      });
     }
   },
   components: {
