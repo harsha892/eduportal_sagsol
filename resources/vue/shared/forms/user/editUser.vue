@@ -1,16 +1,15 @@
 <template>
   <div id="newUserForm">
-    <form @submit="createNewUser" v-if="formData!==undefined">
+    <form @submit="editUser" v-if="formData!==undefined">
       <div class="card">
         <div class="card-body">
           <div class="col-12">
             <h4 class="text-uppercase">
-              <span v-if="routeName !=='editUser'">New</span>
-              <span v-else>Edit</span> User
+              <span>Edit</span> User
             </h4>
             <hr>
           </div>
-          <div class="col-12">
+          <div class="col-12" v-if="formData.user_detail">
             <div class="row">
               <div class="col-3">
                 <div class="form-group">
@@ -20,7 +19,7 @@
                     class="form-control"
                     id="first_name"
                     placeholder="Firstname"
-                    v-model="first_name"
+                    v-model="formData.user_detail.first_name"
                     name="first_name"
                     v-validate="'required'"
                   >
@@ -35,7 +34,7 @@
                     class="form-control"
                     id="last_name"
                     placeholder="lastname"
-                    v-model="last_name"
+                    v-model="formData.user_detail.last_name"
                     name="last_name"
                     v-validate="'required'"
                   >
@@ -45,12 +44,16 @@
               <div class="col-3">
                 <div class="form-group">
                   <label for="last_name">Date of birth</label>
-                  <datepicker v-model="dob" input-class="form-control" format="dd/MM/yyyy"></datepicker>
+                  <datepicker
+                    v-model="formData.user_detail.dob"
+                    input-class="form-control"
+                    format="dd/MM/yyyy"
+                  ></datepicker>
 
                   <small class="text-danger my-2">{{ errors.first('dob') }}</small>
                 </div>
               </div>
-              <!-- <div class="col-3">
+              <div class="col-3">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Gender</label>
                   <div class="form-row">
@@ -61,7 +64,7 @@
                         name="gender"
                         id="male"
                         value="male"
-                        v-model="gender"
+                        v-model="formData.user_detail.gender"
                       >
                       <label class="form-check-label" for="male">Male</label>
                     </div>
@@ -72,13 +75,13 @@
                         name="gender"
                         id="female"
                         value="female"
-                        v-model="gender"
+                        v-model="formData.user_detail.gender"
                       >
                       <label class="form-check-label" for="female">Fe male</label>
                     </div>
                   </div>
                 </div>
-              </div>-->
+              </div>
               <div class="col-3">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Phone</label>
@@ -87,7 +90,7 @@
                     class="form-control"
                     id="Phone"
                     placeholder="Phone"
-                    v-model="phone"
+                    v-model="formData.user_detail.phone"
                     name="phone"
                     v-validate="'required'"
                     disabled
@@ -103,7 +106,7 @@
                     class="form-control"
                     id="emergency_phone"
                     placeholder="Emergency Phone"
-                    v-model="emergency_phone"
+                    v-model="formData.user_detail.emergency_phone"
                     name="emergency phone"
                     v-validate="'required'"
                   >
@@ -118,27 +121,12 @@
                     class="form-control"
                     id="email"
                     placeholder="Email"
-                    v-model="email"
+                    v-model="formData.email"
                     name="email"
                     v-validate="'required'"
                     disabled
                   >
                   <small class="text-danger my-2" disabled>{{ errors.first('email') }}</small>
-                </div>
-              </div>
-              <div class="col-3" v-if="routeName !=='editUser'">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    placeholder="password"
-                    v-model="password"
-                    name="password"
-                    v-validate="'required'"
-                  >
-                  <small class="text-danger my-2">{{ errors.first('password') }}</small>
                 </div>
               </div>
               <div class="col-3">
@@ -149,7 +137,7 @@
                     class="form-control"
                     id="Address"
                     placeholder="Address"
-                    v-model="address"
+                    v-model="formData.user_detail.address"
                     name="address"
                     v-validate="'required'"
                   >
@@ -164,7 +152,7 @@
                     class="form-control"
                     id="city"
                     placeholder="city"
-                    v-model="city"
+                    v-model="formData.user_detail.city"
                     name="city"
                     v-validate="'required'"
                   >
@@ -179,7 +167,7 @@
                     class="form-control"
                     id="state"
                     placeholder="state"
-                    v-model="state"
+                    v-model="formData.user_detail.state"
                     name="state"
                     v-validate="'required'"
                   >
@@ -194,7 +182,7 @@
                     class="form-control"
                     id="country"
                     placeholder="country"
-                    v-model="country"
+                    v-model="formData.user_detail.country"
                     name="country"
                     v-validate="'required'"
                   >
@@ -209,7 +197,7 @@
                     class="form-control"
                     id="zip"
                     placeholder="zip"
-                    v-model="zip"
+                    v-model="formData.user_detail.zip"
                     name="zip"
                     v-validate="'required'"
                   >
@@ -244,7 +232,6 @@ export default {
     return {
       rolesLength: 0,
       userId: this.$route.params.id,
-      formView: false,
       routeName: this.$route.name
     };
   },
@@ -256,36 +243,20 @@ export default {
   mounted() {},
   computed: {
     formData() {
-      return this.$store.getters.SINGLE_USER_INFO;
-    },
-    ...mapFields([
-      "singleUserInfo.email",
-      "singleUserInfo.user_detail.first_name",
-      "singleUserInfo.user_detail.last_name",
-      "singleUserInfo.user_detail.phone",
-      "singleUserInfo.user_detail.emergency_phone",
-      "singleUserInfo.user_detail.address",
-      "singleUserInfo.user_detail.city",
-      "singleUserInfo.user_detail.state",
-      "singleUserInfo.user_detail.zip",
-      "singleUserInfo.user_detail.country",
-      "singleUserInfo.user_detail.dob"
-    ])
+      return JSON.parse(JSON.stringify(this.$store.getters.SINGLE_USER_INFO));
+    }
   },
   created() {
     this.$store.dispatch("GET_USER_BY_ID_ACTION", this.userId);
   },
   methods: {
-    createNewUser(e) {
+    editUser(e) {
       e.preventDefault();
-      this.formData.user_detail.dob = moment(this.formData.dob).format(
-        "DD/MM/YYYY"
-      );
-      const data = {
-        routeName: this.routeName,
-        payload: this.formData
-      };
-      this.$store.dispatch("POST_USER_DATA", data);
+      this.$store.dispatch("POST_USER_DATA", {
+        method: "post",
+        type: "edit",
+        data: this.formData
+      });
     }
   },
   components: {

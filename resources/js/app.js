@@ -14,7 +14,9 @@ import VeeValidate from 'vee-validate';
 import VueSwal from 'vue-swal'
 import store from '../store'
 import moment from "moment";
-const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment];
+import vSelect from 'vue-select'
+
+const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment, vSelect];
 dependencies.forEach(element => {
     Vue.use(element);
 });
