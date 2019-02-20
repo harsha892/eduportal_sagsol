@@ -51,9 +51,11 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
         $api->resource('subject', 'SubjectController');
 
         $api->group(['prefix' => 'topic'], function ($api) {
+            $api->get('/', 'TopicController@getAllTopics');
             $api->get('/{topic_id}', 'TopicController@getTopic');
             $api->get('/{topic_id}/content', 'TopicController@getTopicContent');
             $api->post('/{topic_id}/content', 'TopicController@addTopicContent');
+            $api->put('/{topic_id}/content/{content_id}', 'TopicController@updateTopicContent');
         });
 
     });

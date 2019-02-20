@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TopicRequest;
+use App\Http\Requests\Topics\AddTopicContentRequest;
 use App\Http\Requests\Topics\GetTopicRequest;
+use App\Http\Requests\Topics\UpdateTopicContentRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Topic;
 use App\Repositories\TopicsRepository;
@@ -19,6 +21,13 @@ class TopicController extends Controller
         $this->topicsRepository = $topicsRepository;
     }
 
+    public function getAllTopics(Request $request)
+    {
+        return response()->json(
+            $this->topicsRepository->getAll($request->all())
+        );
+    }
+
     public function getTopic(GetTopicRequest $request, $topic_id)
     {
         return response()->json(
@@ -31,7 +40,20 @@ class TopicController extends Controller
         return response()->json(
             $this->topicsRepository->getContent($topic_id)
         );
+    }
 
+    public function addTopicContent(AddTopicContentRequest $request, $topic_id)
+    {
+        return response()->json(
+            $this->topicsRepository->addContent($topic_id, $request->get('content'))
+        );
+    }
+
+    public function updateTopicContent(UpdateTopicContentRequest $request, $topic_id, $content_id)
+    {
+        return response()->json(
+            $this->topicsRepository->updateContent($topic_id, $content_id, $request->all())
+        );
     }
 
     public function createNewTopic(TopicRequest $request)
@@ -77,10 +99,5 @@ class TopicController extends Controller
         $topic = topic::find($request->get("id"));
         $topic->delete();
         return "topic Deleted Successful";
-    }
-    public function getAllTopics()
-    {
-        $topic = topic::all();
-        return $topic;
     }
 }
