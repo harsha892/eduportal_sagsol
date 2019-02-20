@@ -2,16 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TopicReuqest;
-use Illuminate\Http\Request;
-
 use App\Http\Requests\TopicRequest;
+use App\Http\Requests\Topics\GetTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
-
 use App\Models\Topic;
+use App\Repositories\TopicsRepository;
+use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
+    private $topicsRepository;
+
+    public function __construct(
+        TopicsRepository $topicsRepository
+    ) {
+        $this->topicsRepository = $topicsRepository;
+    }
+
+    public function getTopic(GetTopicRequest $request, $topic_id)
+    {
+        return response()->json(
+            $this->topicsRepository->get($topic_id)
+        );
+    }
+
+    public function getTopicContent(GetTopicRequest $request, $topic_id)
+    {
+        return response()->json(
+            $this->topicsRepository->getContent($topic_id)
+        );
+
+    }
+
     public function createNewTopic(TopicRequest $request)
     {
         $topic = new topic();
@@ -45,7 +67,6 @@ class TopicController extends Controller
         $topic->short_description = $request->get("short_description");
         $topic->long_description = $request->get("long_description");
         $topic->type_of_content = $request->get("type_of_content");
-
 
         $topic->save();
         return $topic;

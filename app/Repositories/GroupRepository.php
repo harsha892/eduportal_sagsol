@@ -3,19 +3,25 @@ namespace App\Repositories;
 
 use App\Models\Group;
 use App\Models\GroupSubject;
-use App\Models\Topic;
 use Cartalyst\Sentinel\Sentinel;
 
 class GroupRepository
 {
     private $group;
+    private $auth;
+    private $topicsRepository;
+    private $subjectRepository;
 
     public function __construct(
         Group $group,
-        Sentinel $auth
+        Sentinel $auth,
+        SubjectRepository $subjectRepository,
+        TopicsRepository $topicsRepository
     ) {
         $this->group = $group;
         $this->auth = $auth;
+        $this->subjectRepository = $subjectRepository;
+        $this->topicsRepository = $topicsRepository;
     }
 
     public function getAll(array $data)
@@ -154,9 +160,17 @@ class GroupRepository
     {
         $topics = [];
         foreach ($data['topics'] as $topic) {
-            $newTopic = new Topic();
-
+            $topic['subject_id'] = $subject_id;
+            // $newTopic = new Topic();
+            // $newTopic->name = $topic['name'];
+            // $newTopic->subject_id = $subject_id;
+            // $newTopic->short_description = !empty($topic['short_description']) ? $topic['short_description'] : null;
+            // $newTopic->long_description = !empty($topic['long_description']) ? $topic['long_description'] : null;
+            // $newTopic->save();
+            $topics[] = $this->topicsRepository->create($topic);
         }
+
+        return $topics;
     }
 
     // addSubjects
