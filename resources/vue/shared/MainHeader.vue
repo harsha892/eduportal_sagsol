@@ -18,7 +18,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown d-none">
             <a
               class="nav-link waves-dark waves-effect"
               href="#"
@@ -119,7 +119,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown d-none">
             <a
               class="nav-link"
               href="#"
@@ -174,7 +174,7 @@
                   <small>ID: ARRPC7455K</small>
                 </div>
               </div>
-              <a class href="#">Profile</a>
+              <a class="d-none" href="#">Profile</a>
               <a href="#" v-on:click="doLogout">Logout</a>
             </div>
           </li>
@@ -209,9 +209,9 @@
               </a>
               <div class="dropdown-menu animated flipInX" aria-labelledby="navbarDropdown">
                 <router-link :to="{name:'newUser'}" class="nav-link text-capitalize">User</router-link>
-                <a class="nav-link" href="#">Paper Model</a>
-                <a class="nav-link" href="#">Topic</a>
-                <a class="nav-link" href="#">Test</a>
+                <!-- <a class="nav-link" href="#">Paper Model</a> -->
+                <router-link :to="{name:'e-learn-new-topic'}" class="nav-link text-capitalize">Topic</router-link>
+                <!-- <a class="nav-link" href="#">Test</a> -->
               </div>
             </div>
           </li>

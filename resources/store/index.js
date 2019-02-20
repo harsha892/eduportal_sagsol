@@ -5,6 +5,8 @@ import user from './modules/user'
 import group from './modules/group'
 import subject from './modules/subject'
 import groupSubjectMapping from "./modules/group-subject-mapping"
+import topics from "./modules/topics"
+import content from "./modules/content"
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -16,7 +18,9 @@ export default new Vuex.Store({
         user,
         group,
         subject,
-        groupSubjectMapping
+        groupSubjectMapping,
+        topics,
+        content
     },
     strict: debug,
     // plugins: debug ? [createLogger()] : []

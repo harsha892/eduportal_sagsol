@@ -15,8 +15,10 @@ import VueSwal from 'vue-swal'
 import store from '../store'
 import moment from "moment";
 import vSelect from 'vue-select'
+import VuePlyr from 'vue-plyr'
+import 'vue-plyr/dist/vue-plyr.css'
 
-const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment, vSelect];
+const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment, vSelect, VuePlyr];
 dependencies.forEach(element => {
     Vue.use(element);
 });

@@ -131,7 +131,6 @@
 <script>
 import Chart from "chart.js";
 import topHeaderView from "../../shared/MainHeader";
-import asideBar from "../../shared/AsideBar";
 import {
   planetChartData,
   pieChartData
@@ -148,7 +147,6 @@ export default {
   },
   components: {
     topHeaderView,
-    asideBar
   },
   mounted() {
     // this.createChart("pie-chart", this.pieChartData);

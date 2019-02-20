@@ -163,7 +163,6 @@
 
 <script>
 import topHeaderView from "../../../shared/MainHeader";
-import asideBar from "../../../shared/AsideBar";
 export default {
   name: "adminApp",
   data() {
@@ -186,7 +185,6 @@ export default {
   },
   components: {
     topHeaderView,
-    asideBar
   },
   methods: {}
 };

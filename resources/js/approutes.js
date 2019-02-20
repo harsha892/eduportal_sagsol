@@ -20,6 +20,7 @@ import LearnSubjectsView from "../vue/portal/education/learn/subjects"
 import LearnTopicesView from "../vue/portal/education/learn/topics"
 import singleTopic from "../vue/portal/education/learn/single-topic"
 import createNewTopic from "../vue/portal/education/learn/create-new-topic"
+import topicContent from "../vue/portal/education/learn/content-to-topic"
 import LearnAnswerBookiIew from "../vue/portal/education/learn/answer-book"
 import MasterSettings from "../vue/portal/admin/master-settings/master-settings"
 import MaterSetGroups from "../vue/portal/admin/master-settings/groups"
@@ -217,7 +218,12 @@ const portalRoutes = [
                         name: "subjectGroupMapping",
                         path: "subject-group-mapping",
                         component: subjectGroupMapping,
-                    }
+                    },
+                    {
+                        name: "topicContent",
+                        path: "topic-content/:topicId",
+                        component: topicContent
+                    },
                 ]
             }
         ]

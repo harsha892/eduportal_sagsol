@@ -33,24 +33,6 @@
         ]
       },
       {
-        "title": "Skill testing / Exams",
-        "routeName": "education",
-        "iconText": "fa-campground",
-        "childern": [
-          {
-            "title": " Tests",
-            "routeName": "e-tests",
-            "iconText": "fa-question"
-          },
-          {
-            "title": "Question Bank",
-            "routeName": "e-test-questionBank",
-            "pageName": "vendor",
-            "iconText": "fa-accusoft"
-          }
-        ]
-      },
-      {
         "title": "library management",
         "routeName": "homePage",
         "params": "client",
@@ -69,12 +51,6 @@
         ]
       },
       {
-        "title": "Notifications",
-        "routeName": "notifications",
-        "params": "employee",
-        "iconText": "fa-bell"
-      },
-      {
         "title": "Management",
         "routeName": "",
         "params": "support",
@@ -88,11 +64,6 @@
           {
             "title": "Groups",
             "routeName": "m-groups",
-            "iconText": "fa-users"
-          },
-          {
-            "title": "Subjects",
-            "routeName": "m-subjects",
             "iconText": "fa-users"
           },
           {
@@ -206,5 +177,21 @@
       "country": "",
       "dob": ""
     }
+  },
+  "filePresets": {
+    "topic": [
+      {
+        "type": "audio",
+        "preset": "topics_audio_files"
+      },
+      {
+        "type": "video",
+        "preset": "topics_video_files"
+      },
+      {
+        "type": "document",
+        "preset": "topics_documents"
+      }
+    ]
   }
 }
