@@ -1,5 +1,6 @@
 <template>
-  <div id="topicView">
+  <div id="content-to-topic">
+    <loder :isLoading="uploading>0?true:false"></loder>
     <div class="card">
       <!-- <div class="card-header">
         <p>{{item.name}}</p>
@@ -45,9 +46,10 @@ import { VueEditor } from "vue2-editor";
 import vSelect from "vue-select";
 import documentUploader from "../../../shared/document-uploder/document-uploder";
 import staticData from "../../../../js/StaticData.json";
+import loder from "../../../shared/loder";
 
 export default {
-  name: "topicView",
+  name: "content-to-topic",
   data() {
     return {
       topicsMediaPresets: staticData.filePresets.topic,
@@ -126,7 +128,8 @@ export default {
   components: {
     VueEditor,
     vSelect,
-    documentUploader
+    documentUploader,
+    loder
   }
 };
 </script>

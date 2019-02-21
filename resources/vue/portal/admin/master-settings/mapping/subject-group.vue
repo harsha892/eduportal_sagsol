@@ -73,7 +73,7 @@
             </thead>
             <tbody>
               <tr v-for="(item,index) in mappedSubjects" :key="index">
-                <td class="text-capitalize">{{item.subject.name}}</td>
+                <td class="text-capitalize">{{item.name}}</td>
                 <td>{{item.year}}</td>
                 <td>{{item.semester}}</td>
                 <td>

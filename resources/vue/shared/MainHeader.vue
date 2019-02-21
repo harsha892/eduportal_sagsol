@@ -1,5 +1,6 @@
 <template>
   <div class="app" id="mainApp">
+    <loder :isLoading="false"></loder>
     <nav class="navbar navbar-expand-lg topbar">
       <a class="navbar-brand border-right pr-2" href="#">
         <img src="../../images/sagsol.png" alt srcset style="height:15px">
@@ -283,6 +284,7 @@
 
 <script>
 import staticData from "../../js/StaticData.json";
+import loder from "./loder";
 import JQuery from "jquery";
 let $ = JQuery;
 
@@ -314,7 +316,9 @@ export default {
         name: "auth"
       });
     }
+  },
+  components: {
+    loder
   }
 };
 </script>
-
