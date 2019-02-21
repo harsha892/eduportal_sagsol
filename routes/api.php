@@ -58,6 +58,15 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
             $api->put('/{topic_id}/content/{content_id}', 'TopicController@updateTopicContent');
         });
 
+        $api->group(['prefix' => 'questions'], function ($api) {
+            $api->get('/', 'QuestionController@getAllQuestions');
+            $api->post('/', 'QuestionController@storeQuestion');
+            $api->get('/{question_id}', 'QuestionController@getQuestion');
+            $api->get('/{question_id}/answers', 'QuestionController@getQuestionAnswers');
+            $api->post('/{question_id}/answers', 'QuestionController@addAnswers');
+            $api->put('/{question_id}/answers/{answer_id}', 'QuestionController@updateAnswer');
+        });
+
     });
 
 //auth
