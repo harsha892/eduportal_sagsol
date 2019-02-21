@@ -1,5 +1,7 @@
 <template>
   <div class="app" id="mainApp">
+    <!-- <loder :isLoading="true"></loder> -->
+
     <div>
       <router-view></router-view>
     </div>
@@ -7,10 +9,13 @@
 </template>
 
 <script>
+import loder from "./shared/loder";
 export default {
   name: "mainApp",
   mounted() {},
-  components: {},
+  components: {
+    loder
+  },
   mounted() {
     // this.$store.dispatch("GET_ROLES_ACTION");
   }
