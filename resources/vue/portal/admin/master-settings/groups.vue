@@ -109,7 +109,7 @@
                       class="form-control"
                       id="durations"
                       v-model="createGroup.duration"
-                      placeholder="Durations"
+                      placeholder="Years"
                     >
                   </div>
                 </div>
