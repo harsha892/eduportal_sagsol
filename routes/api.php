@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,17 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
     require ('partials/user.php');
 
     $api->group(['middleware' => 'jwt.auth'], function ($api) {
+
+        $api->get('/master', function () {
+            $difficultyLevels = DB::table('difficulty')->get();
+            $securityTypes = DB::table('security_types')->get();
+
+            return response()->json([
+                'difficulty_levels' => $difficultyLevels,
+                'security_types' => $securityTypes,
+            ]);
+        });
+
         $api->resource('role', 'RolesController');
 
         $api->group(['prefix' => 'user'], function ($api) {
