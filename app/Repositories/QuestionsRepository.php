@@ -175,20 +175,28 @@ class QuestionsRepository
             $answer = new QuestionAnswer();
         }
 
-        if (isset($data['notes'])) {
-            $answer->notes = $data['notes'];
+        if (isset($data['title'])) {
+            $answer->title = $data['title'];
         }
 
         if (isset($data['video'])) {
             $answer->video = $data['video'];
         }
 
-        if (isset($data['ppt'])) {
-            $answer->ppt = $data['ppt'];
+        if (isset($data['video'])) {
+            $answer->video = $data['video'];
         }
 
-        if (isset($data['audio'])) {
-            $answer->audio = $data['audio'];
+        if (isset($data['attachment'])) {
+            $answer->attachment = $data['attachment'];
+        }
+
+        if (isset($data['question_id'])) {
+            $answer->question_id = $data['question_id'];
+        }
+
+        if (isset($data['correct'])) {
+            $answer->correct = $data['correct'];
         }
 
         return $answer;

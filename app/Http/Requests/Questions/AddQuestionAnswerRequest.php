@@ -26,6 +26,8 @@ class AddQuestionAnswerRequest extends FormRequest
         return [
             'question_id' => 'required|numeric|exists:questions,id',
             'answer' => 'required|array',
+            'answer.title' => 'required',
+            'answer.correct' => 'boolean',
         ];
     }
 
