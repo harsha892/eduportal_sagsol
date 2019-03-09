@@ -118,6 +118,14 @@ class QuestionsRepository
             $question->subject_id = $data['subject_id'];
         }
 
+        if (isset($data['difficulty_id'])) {
+            $question->difficulty_id = $data['difficulty_id'];
+        }
+
+        if (isset($data['privacy_id'])) {
+            $question->privacy_id = $data['privacy_id'];
+        }
+
         if (isset($data['type'])) {
             $question->type = $data['type'];
         }

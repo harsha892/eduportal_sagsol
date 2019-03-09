@@ -38,6 +38,8 @@ class StoreQuestionRequest extends FormRequest
     {
         return [
             'subject_id' => 'required|numeric|exists:group_subjects,id',
+            'difficulty_id' => 'required|numeric|exists:difficulty,id',
+            'privacy_id' => 'required|numeric|exists:privacy,id',
             'topic_id' => 'required|numeric|exists:topics,id',
             'type' => [
                 'required',

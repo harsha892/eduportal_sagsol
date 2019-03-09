@@ -34,11 +34,11 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
 
         $api->get('/master', function () {
             $difficultyLevels = DB::table('difficulty')->get();
-            $securityTypes = DB::table('security_types')->get();
+            $privacy = DB::table('privacy')->get();
 
             return response()->json([
                 'difficulty_levels' => $difficultyLevels,
-                'security_types' => $securityTypes,
+                'privacy' => $privacy,
             ]);
         });
 

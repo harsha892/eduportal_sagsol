@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
 
             $table->integer('topic_id')->unsigned();
-            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');;
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
 
             $table->text('detail')->nullable();
             $table->text('audio')->nullable();

@@ -13,10 +13,10 @@ class CreateSecurityTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('security_types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->unique();
-        });
+        // Schema::create('security_types', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('name')->unique();
+        // });
     }
 
     /**
