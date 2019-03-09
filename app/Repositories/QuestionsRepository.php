@@ -44,31 +44,32 @@ class QuestionsRepository
         $sortBy = isset($data['sort_by']) ? $data['sort_by'] : 'name';
         $sortType = isset($data['sort_type']) ? $data['sort_type'] : 'ASC';
 
-        $users = $this->question->join('group_subjects', 'questions.subject_id', '=', 'group_subjects.id')
-            ->join('subjects', 'group_subjects.subject_id', '=', 'subjects.id')
-            ->join('groups', 'groups.id', '=', 'group_subjects.group_id')
-            ->select(
-                'questions.id',
-                'questions.name',
-                'questions.short_description',
-                'questions.is_active',
-                'questions.subject_id',
-                'subjects.name AS subject_name',
-                'groups.name AS group_name',
-                'groups.id AS group_id'
-                // 'subjects.id AS subject_id'
+        $users = $this->question
+        // ->join('group_subjects', 'questions.subject_id', '=', 'group_subjects.id')
+        //     ->join('subjects', 'group_subjects.subject_id', '=', 'subjects.id')
+        //     ->join('groups', 'groups.id', '=', 'group_subjects.group_id')
+        //     ->select(
+        //         'questions.id',
+        //         'questions.title',
+        //         'questions.short_description',
+        //         'questions.is_active',
+        //         'questions.subject_id',
+        //         'subjects.name AS subject_name',
+        //         'groups.name AS group_name',
+        //         'groups.id AS group_id'
+        //         // 'subjects.id AS subject_id'
 
-                // 'user_details.first_name',
-                // 'user_details.last_name',
-                // 'user_details.phone',
-                // 'role_users.role_id',
-                // 'roles.name AS role'
-            )
-            ->where(function ($s_query) use ($search) {
-                if (!empty($search)) {
-                    $s_query->where('questions.name', 'LIKE', "%$search%");
-                }
-            })
+        //         // 'user_details.first_name',
+        //         // 'user_details.last_name',
+        //         // 'user_details.phone',
+        //         // 'role_users.role_id',
+        //         // 'roles.name AS role'
+        //     )
+        //     ->where(function ($s_query) use ($search) {
+        //         if (!empty($search)) {
+        //             $s_query->where('questions.name', 'LIKE', "%$search%");
+        //         }
+        //     })
             ->orderBy($sortBy, $sortType)
             ->paginate(15)
             ->appends([
@@ -183,8 +184,8 @@ class QuestionsRepository
             $answer->video = $data['video'];
         }
 
-        if (isset($data['video'])) {
-            $answer->video = $data['video'];
+        if (isset($data['audio'])) {
+            $answer->audio = $data['audio'];
         }
 
         if (isset($data['attachment'])) {
