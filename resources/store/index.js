@@ -7,6 +7,9 @@ import subject from './modules/subject'
 import groupSubjectMapping from "./modules/group-subject-mapping"
 import topics from "./modules/topics"
 import content from "./modules/content"
+import question from "./modules/question"
+import masters from "./modules/masters"
+import answer from "./modules/answer"
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -20,7 +23,10 @@ export default new Vuex.Store({
         subject,
         groupSubjectMapping,
         topics,
-        content
+        content,
+        question,
+        masters,
+        answer
     },
     strict: debug,
     // plugins: debug ? [createLogger()] : []

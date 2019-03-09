@@ -1,13 +1,13 @@
 
 <template>
   <div class="app" id="homeView">
-    <div v-if="userType === 'admin'">
+    <div v-if="userType === 'AA'">
       <admin-app></admin-app>
     </div>
     <div v-if="userType === 'student'">
       <student-app></student-app>
     </div>
-    <div v-if="userType === 'member'">
+    <div v-if="userType === 'AI'">
       <staff-app></staff-app>
     </div>
   </div>

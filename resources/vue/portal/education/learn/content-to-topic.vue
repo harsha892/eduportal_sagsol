@@ -31,7 +31,7 @@
                 <span
                   class="btn btn-info text-white"
                   v-on:click="submitTopicContent()"
-                >Upload &amp; Submit Notes</span>
+                >Submit Topic Notes</span>
               </div>
             </form>
           </form>

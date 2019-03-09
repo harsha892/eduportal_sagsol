@@ -2,7 +2,7 @@
   <div class="app" id="mainApp">
     <loder :isLoading="false"></loder>
     <nav class="navbar navbar-expand-lg topbar">
-      <a class="navbar-brand border-right pr-2" href="#">
+      <a class="navbar-brand border-right pr-2" href="javascript:void(0)" @click="$router.go(-1)">
         <img src="../../images/sagsol.png" alt srcset style="height:15px">
       </a>
       <button
@@ -18,10 +18,15 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item" v-if="homeLink">
+            <router-link :to="{name:'adminDashboard'}" class="nav-link">Home</router-link>
+          </li>
+        </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown d-none">
             <a
-              class="nav-link waves-dark waves-effect"
+              class="nav-link"
               href="#"
               id="navbarDropdown"
               role="button"
@@ -35,7 +40,7 @@
                 <span class="point"></span>
               </div>
             </a>
-            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
+            <div class="dropdown-menu dropdown-menu-right mailbox">
               <ul class="list-unstyled">
                 <li>
                   <div class="drop-title border-bottom">You have 4 new messanges</div>
@@ -120,28 +125,32 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item dropdown d-none">
-            <a
-              class="nav-link"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-cogs"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+
+          <li class="nav-item text-uppercase dropdown btn btn_primary btn-sm">
+            <div>
+              <a
+                href
+                class="nav-link dropdown-toggle hide-chevron text-white"
+                id="navbarDropdown"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fas fa-folder-plus"></i> Create New
+              </a>
+              <div class="dropdown-menu main_header_dropdown" aria-labelledby="navbarDropdown">
+                <router-link :to="{name:'newUser'}" class="nav-link text-capitalize">User</router-link>
+                <router-link :to="{name:'e-learn-new-topic'}" class="nav-link text-capitalize">Topic</router-link>
+                <!-- <router-link
+                  :to="{name:'e-learn-subjects'}"
+                  class="nav-link text-capitalize"
+                >Subject</router-link> -->
+              </div>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle waves-dark waves-effect"
+              class="nav-link dropdown-toggle"
               href="#"
               id="navbarDropdown"
               role="button"
@@ -157,7 +166,7 @@
               > Addision
             </a>
             <div
-              class="dropdown-menu user_dropdown animated dropdown-menu-right zoomIn"
+              class="dropdown-menu user_dropdown dropdown-menu-right"
               aria-labelledby="navbarDropdown"
             >
               <div class="media px-3 py-2 bg-light">
@@ -182,7 +191,7 @@
         </ul>
       </div>
     </nav>
-    <nav class="navbar navbar-expand-lg border-0 bg-dark p-0 bottom_nav">
+    <!-- <nav class="navbar navbar-expand-lg border-0 bg-dark p-0 bottom_nav">
       <button
         class="navbar-toggler"
         type="button"
@@ -210,9 +219,8 @@
               </a>
               <div class="dropdown-menu animated flipInX" aria-labelledby="navbarDropdown">
                 <router-link :to="{name:'newUser'}" class="nav-link text-capitalize">User</router-link>
-                <!-- <a class="nav-link" href="#">Paper Model</a> -->
                 <router-link :to="{name:'e-learn-new-topic'}" class="nav-link text-capitalize">Topic</router-link>
-                <!-- <a class="nav-link" href="#">Test</a> -->
+                <router-link :to="{name:'e-learn-subjects'}" class="nav-link text-capitalize">Subject</router-link>
               </div>
             </div>
           </li>
@@ -278,7 +286,7 @@
           </li>
         </ul>
       </div>
-    </nav>
+    </nav>-->
   </div>
 </template>
 
@@ -295,7 +303,8 @@ export default {
       siteTitle: staticData.siteTitle,
       menuItems: "",
       userType: this.$route.params.userType,
-      route: ""
+      routeName: "",
+      homeLink: false
     };
   },
   mounted() {
@@ -307,6 +316,7 @@ export default {
       }
     });
     this.menuItems = staticData.userMenu[this.userType];
+    this.homeLink = this.$route.name !== "adminDashboard" ? true : false;
   },
   methods: {
     doLogout() {

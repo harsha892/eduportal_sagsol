@@ -1,12 +1,7 @@
 {
   "siteTitle": "education portal",
   "userMenu": {
-    "admin": [
-      {
-        "title": "Home",
-        "routeName": "adminDashboard",
-        "iconText": "fa-window-maximize"
-      },
+    "AA": [
       {
         "title": "Users",
         "params": "userslist",
@@ -51,6 +46,36 @@
         ]
       },
       {
+        "title": "Template management",
+        "params": "client",
+        "iconText": "fa-tv",
+        "childern": [
+          {
+            "title": "test temlate index",
+            "routeName": "t-temlate-index",
+            "iconText": "fa-random"
+          }
+        ]
+      },
+      {
+        "title": "Skill testing / Exams",
+        "routeName": "education",
+        "iconText": "fa-campground",
+        "childern": [
+          {
+            "title": " Tests",
+            "routeName": "e-tests",
+            "iconText": "fa-question"
+          },
+          {
+            "title": "Question Bank",
+            "routeName": "e-test-questionBank",
+            "pageName": "vendor",
+            "iconText": "fa-accusoft"
+          }
+        ]
+      },
+      {
         "title": "Management",
         "routeName": "",
         "params": "support",
@@ -79,7 +104,7 @@
         ]
       }
     ],
-    "member": [
+    "AM": [
       {
         "title": "AM Home",
         "routeName": "adminDashboard",
@@ -87,7 +112,7 @@
         "iconText": "fa-window-maximize"
       }
     ],
-    "incharge": [
+    "AI": [
       {
         "title": "AI home",
         "routeName": "adminDashboard",
@@ -192,6 +217,71 @@
         "type": "document",
         "preset": "topics_documents"
       }
+    ],
+    "questions": [
+      {
+        "type": "audio",
+        "preset": "topics_audio_files"
+      },
+      {
+        "type": "video",
+        "preset": "topics_video_files"
+      },
+      {
+        "type": "document",
+        "preset": "topics_documents"
+      }
     ]
-  }
+  },
+  "security": [
+    {
+      "type": "private",
+      "title": "Private"
+    },
+    {
+      "type": "public",
+      "title": "Public"
+    }
+  ],
+  "questionTypes": [
+    {
+      "type": "objective",
+      "title": "Objective"
+    },
+    {
+      "type": "descriptive",
+      "title": "Descriptive"
+    },
+    {
+      "type": "orative",
+      "title": "Record / upload file"
+    },
+    {
+      "type": "mcq",
+      "title": "MCQ",
+      "options": {
+        "alpha": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ]
+      }
+    }
+  ],
+  "difficultyLevel": [
+    {
+      "type": "high",
+      "title": "high"
+    },
+    {
+      "title": "Medium",
+      "type": "medium"
+    },
+    {
+      "title": "Low",
+      "type": "low"
+    }
+  ],
+  "typeOfContent": []
 }

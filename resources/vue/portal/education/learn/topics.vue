@@ -74,9 +74,7 @@
             </tr>
           </tbody>
         </table>
-        <p v-else>
-          No topics were found create new topic
-        </p>
+        <p v-else>No topics were found create new topic</p>
       </div>
     </div>
     <!-- Modal -->
@@ -211,7 +209,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("GET_TOPICS_LIST", { page: 1 });
+    this.$store.dispatch("GET_TOPICS_LIST", { url: "topic?&page=" + 1 });
   }
 };
 </script>

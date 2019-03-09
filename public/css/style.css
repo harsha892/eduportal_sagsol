@@ -13,11 +13,12 @@ body {
     font-family: "Rubik", sans-serif
 }
 
-aside {
+aside,
+.asideView {
     width: 19em;
     min-height: 100vh;
     background: #fff;
-    height: 100%;
+    height: inherit;
 }
 
 .topbar.navbar {
@@ -231,14 +232,19 @@ aside {
     opacity: .4;
 }
 
+.navbar .nav-item .main_header_dropdown.dropdown-menu,
 .navbar .nav-item .user_dropdown.dropdown-menu {
     margin: 0;
     padding: 0;
-    min-width: 280px;
     top: 40px;
     right: 5px;
 }
 
+.navbar .nav-item .user_dropdown.dropdown-menu {
+    min-width: 280px;
+}
+
+.navbar .nav-item .main_header_dropdown.dropdown-menu a,
 .navbar .nav-item .user_dropdown.dropdown-menu a {
     padding: 13px;
     line-height: 1.8;
@@ -247,6 +253,7 @@ aside {
     transition: all .2s;
 }
 
+.navbar .nav-item .main_header_dropdown.dropdown-menu a:hover,
 .navbar .nav-item .user_dropdown.dropdown-menu a:hover {
     background: #D66636;
     color: #fff;
@@ -436,4 +443,8 @@ label {
     line-height: 1.6 !important;
     color: #495057 !important;
     margin: 0 !important;
+}
+.btn_primary{
+    background-color: #D66636;
+    color: #fff;
 }

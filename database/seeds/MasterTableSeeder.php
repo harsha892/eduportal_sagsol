@@ -11,11 +11,11 @@ class MasterTableSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('difficulty')->insert([
-        //     ['id' => 1, 'name' => 'high'],
-        //     ['id' => 2, 'name' => 'medium'],
-        //     ['id' => 3, 'name' => 'low'],
-        // ]);
+        DB::table('difficulty')->insert([
+            ['id' => 1, 'name' => 'high'],
+            ['id' => 2, 'name' => 'medium'],
+            ['id' => 3, 'name' => 'low'],
+        ]);
 
         DB::table('privacy')->insert([
             ['id' => 1, 'name' => 'Public'],

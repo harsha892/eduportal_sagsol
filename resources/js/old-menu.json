@@ -1,24 +1,6 @@
 {
     "AdminMenuItems": [
         {
-            "title": "Skill testing / Exams",
-            "routeName": "education",
-            "iconText": "fa-campground",
-            "childern": [
-                {
-                    "title": " Tests",
-                    "routeName": "e-tests",
-                    "iconText": "fa-question"
-                },
-                {
-                    "title": "Question Bank",
-                    "routeName": "e-test-questionBank",
-                    "pageName": "vendor",
-                    "iconText": "fa-accusoft"
-                }
-            ]
-        },
-        {
             "title": "Home",
             "routeName": "adminDashboard",
             "pageName": "home",

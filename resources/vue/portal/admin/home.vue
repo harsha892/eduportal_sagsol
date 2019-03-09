@@ -2,7 +2,7 @@
   <div id="adminView">
     <div class="mt-2 container-fluid">
       <div class="row mb-3">
-        <div class="col-2">
+        <!-- <div class="col-12">
           <ul class="list-group">
             <li
               class="list-group-item d-flex justify-content-between align-items-center"
@@ -20,7 +20,7 @@
         </div>
         <div class="col-10">
           <div class="row">
-            <!-- <div class="col-5">
+            <div class="col-5">
               <div class="card">
                 <div class="card-header">
                   <i class="fa fa-chart-line mr-2"></i> User Statistics
@@ -29,7 +29,7 @@
                   <canvas id="pie-chart"></canvas>
                 </div>
               </div>
-            </div>-->
+            </div>
             <div class="col">
               <div class="card">
                 <div class="card-header">
@@ -66,7 +66,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- <div class="col-md-3 col-sm-6" v-for="(item,index) in analyticsData" :key="index">
           <div class="media state-media box-ws">
             <div class="media-left">

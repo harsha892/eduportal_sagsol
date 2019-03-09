@@ -4,6 +4,7 @@
       <top-header-view></top-header-view>
     </header>
     <div class="wrapper">
+      <aside-view></aside-view>
       <div class="mt-2 container-fluid">
         <div class="row">
           <div class="col-12">
@@ -20,6 +21,7 @@
 
 <script>
 import topHeaderView from "../../shared/MainHeader";
+import asideView from "../../shared/AsideBar";
 import AdminHome from "./home";
 import UsersList from "./user/userslist";
 import mapState from "vuex";
@@ -56,7 +58,8 @@ export default {
   components: {
     topHeaderView,
     AdminHome,
-    UsersList
+    UsersList,
+    asideView
   }
 };
 </script>

@@ -1,6 +1,23 @@
 <template>
   <div class="row">
-    <div class="form-group col">
+    <div class="col d-flex justify-content-center text-center">
+      <label :for="item.type">
+        <div class="card">
+          <div class="card-body p-5 mx-5">
+            <i class="fa fa-cloud-upload-alt fa-5x"></i>
+            <p>{{item.type}} file</p>
+          </div>
+        </div>
+        <input
+          type="file"
+          class="custom-file-input d-none"
+          :id="item.type"
+          ref="fileToUpload"
+          v-on:change="handleFileUpload()"
+        >
+      </label>
+    </div>
+    <!-- <div class="form-group col">
       <label :for="item.type">{{item.type}} file</label>
       <div class="custom-file">
         <input
@@ -12,7 +29,7 @@
         >
         <label class="custom-file-label" :for="item.type">{{item.type}} file</label>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 

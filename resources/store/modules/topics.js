@@ -64,7 +64,8 @@ export default {
             })
         },
         GET_TOPICS_LIST: (context, payload) => {
-            ApiService.doGet('topic?&page=' + payload.page).then(({ data }) => {
+            // payload.page
+            ApiService.doGet(payload.url).then(({ data }) => {
                 const topics = data;
                 context.commit('SET_TOPICS_MUTATION', topics);
             }).catch(e => {

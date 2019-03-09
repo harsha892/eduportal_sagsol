@@ -14,6 +14,7 @@ import educationPortal from "../vue/portal/education/education-portal"
 import SubjectsView from "../vue/portal/education/tests/subjects/subjectsView"
 import QuestionBank from "../vue/portal/education/tests/questions/questionbank"
 import CreateNewQuestion from "../vue/portal/education/tests/questions/create-question"
+import CreateAnswerToQuestion from "../vue/portal/education/tests/questions/create-answer"
 import singleQuestionView from "../vue/portal/education/tests/questions/single-question-view"
 import TestsView from "../vue/portal/education/tests/tests/tests"
 import LearnSubjectsView from "../vue/portal/education/learn/subjects"
@@ -39,6 +40,8 @@ import formsView from "../vue/shared/forms/FormsComponent"
 import NewUserForm from "../vue/shared/forms/user/NewUser"
 import editUserForm from "../vue/shared/forms/user/editUser"
 import subjectGroupMapping from "../vue/shared/forms/subject-group-form"
+import templatesRoute from "../vue/templates/templates"
+import testTemplateIndex from "../vue/templates/test-template-index"
 
 const portalRoutes = [
     {
@@ -104,6 +107,11 @@ const portalRoutes = [
                                 component: CreateNewQuestion
                             },
                             {
+                                name: "e-create-answer-to-question",
+                                path: "question/create-answer/:qid",
+                                component: CreateAnswerToQuestion
+                            },
+                            {
                                 name: "single-question-view",
                                 path: "question/id",
                                 component: singleQuestionView
@@ -149,6 +157,18 @@ const portalRoutes = [
                                 name: "e-answers",
                                 path: "answer-book/",
                                 component: LearnAnswerBookiIew
+                            }
+                        ]
+                    },
+                    {
+                        name: "",
+                        path: "template/s/",
+                        component: templatesRoute,
+                        children: [
+                            {
+                                name: "t-temlate-index",
+                                path: "t-temlate-index/",
+                                component: testTemplateIndex
                             }
                         ]
                     },

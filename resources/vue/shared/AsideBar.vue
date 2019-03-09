@@ -1,7 +1,7 @@
 <template>
   <div class="asideView" id="asideView">
     <aside>
-      <div class="user_profile_box">
+      <!-- <div class="user_profile_box">
         <div class="user_profile_view">
           <img
             src="http://vue-dark.vueadmintemplate.com/src/assets/img/authors/avatar1.jpg"
@@ -36,8 +36,7 @@
             </div>
           </div>
         </div>
-      </div>
-
+      </div>-->
       <div class="main_aside_nav mt-2">
         <ul class="m-0 list-unstyled">
           <li v-for="(item,index) in menuItems" :key="index" class="text-capitalize dropdown">
@@ -110,7 +109,7 @@ export default {
       siteTitle: staticData.siteTitle,
       menuItems: "",
       userType: this.$route.params.userType,
-      route: "",
+      route: ""
     };
   },
   mounted() {
