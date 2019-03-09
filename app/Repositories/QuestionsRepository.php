@@ -70,7 +70,7 @@ class QuestionsRepository
         //             $s_query->where('questions.name', 'LIKE', "%$search%");
         //         }
         //     })
-            ->orderBy($sortBy, $sortType)
+            // ->orderBy($sortBy, $sortType)
             ->paginate(15)
             ->appends([
                 'search' => $search,
