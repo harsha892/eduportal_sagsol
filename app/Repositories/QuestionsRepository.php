@@ -32,7 +32,8 @@ class QuestionsRepository
         ->join('groups', 'groups.id', '=', 'group_subjects.group_id')
         ->select(
             'questions.*',
-            'group_subjects.*',
+            'group_subjects.year',
+            'group_subjects.semester',
             'groups.name as group_name',
             'topics.name as topic_name',
             'subjects.name as subject_name'
@@ -61,7 +62,8 @@ class QuestionsRepository
             ->join('groups', 'groups.id', '=', 'group_subjects.group_id')
             ->select(
                 'questions.*',
-                'group_subjects.*',
+                'group_subjects.year',
+                'group_subjects.semester',
                 'groups.name as group_name',
                 'topics.name as topic_name',
                 'subjects.name as subject_name'
