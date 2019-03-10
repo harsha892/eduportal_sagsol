@@ -26,7 +26,17 @@ class QuestionsRepository
      */
     public function get($id)
     {
-        $question = $this->question->findOrFail($id);
+        $question = $this->question->join('group_subjects', 'questions.subject_id', '=', 'group_subjects.id')
+        ->join('subjects', 'group_subjects.subject_id', '=', 'subjects.id')
+        ->join('topics', 'topics.id', '=', 'questions.topic_id')
+        ->join('groups', 'groups.id', '=', 'group_subjects.group_id')
+        ->select(
+            'questions.*',
+            'group_subjects.*',
+            'groups.name as group_name',
+            'topics.name as topic_name',
+            'subjects.name as subject_name'
+        )->findOrFail($id);
         return $question;
     }
 
@@ -41,36 +51,27 @@ class QuestionsRepository
     {
         $search = isset($data['search']) ? $data['search'] : '';
 
-        $sortBy = isset($data['sort_by']) ? $data['sort_by'] : 'name';
+        $sortBy = isset($data['sort_by']) ? $data['sort_by'] : 'title';
         $sortType = isset($data['sort_type']) ? $data['sort_type'] : 'ASC';
 
         $users = $this->question
-        // ->join('group_subjects', 'questions.subject_id', '=', 'group_subjects.id')
-        //     ->join('subjects', 'group_subjects.subject_id', '=', 'subjects.id')
-        //     ->join('groups', 'groups.id', '=', 'group_subjects.group_id')
-        //     ->select(
-        //         'questions.id',
-        //         'questions.title',
-        //         'questions.short_description',
-        //         'questions.is_active',
-        //         'questions.subject_id',
-        //         'subjects.name AS subject_name',
-        //         'groups.name AS group_name',
-        //         'groups.id AS group_id'
-        //         // 'subjects.id AS subject_id'
-
-        //         // 'user_details.first_name',
-        //         // 'user_details.last_name',
-        //         // 'user_details.phone',
-        //         // 'role_users.role_id',
-        //         // 'roles.name AS role'
-        //     )
-        //     ->where(function ($s_query) use ($search) {
-        //         if (!empty($search)) {
-        //             $s_query->where('questions.name', 'LIKE', "%$search%");
-        //         }
-        //     })
-            // ->orderBy($sortBy, $sortType)
+            ->join('group_subjects', 'questions.subject_id', '=', 'group_subjects.id')
+            ->join('subjects', 'group_subjects.subject_id', '=', 'subjects.id')
+            ->join('topics', 'topics.id', '=', 'questions.topic_id')
+            ->join('groups', 'groups.id', '=', 'group_subjects.group_id')
+            ->select(
+                'questions.*',
+                'group_subjects.*',
+                'groups.name as group_name',
+                'topics.name as topic_name',
+                'subjects.name as subject_name'
+            )
+            ->where(function ($s_query) use ($search) {
+                if (!empty($search)) {
+                    $s_query->where('questions.title', 'LIKE', "%$search%");
+                }
+            })
+            ->orderBy($sortBy, $sortType)
             ->paginate(15)
             ->appends([
                 'search' => $search,
@@ -96,6 +97,14 @@ class QuestionsRepository
         $question = $this->assign(new Question(), $data);
         $question->save();
         return $question;
+    }
+
+    public function updateQuestion($question_id, array $data = [])
+    {
+        $question = Question::findOrFail($question_id);
+        $question = $this->assign($question, $data);
+        $question->save();
+        return $this->get( $question_id );
     }
 
     /**

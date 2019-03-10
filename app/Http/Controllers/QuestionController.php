@@ -40,6 +40,14 @@ class QuestionController extends Controller
         );
     }
 
+    public function updateQuestion(GetQuestionRequest $request, $question_id)
+    {
+        return response()->json(
+            $this->questionsRepository->updateQuestion($question_id, $request->all())
+        );
+    }
+
+
     public function getQuestionAnswers(GetQuestionRequest $request, $topic_id)
     {
         return response()->json(
