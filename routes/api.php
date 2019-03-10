@@ -75,7 +75,7 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
             $api->post('/', 'QuestionController@storeQuestion');
             $api->get('/{question_id}', 'QuestionController@getQuestion');
             $api->get('/{question_id}/answers', 'QuestionController@getQuestionAnswers');
-            $api->post('/{question_id}/answers', 'QuestionController@addAnswers');
+            $api->post('/{question_id}/answers', 'QuestionController@addQuestionAnswer');
             $api->put('/{question_id}/answers/{answer_id}', 'QuestionController@updateAnswer');
         });
 

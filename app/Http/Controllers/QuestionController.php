@@ -40,7 +40,7 @@ class QuestionController extends Controller
         );
     }
 
-    public function getQuestionAnswer(GetQuestionRequest $request, $topic_id)
+    public function getQuestionAnswers(GetQuestionRequest $request, $topic_id)
     {
         return response()->json(
             $this->questionsRepository->getAnswer($topic_id)

@@ -192,10 +192,6 @@ class QuestionsRepository
             $answer->attachment = $data['attachment'];
         }
 
-        if (isset($data['question_id'])) {
-            $answer->question_id = $data['question_id'];
-        }
-
         if (isset($data['correct'])) {
             $answer->correct = $data['correct'];
         }
