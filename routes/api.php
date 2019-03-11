@@ -80,6 +80,13 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
             $api->put('/{question_id}/answers/{answer_id}', 'QuestionController@updateAnswer');
         });
 
+        $api->resource('paper-models', 'QuestionPaperModelController');
+        $api->group(['prefix' => 'paper-models'], function ($api) {
+            $api->get('/{model_id}/sections', 'QuestionPaperModelController@getModelSections');
+            $api->post('/{model_id}/sections', 'QuestionPaperModelController@addModelSections');
+            $api->put('/{model_id}/sections/{section_id}', 'QuestionPaperModelController@updateModelSection');
+        });
+
     });
 
 //auth
