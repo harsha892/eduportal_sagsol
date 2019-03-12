@@ -141,10 +141,14 @@
               <div class="dropdown-menu main_header_dropdown" aria-labelledby="navbarDropdown">
                 <router-link :to="{name:'newUser'}" class="nav-link text-capitalize">User</router-link>
                 <router-link :to="{name:'e-learn-new-topic'}" class="nav-link text-capitalize">Topic</router-link>
+                <router-link
+                  :to="{ name: 'e-create-new-question'}"
+                  class="nav-link text-capitalize"
+                >Add New Question</router-link>
                 <!-- <router-link
                   :to="{name:'e-learn-subjects'}"
                   class="nav-link text-capitalize"
-                >Subject</router-link> -->
+                >Subject</router-link>-->
               </div>
             </div>
           </li>

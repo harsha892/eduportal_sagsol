@@ -32,6 +32,9 @@ Vue.filter('dateFormat', function (value) {
         "DD/MM/YYYY"
     );
 })
+Vue.filter('fromNow', function (value) {
+    return moment(value).fromNow();
+})
 Vue.component('main-component', require('../vue/App.vue').default);
 import router from './approutes'
 export const serverBus = new Vue();

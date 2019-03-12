@@ -1,5 +1,5 @@
 <template>
-  <div id="adminView">
+  <div id="singleQuestion">
     <div class="card">
       <div class="card-body">
         <h5>Question</h5>
@@ -11,10 +11,8 @@
 </template>
 
 <script>
-import topHeaderView from "../../../../shared/MainHeader";
-import asideBar from "../../../../shared/AsideBar";
 export default {
-  name: "adminApp",
+  name: "singleQuestion",
   data() {
     return {
       userType: "",
@@ -33,10 +31,7 @@ export default {
     )[1];
     console.log(this.pageType);
   },
-  components: {
-    topHeaderView,
-    asideBar
-  },
+  components: {},
   methods: {}
 };
 </script>

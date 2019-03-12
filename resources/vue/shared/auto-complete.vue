@@ -7,6 +7,7 @@
         :serializer="s => s.name"
         :data="autoCompleteData"
         @hit="selectedValue = $event"
+        ref="searchKeyWordTypeHead"
       />
     </div>
   </div>
@@ -16,7 +17,7 @@ import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 
 export default {
   name: "autoComplete",
-  props: ["label", "source"],
+  props: ["label", "source", "inputValue"],
   data() {
     return {
       searchKeyWord: "",
@@ -40,7 +41,9 @@ export default {
       this.$emit("value", this.selectedValue);
     }
   },
-  mounted() {},
+  mounted() {
+    this.$refs.searchKeyWordTypeHead.inputValue = this.inputValue;
+  },
   computed: {
     autoCompleteData() {
       switch (this.label) {

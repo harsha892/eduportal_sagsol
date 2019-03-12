@@ -18,20 +18,20 @@
       </div>-->
       <div class="card-body">
         <div>
-          <form v-if="question">
+          <form v-if="question && answer">
             <div class="form-row form-group" v-if="question.type==='objective'">
               <div class="col-12">
                 <label for>Answer</label>
-                <vue-editor v-model="answer"></vue-editor>
+                <vue-editor :value="answer.title" @input="updateField($event, 'title')"></vue-editor>
               </div>
             </div>
             <div class="form-row form-group" v-if="question.type==='descriptive'">
               <div class="col-12">
                 <label for>answer</label>
-                <vue-editor v-model="answer"></vue-editor>
+                <vue-editor :value="answer.title" @input="updateField($event, 'title')"></vue-editor>
               </div>
             </div>
-            <div class="form-row form-group" v-if="question.type==='orative'">
+            <div class="form-row form-group">
               <div class="col" v-for="(item,index) in topicsMediaPresets" :key="index">
                 <document-uploader
                   :tags="'item.tags'"
@@ -65,10 +65,10 @@ export default {
     return {
       topicsMediaPresets: staticData.filePresets.topic,
       tags: "",
-      answer: null,
       qId: this.$route.params.qid,
       uploading: 0,
-      content: {}
+      content: {},
+      qnsId: null
     };
   },
   watch: {
@@ -79,9 +79,7 @@ export default {
       this.filesUploadCompleted;
     }
   },
-  mounted() {
-    console.log(this.qId);
-  },
+  mounted() {},
   computed: {
     topic() {
       return this.$store.getters.GET_UPLOADED_FILES;
@@ -95,23 +93,46 @@ export default {
       return !this.uploading && (!!answer || hasFiles);
     },
     question() {
-      console.log(this.$store.getters["question/GET_QUESTION_BY_ID"]);
       return this.$store.getters["question/GET_QUESTION_BY_ID"];
+    },
+    answer: {
+      get() {
+        this.qnsId = !!this.$store.getters["answer/GET_ANSWER_OBJ"]["id"]
+          ? this.$store.getters["answer/GET_ANSWER_OBJ"]["id"]
+          : null;
+        return this.$store.getters["answer/GET_ANSWER_OBJ"];
+      }
     }
   },
   created() {
     this.$store.dispatch("question/GET_QUESTION_BY_ID", this.qId);
-    this.$store.dispatch("GROUP_GLOBE_ACTION");
+    this.$store.dispatch("answer/GET_ANSWER_BY_ID", this.qId);
+    // this.$store.dispatch("GROUP_GLOBE_ACTION");
   },
   methods: {
+    updateField(event, key) {
+      const value = !!event.target ? event.target.value : event;
+      const payload = { key, value };
+      this.$store.commit("answer/UPDATE_ANSWER_FIELD", payload);
+    },
     submitAnswerContent() {
-      const { answer } = this;
-      const content = { ...this.content, answer };
-      console.log(content);
-      this.$store.dispatch("answer/POST_ANSWER", {
-        qId: this.qId,
-        content: { answer: content }
-      });
+      const { qId, qnsId, answer } = this;
+      !!qnsId
+        ? this.$store.dispatch("answer/UPDATE_ANSWER", {
+            qId,
+            answer,
+            qnsId
+          })
+        : this.$store.dispatch("answer/POST_ANSWER", {
+            qId,
+            answer: { answer }
+          });
+      console.log("answer/GET_ANSWER_OBJ", qnsId, answer);
+
+      // this.$store.dispatch("answer/POST_ANSWER", {
+      //   qId: this.qId,
+      //   content
+      // });
     },
     // On File Selected upload file to cloudinary
     uploadFileToCloudinary(file) {
@@ -125,7 +146,7 @@ export default {
       const { url, item = {} } = data;
       const { type } = item;
       this.uploading--;
-      this.content[type] = url;
+      this.updateField(url, type);
     },
 
     // File upload error

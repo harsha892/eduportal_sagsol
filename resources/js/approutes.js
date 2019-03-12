@@ -14,6 +14,7 @@ import educationPortal from "../vue/portal/education/education-portal"
 import SubjectsView from "../vue/portal/education/tests/subjects/subjectsView"
 import QuestionBank from "../vue/portal/education/tests/questions/questionbank"
 import CreateNewQuestion from "../vue/portal/education/tests/questions/create-question"
+import updateQuestion from "../vue/portal/education/tests/questions/edit-question"
 import CreateAnswerToQuestion from "../vue/portal/education/tests/questions/create-answer"
 import singleQuestionView from "../vue/portal/education/tests/questions/single-question-view"
 import TestsView from "../vue/portal/education/tests/tests/tests"
@@ -104,6 +105,11 @@ const portalRoutes = [
                             {
                                 name: "e-create-new-question",
                                 path: "question-bank/create-new/question",
+                                component: CreateNewQuestion
+                            },
+                            {
+                                name: "e-edit-question",
+                                path: "question-bank/edit/:qid/question",
                                 component: CreateNewQuestion
                             },
                             {

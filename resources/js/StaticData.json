@@ -1,7 +1,7 @@
 {
   "siteTitle": "education portal",
   "userMenu": {
-    "AA": [
+    "admin": [
       {
         "title": "Users",
         "params": "userslist",
@@ -46,18 +46,6 @@
         ]
       },
       {
-        "title": "Template management",
-        "params": "client",
-        "iconText": "fa-tv",
-        "childern": [
-          {
-            "title": "test temlate index",
-            "routeName": "t-temlate-index",
-            "iconText": "fa-random"
-          }
-        ]
-      },
-      {
         "title": "Skill testing / Exams",
         "routeName": "education",
         "iconText": "fa-campground",
@@ -76,7 +64,79 @@
         ]
       },
       {
-        "title": "Management",
+        "title": "Domain",
+        "routeName": "",
+        "params": "support",
+        "iconText": "fa-cog",
+        "childern": [
+          {
+            "title": "Add new Domain",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Add Content",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          }
+        ]
+      },
+      {
+        "title": "ADD NEW",
+        "routeName": "",
+        "params": "support",
+        "iconText": "fa-cog",
+        "childern": [
+          {
+            "title": "Add new Question",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Add Content",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          }
+        ]
+      },
+      {
+        "title": "Test Management",
+        "routeName": "",
+        "params": "support",
+        "iconText": "fa-cog",
+        "childern": [
+          {
+            "title": "Test Template Index",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Test Template Index",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          }
+        ]
+      },
+      {
+        "title": "Training Management",
+        "routeName": "",
+        "params": "support",
+        "iconText": "fa-cog",
+        "childern": [
+          {
+            "title": "Training Template index",
+            "routeName": "m-question-paper-list",
+            "iconText": "fa-users"
+          },
+          {
+            "title": "Training Template 2",
+            "routeName": "m-groups",
+            "iconText": "fa-users"
+          }
+        ]
+      },
+      {
+        "title": "Masters",
         "routeName": "",
         "params": "support",
         "iconText": "fa-cog",
@@ -92,19 +152,54 @@
             "iconText": "fa-users"
           },
           {
-            "title": "Question Papers",
+            "title": "Subjects",
             "routeName": "m-question-paper-list",
             "iconText": "fa-users"
           },
           {
-            "title": "Mapping",
+            "title": "Topics",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          },
+          {
+            "title": "Course year",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          },
+          {
+            "title": "Course semester",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          },
+          {
+            "title": "Academic Years",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          },
+          {
+            "title": "LOD of Content / Question",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          },
+          {
+            "title": "Privacy of Content / Question",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          },
+          {
+            "title": "Type of content",
+            "routeName": "m-mapping",
+            "iconText": "fa-bell"
+          },
+          {
+            "title": "Type of Question",
             "routeName": "m-mapping",
             "iconText": "fa-bell"
           }
         ]
       }
     ],
-    "AM": [
+    "manager": [
       {
         "title": "AM Home",
         "routeName": "adminDashboard",
@@ -112,7 +207,7 @@
         "iconText": "fa-window-maximize"
       }
     ],
-    "AI": [
+    "incharge": [
       {
         "title": "AI home",
         "routeName": "adminDashboard",
@@ -214,7 +309,7 @@
         "preset": "topics_video_files"
       },
       {
-        "type": "document",
+        "type": "attachment",
         "preset": "topics_documents"
       }
     ],
@@ -228,7 +323,7 @@
         "preset": "topics_video_files"
       },
       {
-        "type": "document",
+        "type": "attachment",
         "preset": "topics_documents"
       }
     ]

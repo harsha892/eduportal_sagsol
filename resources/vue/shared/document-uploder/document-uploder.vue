@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="col d-flex justify-content-center text-center">
-      <label :for="item.type">
+    <div class="col d-flex justify-content-center text-center flex-column">
+      <label :for="item.type" class="w-100">
         <div class="card">
           <div class="card-body p-5 mx-5">
             <i class="fa fa-cloud-upload-alt fa-5x"></i>
@@ -16,6 +16,15 @@
           v-on:change="handleFileUpload()"
         >
       </label>
+      <div v-if="item.type==='audio' && fileURL">
+        <img :src="fileURL" alt="audio" class="w-100">
+      </div>
+      <div v-if="item.type==='video' && fileURL">
+        <img :src="fileURL" alt="video" class="w-100">
+      </div>
+      <div v-if="item.type==='attachment'&& fileURL">
+        <img :src="fileURL" alt="attachment" class="w-100">
+      </div>
     </div>
     <!-- <div class="form-group col">
       <label :for="item.type">{{item.type}} file</label>
@@ -48,7 +57,8 @@ export default {
   data: function() {
     return {
       uploadFile: "",
-      fileType: ""
+      fileType: "",
+      fileURL: null
     };
   },
   mounted() {},
@@ -74,9 +84,9 @@ export default {
         .post(url, formData, config)
         .then(response => {
           const data = response.data;
-          const fileURL = data.secure_url; // You should store this URL for future references in your app
+          this.fileURL = data.secure_url; // You should store this URL for future references in your app
           this.$emit("file", {
-            url: fileURL,
+            url: this.fileURL,
             item: this.item
           });
         })

@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'id' => 1,
-            'email' => 'test@admin.com',
+            'email' => 'test@aa.com',
             'password' => bcrypt('test123'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 1,
                 'slug' => 'admin',
-                'name' => 'Admin',
+                'name' => 'aa',
                 'permissions' => '[]',
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 2,
                 'slug' => 'member',
-                'name' => 'Member',
+                'name' => 'am',
                 'permissions' => '[]',
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 3,
                 'slug' => 'incharge',
-                'name' => 'Incharge',
+                'name' => 'ai',
                 'permissions' => '[]',
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

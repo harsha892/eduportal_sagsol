@@ -1,7 +1,7 @@
 
 <template>
   <div class="app" id="homeView">
-    <div v-if="userType === 'AA'">
+    <div v-if="userType === 'admin'">
       <admin-app></admin-app>
     </div>
     <div v-if="userType === 'student'">

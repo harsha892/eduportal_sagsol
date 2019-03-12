@@ -16,6 +16,7 @@ export default {
     return {};
   },
   mounted() {
+    this.$store.dispatch("GET_MASTERS_ACTION");
     console.log("dash board Component mounted.");
   },
   components: {

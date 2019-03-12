@@ -2,7 +2,7 @@
   <div id="adminView">
     <div class="card">
       <div class="card-body">
-        <form id="app" @submit="postQuestion">
+        <form id="app" @submit="postQuestion" v-if="question">
           <div class="form-row">
             <div class="col-3">
               <auto-complete label="topic" @value="getTopic"></auto-complete>
@@ -12,7 +12,7 @@
                 <label for="inputAddress">Question Type</label>
                 <select
                   class="custom-select"
-                  :value="formData.type"
+                  :value="question.type"
                   @input="updateField($event, 'type')"
                 >
                   <option value>Select Question Type</option>
@@ -29,7 +29,7 @@
                 <label for="inputAddress">Level of difficulty</label>
                 <select
                   class="custom-select"
-                  :value="formData.difficulty_id"
+                  :value="question.difficulty_id"
                   @input="updateField($event, 'difficulty_id')"
                 >
                   <option value>Select Difficulty Level</option>
@@ -46,7 +46,7 @@
                 <label for="inputAddress">Privacy Type</label>
                 <select
                   class="custom-select"
-                  :value="formData.privacy_id"
+                  :value="question.privacy_id"
                   @input="updateField($event, 'privacy_id')"
                 >
                   <option value>Select Question Type</option>
@@ -67,7 +67,7 @@
                 class="form-control"
                 id="detail"
                 placeholder="detail"
-                :value="formData.detail"
+                :value="question.detail"
                 @input="updateField($event, 'detail')"
               >
             </div>
@@ -76,7 +76,7 @@
             <div class="col-12">
               <div class="form-group">
                 <label>Question area</label>
-                <vue-editor :value="formData.title" @input="updateField($event, 'title')"></vue-editor>
+                <vue-editor :value="question.title" @input="updateField($event, 'title')"></vue-editor>
               </div>
             </div>
 
@@ -102,34 +102,42 @@ export default {
   data() {
     return {
       difficultyLevelType: null,
-      StaticData: StaticData
+      StaticData: StaticData,
+      qid: this.$route.params.qid
     };
   },
-  watch: {},
+  watch: {
+    qid: function() {}
+  },
   mounted() {
+    console.log("mounted", this.$route.name);
     this.userType = this.$route.params.userType;
     this.pageType = this.$route.path.split(
       "/portal/" + this.userType + "/dashboard/"
     )[1];
+    this.qid
+      ? this.$store.dispatch("question/GET_QUESTION_BY_ID", this.qid)
+      : this.$store.dispatch("question/CLEAR_QUESTION_OBJ");
   },
   computed: {
     checkIsFormReadyToSubmit() {
-      const question = this.formData;
-      const hasFiles = !!Object.keys(this.formData).length;
+      const question = this.question;
+      const hasFiles = !!Object.keys(this.question).length;
       return !this.uploading && (!!notes || hasFiles);
     },
-    formData: {
+    question: {
       get() {
-        return this.$store.getters["question/GET_QUESTION_OBJ"];
+        console.log(this.qid);
+        return !this.qid
+          ? this.$store.getters["question/GET_QUESTION_OBJ"]
+          : this.$store.getters["question/GET_QUESTION_BY_ID"];
       }
     },
     masterData() {
       return this.$store.getters.GET_MASTERS;
     }
   },
-  created() {
-    this.$store.dispatch("GET_MASTERS_ACTION");
-  },
+  created() {},
   components: {
     VueEditor,
     autoComplete,
@@ -148,8 +156,8 @@ export default {
     },
     postQuestion() {
       // e.preventDefault();
-      console.log(this.formData);
-      this.$store.dispatch("question/POST_QUESTION", this.formData);
+      console.log(this.question);
+      this.$store.dispatch("question/POST_QUESTION", this.question);
     }
   }
 };
