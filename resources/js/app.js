@@ -12,13 +12,16 @@ import 'es6-promise/auto'
 import VueSession from 'vue-session'
 import VeeValidate from 'vee-validate';
 import VueSwal from 'vue-swal'
-import store from '../store'
 import moment from "moment";
 import vSelect from 'vue-select'
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
+import router from './routes'
+import store from './store'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 
-const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment, vSelect, VuePlyr];
+const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment, vSelect, VuePlyr, Buefy];
 dependencies.forEach(element => {
     Vue.use(element);
 });
@@ -27,6 +30,8 @@ dependencies.forEach(element => {
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+
 Vue.filter('dateFormat', function (value) {
     return moment(value).format(
         "DD/MM/YYYY"
@@ -35,8 +40,7 @@ Vue.filter('dateFormat', function (value) {
 Vue.filter('fromNow', function (value) {
     return moment(value).fromNow();
 })
-Vue.component('main-component', require('../vue/App.vue').default);
-import router from './approutes'
+Vue.component('main-component', require('../vue-components/App.vue').default);
 export const serverBus = new Vue();
 
 new Vue({

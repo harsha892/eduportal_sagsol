@@ -15,7 +15,7 @@ body {
 
 aside,
 .asideView {
-    width: 19em;
+    width: 15em;
     min-height: 100vh;
     background: #fff;
     height: inherit;
@@ -237,7 +237,8 @@ aside,
     margin: 0;
     padding: 0;
     top: 40px;
-    right: 5px;
+    right: 0;
+    left: auto;
 }
 
 .navbar .nav-item .user_dropdown.dropdown-menu {
@@ -444,7 +445,8 @@ label {
     color: #495057 !important;
     margin: 0 !important;
 }
-.btn_primary{
+
+.btn_primary {
     background-color: #D66636;
     color: #fff;
 }

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="/css/style.css">
         <title>School portal</title>
         <link rel="stylesheet" href="/css/vue-tags-input.css">
+        
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="/css/style.css">

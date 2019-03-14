@@ -3,80 +3,14 @@
   "userMenu": {
     "admin": [
       {
-        "title": "Users",
-        "params": "userslist",
-        "iconText": "fa-users",
-        "childern": [
-          {
-            "title": "Manager",
-            "routeName": "users",
-            "params": "member",
-            "iconText": "fa-chess-king"
-          },
-          {
-            "title": "Incharge",
-            "routeName": "users",
-            "params": "incharge",
-            "iconText": "fa-code-branch"
-          },
-          {
-            "title": "Students",
-            "routeName": "users",
-            "params": "student",
-            "iconText": "fa-user-graduate"
-          }
-        ]
-      },
-      {
-        "title": "library management",
-        "routeName": "homePage",
-        "params": "client",
-        "iconText": "fa-tv",
-        "childern": [
-          {
-            "title": "Topics",
-            "routeName": "e-learn-topics",
-            "iconText": "fa-random"
-          },
-          {
-            "title": "Subjects",
-            "routeName": "e-learn-subjects",
-            "iconText": "fa-random"
-          }
-        ]
-      },
-      {
-        "title": "Skill testing / Exams",
-        "routeName": "education",
-        "iconText": "fa-campground",
-        "childern": [
-          {
-            "title": " Tests",
-            "routeName": "e-tests",
-            "iconText": "fa-question"
-          },
-          {
-            "title": "Question Bank",
-            "routeName": "e-test-questionBank",
-            "pageName": "vendor",
-            "iconText": "fa-accusoft"
-          }
-        ]
-      },
-      {
         "title": "Domain",
         "routeName": "",
         "params": "support",
         "iconText": "fa-cog",
-        "childern": [
+        "children": [
           {
-            "title": "Add new Domain",
-            "routeName": "m-question-paper-list",
-            "iconText": "fa-users"
-          },
-          {
-            "title": "Add Content",
-            "routeName": "m-question-paper-list",
+            "title": "List of Domains",
+            "routeName": "domain.list",
             "iconText": "fa-users"
           }
         ]
@@ -84,17 +18,16 @@
       {
         "title": "ADD NEW",
         "routeName": "",
-        "params": "support",
         "iconText": "fa-cog",
-        "childern": [
+        "children": [
           {
             "title": "Add new Question",
-            "routeName": "m-question-paper-list",
+            "routeName": "addNew.question",
             "iconText": "fa-users"
           },
           {
             "title": "Add Content",
-            "routeName": "m-question-paper-list",
+            "routeName": "addNew.content",
             "iconText": "fa-users"
           }
         ]
@@ -104,15 +37,15 @@
         "routeName": "",
         "params": "support",
         "iconText": "fa-cog",
-        "childern": [
+        "children": [
           {
-            "title": "Test Template Index",
-            "routeName": "m-question-paper-list",
+            "title": "Test Template index",
+            "routeName": "test.index",
             "iconText": "fa-users"
           },
           {
-            "title": "Test Template Index",
-            "routeName": "m-question-paper-list",
+            "title": "Test Template",
+            "routeName": "test.new",
             "iconText": "fa-users"
           }
         ]
@@ -122,15 +55,15 @@
         "routeName": "",
         "params": "support",
         "iconText": "fa-cog",
-        "childern": [
+        "children": [
           {
             "title": "Training Template index",
-            "routeName": "m-question-paper-list",
+            "routeName": "training.index",
             "iconText": "fa-users"
           },
           {
-            "title": "Training Template 2",
-            "routeName": "m-groups",
+            "title": "Training Template",
+            "routeName": "training.new",
             "iconText": "fa-users"
           }
         ]
@@ -140,7 +73,7 @@
         "routeName": "",
         "params": "support",
         "iconText": "fa-cog",
-        "childern": [
+        "children": [
           {
             "title": "Roles",
             "routeName": "m-roles",
