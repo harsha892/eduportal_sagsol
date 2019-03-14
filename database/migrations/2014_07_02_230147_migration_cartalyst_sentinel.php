@@ -147,6 +147,16 @@ class MigrationCartalystSentinel extends Migration
             $table->engine = 'InnoDB';
         });
 
+        Schema::create('course_years', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
+
+        Schema::create('course_semester', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
+
         Schema::create('difficulty', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
@@ -176,6 +186,12 @@ class MigrationCartalystSentinel extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('difficulty');
+        Schema::dropIfExists('course_semester');
+        Schema::dropIfExists('course_years');
+        Schema::dropIfExists('privacy');
+        Schema::dropIfExists('question_type');
+        Schema::dropIfExists('content_types');
         Schema::dropIfExists('user_details');
         Schema::dropIfExists('activations');
         Schema::dropIfExists('persistences');

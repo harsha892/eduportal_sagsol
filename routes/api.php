@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Requests\MasterPostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,11 +36,37 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
         $api->get('/master', function () {
             $difficultyLevels = DB::table('difficulty')->get();
             $privacy = DB::table('privacy')->get();
+            $course_years = DB::table('course_years')->get();
+            $course_semester = DB::table('course_semester')->get();
+            $question_type = DB::table('question_type')->get();
+            $content_types = DB::table('content_types')->get();
 
             return response()->json([
                 'difficulty_levels' => $difficultyLevels,
                 'privacy' => $privacy,
+                'course_years' => $course_years,
+                'course_semester' => $course_semester,
+                'question_type' => $question_type,
+                'content_types' => $content_types,
             ]);
+        });
+
+        $api->group(['prefix' => 'master'], function ($api) {
+
+            $api->post("/{table}", function (MasterPostRequest $request, $table) {
+                $dbSuccess = DB::table($table)->insert([
+                    ['name' => $request->name],
+                ]);
+                return response()->json($dbSuccess);
+            });
+
+            $api->put("/{table}/{id}", function (MasterPostRequest $request, $table, $id) {
+                $dbSuccess = DB::table($table)->where(['id' => $id])->update([
+                    'name' => $request->name,
+                ]);
+                return response()->json($dbSuccess);
+            });
+
         });
 
         $api->resource('role', 'RolesController');

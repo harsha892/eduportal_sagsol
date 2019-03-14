@@ -22,7 +22,8 @@ class CreateTopicsTable extends Migration
             $table->text('short_description')->nullable();
             $table->text('long_description')->nullable();
             $table->integer('subject_id')->unsigned();
-            $table->foreign('subject_id')->references('id')->on('group_subjects')->onDelete('cascade');;
+            $table->foreign('subject_id')->references('id')->on('group_subjects')->onDelete('cascade');
+            $table->integer('semester')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
