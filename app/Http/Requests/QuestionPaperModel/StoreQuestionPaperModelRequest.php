@@ -39,14 +39,14 @@ class StoreQuestionPaperModelRequest extends FormRequest
         return [
             'subject_id' => 'numeric|exists:group_subjects,id',
             'group_id' => 'numeric|exists:groups,id',
-            'section_type' => [
-                'required',
-                Rule::in(['letter', 'number', 'roman']),
-            ],
-            'name_type' => [
-                'required',
-                Rule::in(['letter', 'number', 'roman']),
-            ],
+            // 'section_type' => [
+            //     'required',
+            //     Rule::in(['letter', 'number', 'roman']),
+            // ],
+            // 'name_type' => [
+            //     'required',
+            //     Rule::in(['letter', 'number', 'roman']),
+            // ],
             'name' => 'required',
             'marks' => 'required|numeric',
             'time' => 'required|numeric',

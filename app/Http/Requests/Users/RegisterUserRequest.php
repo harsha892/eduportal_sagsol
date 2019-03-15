@@ -27,8 +27,7 @@ class RegisterUserRequest extends FormRequest
             "email" => "required|unique:users",
             "phone" => "required|unique:users",
             "password" => "required|min:8",
-            "address" => "required",
-            // "role_id" => "required",
+            "role_id" => "required",
 
             "user_detail.first_name" => "required",
             "user_detail.level_year" => "required",
