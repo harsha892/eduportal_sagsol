@@ -335,6 +335,14 @@ class UserRepository
             $userDetail->last_name = $data['user_detail']['last_name'];
         }
 
+        if (isset($data['user_detail']['father_name'])) {
+            $userDetail->father_name = $data['user_detail']['father_name'];
+        }
+
+        if (isset($data['user_detail']['email'])) {
+            $userDetail->phone = $data['user_detail']['email'];
+        }
+
         if (isset($data['user_detail']['phone'])) {
             $userDetail->phone = $data['user_detail']['phone'];
         }
@@ -343,8 +351,16 @@ class UserRepository
             $userDetail->gender = $data['user_detail']['gender'];
         }
 
-        if (isset($data['user_detail']['emergency_phone'])) {
-            $userDetail->emergency_phone = $data['user_detail']['emergency_phone'];
+        if (isset($data['user_detail']['profile_image'])) {
+            $userDetail->profile_image = $data['user_detail']['profile_image'];
+        }
+
+        if (isset($data['user_detail']['blood_group'])) {
+            $userDetail->blood_group = $data['user_detail']['blood_group'];
+        }
+
+        if (isset($data['user_detail']['identity_number'])) {
+            $userDetail->identity_number = $data['user_detail']['identity_number'];
         }
 
         if (isset($data['user_detail']['address'])) {
@@ -373,6 +389,50 @@ class UserRepository
 
         if (isset($data['user_detail']['dob'])) {
             $userDetail->dob = $data['user_detail']['dob'];
+        }
+
+        if (isset($data['user_detail']['level_year'])) {
+            $userDetail->level_year = $data['user_detail']['level_year'];
+        }
+
+        if (isset($data['user_detail']['level_semester'])) {
+            $userDetail->level_semester = $data['user_detail']['level_semester'];
+        }
+
+        if (isset($data['user_detail']['group'])) {
+            $userDetail->group = $data['user_detail']['group'];
+        }
+
+        if (isset($data['user_detail']['academic_year'])) {
+            $userDetail->academic_year = $data['user_detail']['academic_year'];
+        }
+
+        if (isset($data['user_detail']['skills'])) {
+            if( is_array($data['user_detail']['skills']) ) {
+                $data['user_detail']['skills'] = json_encode($data['user_detail']['skills']);
+            }
+            $userDetail->skills = $data['user_detail']['skills'];
+        }
+
+        if (isset($data['user_detail']['hobbies'])) {
+            if( is_array($data['user_detail']['hobbies']) ) {
+                $data['user_detail']['hobbies'] = json_encode($data['user_detail']['hobbies']);
+            }
+            $userDetail->hobbies = $data['user_detail']['hobbies'];
+        }
+
+        if (isset($data['user_detail']['languages'])) {
+            if( is_array($data['user_detail']['languages']) ) {
+                $data['user_detail']['languages'] = json_encode($data['user_detail']['languages']);
+            }
+            $userDetail->languages = $data['user_detail']['languages'];
+        }
+
+        if (isset($data['user_detail']['references'])) {
+            if( is_array($data['user_detail']['references']) ) {
+                $data['user_detail']['references'] = json_encode($data['user_detail']['references']);
+            }
+            $userDetail->references = $data['user_detail']['references'];
         }
 
     }

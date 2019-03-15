@@ -96,6 +96,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
+            $table->string('phone', 20)->unique();
             $table->string('password');
 
             $table->string('token')->nullable();
@@ -104,6 +105,7 @@ class MigrationCartalystSentinel extends Migration
             $table->boolean('login_status')->nullable();
 
             $table->boolean('status')->default(1);
+            $table->text('address')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -119,21 +121,38 @@ class MigrationCartalystSentinel extends Migration
             $table->string('last_name')->nullable();
             $table->string('gender')->nullable();
             $table->string('phone', 20)->nullable();
+            $table->string('email')->nullable();
             $table->boolean('phone_verified')->default(0);
             $table->string('verification_code')->nullable();
 
+            $table->text('description')->nullable();
             $table->text('address')->nullable();
+            $table->text('profile_image')->nullable();
+            
+            $table->unsignedInteger('level_year')->nullable();
+            $table->unsignedInteger('level_semester')->nullable();
+
+            $table->string('father_name')->nullable();
+            $table->string('blood_group')->nullable();
+            $table->string('identity_number')->nullable();
+
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zip')->nullable();
             $table->string('country')->default('IN')->nullable();
 
-            $table->string('emergency_phone', 20)->nullable();
+            // $table->string('emergency_phone', 20)->nullable();
 
             $table->date('dob')->nullable();
 
-            $table->unsignedInteger('academic_year_start')->nullable();
-            $table->unsignedInteger('academic_year_end')->nullable();
+            $table->unsignedInteger('group')->nullable();
+            $table->unsignedInteger('academic_year')->nullable();
+            // $table->unsignedInteger('academic_year_end')->nullable();
+
+            $table->text('hobbies')->nullable();
+            $table->text('languages')->nullable();
+            $table->text('skills')->nullable();
+            $table->text('references')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -147,7 +166,39 @@ class MigrationCartalystSentinel extends Migration
             $table->engine = 'InnoDB';
         });
 
+        Schema::create('qualifications', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->string('college');
+            $table->string('year');
+            $table->double('marks');
+            $table->double('percentage');
+            $table->text('attachment');
+        });
+
+        Schema::create('experiences', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->string('company');
+            $table->string('year');
+            $table->double('title');
+        });
+
+        Schema::create('bank_accounts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->string('bank');
+            $table->string('ifsc');
+            $table->text('ac_no');
+            $table->text('ac_type')->nullable();
+        });
+
         Schema::create('course_years', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
+
+        Schema::create('academic_years', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
         });
@@ -189,6 +240,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::dropIfExists('difficulty');
         Schema::dropIfExists('course_semester');
         Schema::dropIfExists('course_years');
+        Schema::dropIfExists('academic_years');
         Schema::dropIfExists('privacy');
         Schema::dropIfExists('question_type');
         Schema::dropIfExists('content_types');
@@ -200,5 +252,8 @@ class MigrationCartalystSentinel extends Migration
         Schema::dropIfExists('role_users');
         Schema::dropIfExists('throttle');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('qualifications');
+        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('bank_accounts');
     }
 }

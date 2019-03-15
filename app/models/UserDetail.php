@@ -20,6 +20,10 @@ class UserDetail extends BaseModel
         'updated_at' => 'datetime:d/m/Y, h:iA',
         'dob' => 'datetime:d/m/Y',
         'phone_verified' => 'boolean',
+        'hobbies' => 'json',
+        'languages' => 'json',
+        'skills' => 'json',
+        'references' => 'json',
     ];
 
     /**

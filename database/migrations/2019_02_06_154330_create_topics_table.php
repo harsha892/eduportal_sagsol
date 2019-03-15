@@ -22,7 +22,7 @@ class CreateTopicsTable extends Migration
             $table->text('short_description')->nullable();
             $table->text('long_description')->nullable();
             $table->integer('subject_id')->unsigned();
-            $table->foreign('subject_id')->references('id')->on('group_subjects')->onDelete('cascade');
+            // $table->foreign('subject_id')->references('id')->on('group_subjects')->onDelete('cascade');
             $table->integer('semester')->nullable();
 
             $table->timestamps();
@@ -33,7 +33,7 @@ class CreateTopicsTable extends Migration
         Schema::create('topic_contents', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('topic_id')->unsigned();
-            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');;
+            // $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');;
 
             $table->text('notes')->nullable();
             $table->text('ppt')->nullable();
@@ -48,7 +48,7 @@ class CreateTopicsTable extends Migration
         Schema::create('content_references', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('content_id')->unsigned();
-            $table->foreign('content_id')->references('id')->on('topic_contents')->onDelete('cascade');;
+            // $table->foreign('content_id')->references('id')->on('topic_contents')->onDelete('cascade');;
 
             $table->text('url')->nullable();
             $table->enum('type', ['file', 'url'])->nullable();

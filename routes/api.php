@@ -40,10 +40,14 @@ $api->version('v1', ["namespace" => "App\Http\Controllers"], function ($api) {
             $course_semester = DB::table('course_semester')->get();
             $question_type = DB::table('question_type')->get();
             $content_types = DB::table('content_types')->get();
+            $academic_years = DB::table('academic_years')->get();
+
+            
 
             return response()->json([
                 'difficulty_levels' => $difficultyLevels,
                 'privacy' => $privacy,
+                'academic_years' => $academic_years,
                 'course_years' => $course_years,
                 'course_semester' => $course_semester,
                 'question_type' => $question_type,

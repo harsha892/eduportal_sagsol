@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 1,
                 'email' => 'aa@test.com',
+                'phone' => '0909090909',
                 'password' => bcrypt('test1234'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -22,6 +23,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 2,
                 'email' => 'am@test.com',
+                'phone' => '0909090908',
                 'password' => bcrypt('test1234'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -29,6 +31,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 3,
                 'email' => 'ai@test.com',
+                'phone' => '0909090907',
                 'password' => bcrypt('test1234'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -36,6 +39,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 4,
                 'email' => 'student@test.com',
+                'phone' => '0909090906',
                 'password' => bcrypt('test1234'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -59,7 +63,7 @@ class UsersTableSeeder extends Seeder
                 'user_id' => 2,
                 'first_name' => 'AM',
                 'last_name' => 'Test',
-                'phone' => '0909090909',
+                'phone' => '0909090908',
                 'phone_verified' => '1',
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -70,7 +74,7 @@ class UsersTableSeeder extends Seeder
                 'user_id' => 3,
                 'first_name' => 'AI',
                 'last_name' => 'Test',
-                'phone' => '0909090909',
+                'phone' => '0909090907',
                 'phone_verified' => '1',
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -80,7 +84,7 @@ class UsersTableSeeder extends Seeder
                 'user_id' => 4,
                 'first_name' => 'Student',
                 'last_name' => 'Test',
-                'phone' => '0909090909',
+                'phone' => '0909090906',
                 'phone_verified' => '1',
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

@@ -18,6 +18,15 @@ class User extends SentinelUser implements JWTSubject
     {
         parent::boot();
     }
+
+    protected $fillable = [
+        'email',
+        'phone', /* i added this */
+        'password',
+        'permissions',
+    ];
+
+
     // Rest omitted for brevity
     protected $hidden = ['password', 'roles'];
 

@@ -32,6 +32,7 @@ class RegisterController extends Controller
         RegisterUserRequest $request,
         ResponseFactory $responseFactory
     ) {
+        // return response()->json($request->all());
         $data = $userDomain->register($request->all());
         try {
             $jwtToken = $jwtAuth->fromUser($data['user']);
