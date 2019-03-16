@@ -1,7 +1,7 @@
 import testManagement from "./test-management"
 import testTemplate from "./components/test-template"
 import testTemplateIndex from "./components/test-template-index"
-const DomainRoutes = {
+const testManagementRoutes = {
     path: "test",
     component: testManagement,
     children: [
@@ -16,4 +16,4 @@ const DomainRoutes = {
         },
     ]
 }
-export default DomainRoutes;
+export default testManagementRoutes;

@@ -18,10 +18,9 @@ import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
 import router from './routes'
 import store from './store'
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import Tabs from "buefy/dist/components/tabs";
 
-const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment, vSelect, VuePlyr, Buefy];
+const dependencies = [Vuex, VueSession, VeeValidate, VueSwal, moment, vSelect, VuePlyr, Tabs];
 dependencies.forEach(element => {
     Vue.use(element);
 });
@@ -40,7 +39,16 @@ Vue.filter('dateFormat', function (value) {
 Vue.filter('fromNow', function (value) {
     return moment(value).fromNow();
 })
+Vue.filter('remove_', function (value) {
+    return value.replace(/_/g, " ");
+})
+Vue.filter("capitalize", function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+})
 Vue.component('main-component', require('../vue-components/App.vue').default);
+
 export const serverBus = new Vue();
 
 new Vue({

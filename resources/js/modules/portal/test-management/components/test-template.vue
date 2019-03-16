@@ -2,7 +2,7 @@
   <div id="test-template">
     <div class="card">
       <div class="card-body">
-        <form id="app" @submit="getFormData">
+        <form id="app" @submit="generateSections" v-if="formErrors && formData">
           <div class="form-row">
             <div class="col-12">
               <div class="form-row">
@@ -18,8 +18,10 @@
                           type="text"
                           class="form-control"
                           id="qpname"
-                          aria-describedby="emailHelp"
                           placeholder="Test template Name"
+                          :class="{'is-invalid' : formErrors.name.length > 0}"
+                          :value="formData.name"
+                          @input="updateField($event, 'name')"
                         >
                       </div>
                     </div>
@@ -30,13 +32,15 @@
                           <span class="text-danger">*</span>
                         </label>
                         <input
-                          v-model="qModelSection.totalSections"
                           type="number"
                           class="form-control"
                           id="totalSections"
                           placeholder="Total Sections"
                           min="1"
                           max="10"
+                          :class="{'is-invalid' : formErrors.no_of_sections.length > 0}"
+                          :value="formData.no_of_sections"
+                          @input="updateField($event, 'no_of_sections')"
                         >
                       </div>
                     </div>
@@ -47,100 +51,100 @@
                     <div class="form-group">
                       <a
                         v-on:click="generateSections()"
-                        class="btn btn-danger text-white"
+                        class="btn btn-success text-white"
                       >Generate Sections</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-12 mb-2" v-for="(item,index) in sections" :key="index">
-              <div class="border p-2">
-                <div class="form-row">
-                  <div class="d-flex justify-content-center align-items-center text-capitalize px-2">
-                    <small class="font-weight-bold">{{item.sectionTitle}}</small>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="totalquestions" class="text-capitalize">No of items</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="totalquestions"
-                        placeholder="Total Sections"
-                        v-model="item.noOfQuestions"
-                      >
+            <div v-if="sections.length>0" class="form-row">
+              <div class="col-12 mb-2" v-for="(item,index) in sections" :key="index">
+                <div class="border p-2">
+                  <div class="form-row">
+                    <div
+                      class="d-flex justify-content-center align-items-center text-capitalize px-2"
+                    >
+                      <small class="font-weight-bold">Section {{item.sectionTitle}}</small>
                     </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="totalquestions" class="text-capitalize">Marks/ items</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="totalquestions"
-                        placeholder="Total Sections"
-                        v-model="item.noOfQuestions"
-                      >
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="totalquestions" class="text-capitalize">No of items</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="totalquestions"
+                          placeholder="Total Sections"
+                          :value="sections[index].questions"
+                          @input="updateFieldWithIndex($event, 'questions',index)"
+                        >
+                      </div>
                     </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="totalquestions" class="text-capitalize">optional Qns</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="totalquestions"
-                        placeholder="Total Sections"
-                        v-model="item.noOfQuestions"
-                      >
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="totalquestions" class="text-capitalize">Marks/ items</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="totalquestions"
+                          placeholder="Total Sections"
+                          :value="sections[index].marks"
+                          @input="updateFieldWithIndex($event, 'marks',index)"
+                        >
+                      </div>
                     </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="totalquestions" class="text-capitalize">Time / Items</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="totalquestions"
-                        placeholder="Time / Items"
-                        v-model="item.noOfQuestions"
-                      >
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="totalquestions" class="text-capitalize">optional Qns</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="totalquestions"
+                          placeholder="Total Sections"
+                          :value="sections[index].options"
+                          @input="updateFieldWithIndex($event, 'options',index)"
+                        >
+                      </div>
                     </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="totalSectionMarks">Total Marks</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="totalSectionMarks"
-                        placeholder="Total Sections"
-                      >
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="totalquestions" class="text-capitalize">Time / Items</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="totalquestions"
+                          placeholder="Time / Items"
+                          :value="sections[index].time"
+                          @input="updateFieldWithIndex($event, 'time',index)"
+                        >
+                      </div>
                     </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="totalSectionMarks">Total Time</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="totalSectionMarks"
-                        placeholder="Total Time"
-                      >
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="questionTypes">Type of Qns</label>
-                      <select class="custom-select" id="questionTypes">
-                        <option>Choose...</option>
-                        <option value="1">MCQ</option>
-                        <option value="2">Orative</option>
-                      </select>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="questionTypes">Type of Qns</label>
+                        <select
+                          class="custom-select"
+                          id="questionTypes"
+                          :value="sections[index].question_type"
+                          @input="updateFieldWithIndex($event, 'question_type',index)"
+                        >
+                          <option value>Choose...</option>
+                          <option
+                            :value="item.id"
+                            v-for="(item,index) in masterData.question_type"
+                            :key="index"
+                          >{{item.name}}</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="text-right col">
+                <a
+                  v-on:click="createTestModel()"
+                  class="btn btn-danger text-white"
+                >Create Test Model</a>
               </div>
             </div>
           </div>
@@ -159,15 +163,11 @@ export default {
     return {
       userType: "",
       pageType: "",
-      formData: {
-        questionContent: "<h1>Some initial question Content</h1>",
-        answerContent: "<h1>Some initial answer Content</h1>"
-      },
       qModelSection: {
         totalSections: 0,
         sectionType: ""
       },
-      sections: []
+      totalMarks: 0
     };
   },
   watch: {
@@ -175,83 +175,54 @@ export default {
       this.userType = this.$route.params.userType;
     }
   },
-  mounted() {
-    this.userType = this.$route.params.userType;
-    this.pageType = this.$route.path.split(
-      "/portal/" + this.userType + "/dashboard/"
-    )[1];
-  },
+  mounted() {},
   components: {
     Datepicker
   },
+  computed: {
+    masterData() {
+      return this.$store.getters["moreMasters/GET_MASTERS"];
+    },
+    formData() {
+      return this.$store.getters["testManagement/GET_TEST_MODEL_FORM"];
+    },
+    formErrors() {
+      return this.$store.getters["testManagement/errors"];
+    },
+    sections() {
+      return this.$store.getters["testManagement/GET_SECTIONS_FOR_MODEL"];
+    }
+  },
+  created() {},
   methods: {
+    updateField(event, key) {
+      const value = !!event.target ? event.target.value : event;
+      const payload = { key, value };
+      this.$store.commit("testManagement/updateField", payload);
+    },
+    updateFieldWithIndex(event, key, index) {
+      const value = !!event.target ? event.target.value : event;
+      const payload = { key, value, index };
+      this.$store.commit("testManagement/updateFieldWithIndex", payload);
+    },
     generateSections() {
-      this.sections = [];
-      for (let index = 0; index < this.qModelSection.totalSections; index++) {
-        this.sections.push({
-          sectionTitle: "section " + this.getSectionTypes(index),
-          noOfQuestions: 0
-        });
-      }
+      this.$store.commit("testManagement/clearSectionForm");
+      this.$store.dispatch("testManagement/GENERATE_TEST_MODEL", this.formData);
     },
-    getFormData(e) {
-      e.preventDefault();
-      console.log(this.formData);
-    },
-    getSectionTypes(index) {
-      switch (this.qModelSection.sectionType) {
-        case "alphabets":
-          return String.fromCharCode(97 + index);
-          break;
-        case "numaric":
-          return index + 1;
-          break;
-        case "romanLetters":
-          let digits = String(index + 1).split(""),
-            key = [
-              "",
-              "C",
-              "CC",
-              "CCC",
-              "CD",
-              "D",
-              "DC",
-              "DCC",
-              "DCCC",
-              "CM",
-              "",
-              "X",
-              "XX",
-              "XXX",
-              "XL",
-              "L",
-              "LX",
-              "LXX",
-              "LXXX",
-              "XC",
-              "",
-              "I",
-              "II",
-              "III",
-              "IV",
-              "V",
-              "VI",
-              "VII",
-              "VIII",
-              "IX"
-            ],
-            roman = "",
-            i = 3;
-          while (i--) {
-            roman = (key[+digits.pop() + i * 10] || "") + roman;
-            return roman;
-          }
-          // code block
-          break;
-        default:
-          return String.fromCharCode(97 + index);
-        // code block
-      }
+    createTestModel() {
+      let time = 0,
+        marks = 0;
+      this.sections.map((item, index) => {
+        console.log(item);
+        time = time + JSON.parse(item.time);
+        marks = marks + JSON.parse(item.marks);
+      });
+      this.updateField(time, "time");
+      this.updateField(marks, "marks");
+      this.$store.dispatch("testManagement/POST_TEST_MODEL", {
+        question: this.formData,
+        sections: this.sections
+      });
     }
   }
 };

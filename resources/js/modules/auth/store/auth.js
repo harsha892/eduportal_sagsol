@@ -1,4 +1,5 @@
-import {Toast} from 'buefy/dist/components/toast'
+
+import { Toast } from 'buefy/dist/components/toast'
 import authService from "../../../api/auth";
 import router from "../../../routes";
 let AUTH_KEYS = {

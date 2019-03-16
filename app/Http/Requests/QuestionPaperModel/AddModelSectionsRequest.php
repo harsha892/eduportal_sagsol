@@ -30,10 +30,7 @@ class AddModelSectionsRequest extends FormRequest
             'sections.*.questions' => 'required|numeric',
             'sections.*.options' => 'required|numeric',
             'sections.*.marks' => 'required|numeric',
-            'sections.*.question_type' => [
-                'required',
-                Rule::in(['letter', 'number', 'roman']),
-            ],
+            'sections.*.question_type' => 'required|numeric|exists:question_type,id',
         ];
     }
 

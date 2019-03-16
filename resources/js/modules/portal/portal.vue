@@ -20,8 +20,8 @@ export default {
   mounted() {},
   components: { navAside, navHeader },
   mounted() {
-    this.$store.dispatch("GET_ROLES_ACTION");
-    this.$store.dispatch("GET_MASTERS_ACTION");
+    this.$store.dispatch("roles/GET_ROLES_ACTION");
+    this.$store.dispatch("moreMasters/GET_MASTERS_ACTION");
   }
 };
 </script>

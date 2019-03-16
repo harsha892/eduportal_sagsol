@@ -9,28 +9,11 @@ if (accessToken) {
 
 class BaseService {
     doGet(endpoint) {
-        console.log({ headers });
         const url = `${environment.apiBase}${endpoint}`;
         return axios.get(url, { headers }).then(function (response) {
             return response;
         }).catch(function (error) {
             console.log(error.response);
-            // if (error.response.status === 401) {
-            //     swal({
-            //         text: "Something went worng please login again",
-            //         icon: "warning",
-            //         dangerMode: true,
-            //     }).then(function () {
-            //         // sessionStorage.clear();
-            //         // window.location.replace("http://" + window.location.hostname + '/portal');
-            //     });
-            // } else {
-            //     swal({
-            //         text: "Something went worng please try again",
-            //         icon: "warning",
-            //         dangerMode: true,
-            //     })
-            // }
         })
     }
     doPost(endpoint, payload) {

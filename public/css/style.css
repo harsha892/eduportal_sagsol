@@ -15,7 +15,7 @@ body {
 
 aside,
 .asideView {
-    width: 15em;
+    width: 17em;
     min-height: 100vh;
     background: #fff;
     height: inherit;
@@ -151,7 +151,7 @@ aside,
 
 .main_aside_nav li a {
     padding: 12px;
-    font-size: 14px;
+    font-size: 12px;
     color: #000;
     display: block;
     text-decoration: none;
@@ -449,4 +449,20 @@ label {
 .btn_primary {
     background-color: #D66636;
     color: #fff;
+}
+
+.btn_fixed_bottom {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+    z-index: 9999;
+}
+
+.btn_fixed_bottom .btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
 }

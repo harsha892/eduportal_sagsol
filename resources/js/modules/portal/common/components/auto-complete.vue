@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="form-group">
-      <label for="SelectTopic">{{label}}</label>
+      <label for="SelectTopic" :class="{'text-danger' : validate === true}">
+        {{label}}
+        <span class="text-danger">*</span>
+      </label>
       <vue-bootstrap-typeahead
         v-model="searchKeyWord"
         :serializer="s => s.name"
@@ -17,7 +20,7 @@ import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 
 export default {
   name: "autoComplete",
-  props: ["label", "source", "inputValue"],
+  props: ["label", "source", "inputValue", "validate", "type"],
   data() {
     return {
       searchKeyWord: "",
@@ -38,7 +41,7 @@ export default {
       }
     },
     selectedValue: function() {
-      this.$emit("value", this.selectedValue);
+      this.$emit("updateValue", this.selectedValue);
     }
   },
   mounted() {
@@ -46,33 +49,15 @@ export default {
   },
   computed: {
     autoCompleteData() {
-      switch (this.label) {
-        case "topic":
-          return ["topic"];
-          //   this.$store.getters.GET_TOPICS.data !== undefined
-          //     ? this.$store.getters.GET_TOPICS.data
-          break;
-
-        default:
-          return [];
-          break;
-      }
+      return this.$store.getters["autoComplete/SEARCH_RESULT"] || [];
     }
   },
   methods: {
-    handleOnChange() {},
     autoCompleteSearch() {
-      switch (this.label) {
-        case "topic":
-          return [];
-          //   this.$store.dispatch("GET_TOPICS_LIST", {
-          //     url: "topic?&search=" + this.searchKeyWord
-          //   });
-          break;
-        default:
-          return [];
-          break;
-      }
+      this.$store.dispatch("autoComplete/SEARCH_BY_KEYWORD", {
+        url: this.type,
+        keyword: this.searchKeyWord
+      });
     }
   }
 };

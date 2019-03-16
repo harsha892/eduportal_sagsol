@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Auth from './modules/auth/store/auth'
-import portalStore from "./modules/portal/store/portal";
+import portalStore from "./modules/portal/store/store";
 // import validator from "./modules/common/validator"
 Vue.use(Vuex)
 

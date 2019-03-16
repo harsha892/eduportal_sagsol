@@ -76,57 +76,27 @@
         "children": [
           {
             "title": "Roles",
-            "routeName": "m-roles",
+            "routeName": "role.list",
             "iconText": "fa-users"
           },
           {
             "title": "Groups",
-            "routeName": "m-groups",
+            "routeName": "groups.list",
             "iconText": "fa-users"
           },
           {
             "title": "Subjects",
-            "routeName": "m-question-paper-list",
+            "routeName": "subjects.list",
             "iconText": "fa-users"
           },
           {
             "title": "Topics",
-            "routeName": "m-mapping",
+            "routeName": "topics.list",
             "iconText": "fa-bell"
           },
           {
-            "title": "Course year",
-            "routeName": "m-mapping",
-            "iconText": "fa-bell"
-          },
-          {
-            "title": "Course semester",
-            "routeName": "m-mapping",
-            "iconText": "fa-bell"
-          },
-          {
-            "title": "Academic Years",
-            "routeName": "m-mapping",
-            "iconText": "fa-bell"
-          },
-          {
-            "title": "LOD of Content / Question",
-            "routeName": "m-mapping",
-            "iconText": "fa-bell"
-          },
-          {
-            "title": "Privacy of Content / Question",
-            "routeName": "m-mapping",
-            "iconText": "fa-bell"
-          },
-          {
-            "title": "Type of content",
-            "routeName": "m-mapping",
-            "iconText": "fa-bell"
-          },
-          {
-            "title": "Type of Question",
-            "routeName": "m-mapping",
+            "title": "More Masters",
+            "routeName": "masters.list",
             "iconText": "fa-bell"
           }
         ]
