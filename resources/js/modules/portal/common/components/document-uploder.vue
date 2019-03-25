@@ -1,28 +1,56 @@
 <template>
   <div class="d-flex justify-content-center text-center flex-column">
-    <label :for="item.type" class="w-100">
-      <div class="border">
-        <div class="p-5 mx-5">
-          <i class="fa fa-cloud-upload-alt fa-5x"></i>
-          <p>{{item.type}} file</p>
+    <div v-if="inputType=true">
+      <!-- <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
         </div>
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            :id="item.type"
+            ref="fileToUpload"
+            v-on:change="handleFileUpload()"
+          >
+        </div>
+      </div>-->
+      <div class="custom-file text-left">
+        <input
+          type="file"
+          class="custom-file-input"
+          :id="item.type"
+          ref="fileToUpload"
+          v-on:change="handleFileUpload()"
+        >
+        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
       </div>
-      <input
-        type="file"
-        class="custom-file-input d-none"
-        :id="item.type"
-        ref="fileToUpload"
-        v-on:change="handleFileUpload()"
-      >
-    </label>
-    <div v-if="item.type==='audio' && fileURL">
-      <img :src="fileURL" alt="audio" class="w-100">
     </div>
-    <div v-if="item.type==='video' && fileURL">
-      <img :src="fileURL" alt="video" class="w-100">
-    </div>
-    <div v-if="item.type==='attachment'&& fileURL">
-      <img :src="fileURL" alt="attachment" class="w-100">
+    <div v-else>
+      <label :for="item.type" class="w-100">
+        <div class="border">
+          <div class="p-5 mx-5">
+            <i class="fa fa-cloud-upload-alt fa-5x"></i>
+            <p>{{item.type}} file</p>
+          </div>
+        </div>
+        <input
+          type="file"
+          class="custom-file-input d-none"
+          :id="item.type"
+          ref="fileToUpload"
+          v-on:change="handleFileUpload()"
+        >
+      </label>
+      <div v-if="item.type==='audio' && fileURL">
+        <img :src="fileURL" alt="audio" class="w-100">
+      </div>
+      <div v-if="item.type==='video' && fileURL">
+        <img :src="fileURL" alt="video" class="w-100">
+      </div>
+      <div v-if="item.type==='attachment'&& fileURL">
+        <img :src="fileURL" alt="attachment" class="w-100">
+      </div>
     </div>
     <!-- <div class="form-group col">
       <label :for="item.type">{{item.type}} file</label>
@@ -51,7 +79,7 @@ const formData = new FormData();
 
 export default {
   name: "asideView",
-  props: ["item", "tags", "change"],
+  props: ["item", "tags", "change", "inputType"],
   data: function() {
     return {
       uploadFile: "",
@@ -59,7 +87,9 @@ export default {
       fileURL: null
     };
   },
-  mounted() {},
+  mounted() {
+    this.inputType = this.inputType === null || undefined ? false : true;
+  },
   methods: {
     handleFileUpload() {
       const file = this.$refs.fileToUpload.files[0];

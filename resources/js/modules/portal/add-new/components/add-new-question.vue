@@ -168,10 +168,10 @@
               <h4 class="font-weight-bold my-2">Tagging</h4>
             </div>
             <div class="col">
-              <auto-complete label="subject" @value="getTopic"></auto-complete>
+              <auto-complete label="subject" type="subject" @value="getTopic"></auto-complete>
             </div>
             <div class="col">
-              <auto-complete label="topic" @value="getTopic"></auto-complete>
+              <auto-complete label="topic" type="topic" @value="getTopic"></auto-complete>
             </div>
           </div>
           <div class="form-row">
@@ -288,7 +288,6 @@ export default {
     qid: function() {}
   },
   mounted() {
-    console.log("mounted", this.$route.name);
     this.userType = this.$route.params.userType;
     this.pageType = this.$route.path.split(
       "/portal/" + this.userType + "/dashboard/"

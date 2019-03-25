@@ -1,4 +1,4 @@
-import DomainRoutes from "./domain/router"
+import UserRoutes from "./user/router"
 import testManagementRoutes from "./test-management/router"
 import trainingManagementRoutes from "./training-management/router"
 import addNewRoutes from "./add-new/router";
@@ -14,7 +14,7 @@ const PortalRoutes = {
             name: "portal.dashboard",
             component: Dashboard,
         },
-        { ...DomainRoutes },
+        { ...UserRoutes },
         { ...testManagementRoutes },
         { ...trainingManagementRoutes },
         { ...addNewRoutes },

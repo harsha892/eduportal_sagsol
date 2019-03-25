@@ -1,6 +1,6 @@
 <template>
   <div id="new-domain">
-    <form @submit="createNewDomain">
+    <form @submit="createNewUser">
       <div class="card mb-2">
         <div class="card-body">
           <div class="col-12">
@@ -15,7 +15,7 @@
               </div>
             </div>
             <div class="text-center my-2">
-              <span class="btn btn-danger" v-on:click="createNewDomain">Create New Domain</span>
+              <span class="btn btn-danger" v-on:click="createNewUser">Create New User</span>
             </div>
           </div>
         </div>
@@ -54,10 +54,10 @@ export default {
       const payload = { key, value };
       this.$store.commit("domain/updateField", payload);
     },
-    createNewDomain(e) {
+    createNewUser(e) {
       e.preventDefault();
       console.log(this.formData);
-      this.$store.commit("domain/checkFormValidation");
+      this.$store.dispatch("user/CREATE_NEW_USER");
     }
   },
   components: {

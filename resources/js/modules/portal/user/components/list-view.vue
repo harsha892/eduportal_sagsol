@@ -18,7 +18,7 @@
             </form>
           </div>
           <div>
-            <router-link :to="{name:'domain.new'}" class="btn btn-danger">Create new domain</router-link>
+            <router-link :to="{name:'user.new'}" class="btn btn-danger">Create new user</router-link>
           </div>
         </div>
         <div v-if="userByRoles">

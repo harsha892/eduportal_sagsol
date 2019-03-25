@@ -1,6 +1,6 @@
 import header from "../common/store/header";
 import autoComplete from "../common/store/auto-complete"
-import domain from "../domain/store/domain";
+import user from "../user/store/user";
 import addNew from "../add-new/store/add-new";
 import masters from "../masters/store";
 import testManagement from "../test-management/store"
@@ -15,7 +15,7 @@ const mutations = {};
 const modules = {
     header,
     autoComplete,
-    domain,
+    user,
     addNew,
     masters,
     testManagement

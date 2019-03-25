@@ -13,6 +13,7 @@ const state = {
         "audio": null,
         "video": null
     },
+    answer:{},
     singleQuestion: null,
     allQuestions: []
 };

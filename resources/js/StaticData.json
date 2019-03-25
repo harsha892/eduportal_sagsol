@@ -3,14 +3,14 @@
   "userMenu": {
     "admin": [
       {
-        "title": "Domain",
+        "title": "User",
         "routeName": "",
         "params": "support",
         "iconText": "fa-cog",
         "children": [
           {
-            "title": "List of Domains",
-            "routeName": "domain.list",
+            "title": "List of User",
+            "routeName": "user.list",
             "iconText": "fa-users"
           }
         ]

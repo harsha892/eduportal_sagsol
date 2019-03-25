@@ -28,15 +28,15 @@
                   @updateValue="getSubject($event)"
                 ></auto-complete>
               </div>
-              <div class="col" v-if="masters">
+              <div class="col" v-if="selectedSubject">
                 <label for="exampleInputEmail1">Semister</label>
                 <select class="custom-select">
                   <option selected>Semister</option>
                   <option
-                    :value="semister.id"
-                    v-for="(semister,index) in masters.course_semester"
+                    :value="index"
+                    v-for="index in selectedSubject.semesters"
                     :key="index"
-                  >{{semister.name}}</option>
+                  >{{index}}</option>
                 </select>
               </div>
             </div>
@@ -80,7 +80,8 @@ export default {
   data() {
     return {
       subjectId: null,
-      isSubjectId: false
+      isSubjectId: false,
+      selectedSubject: null
     };
   },
   watch: {},
@@ -120,6 +121,8 @@ export default {
     },
     getSubject(e) {
       this.subjectId = e.id;
+      this.selectedSubject = e;
+      console.log(this.selectedSubject);
     }
   },
   components: {
